@@ -1,0 +1,10 @@
+preferred_syntax = :sass
+http_path = '/public'
+css_dir = '../css'
+sass_dir = '.'
+# images_dir = 'assets/images'
+# javascripts_dir = 'assets/javascripts'
+relative_assets = true
+line_comments = true
+output_style = :expanded
+environment = :development

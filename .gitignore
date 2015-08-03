@@ -5,3 +5,6 @@ Homestead.yaml
 .env.*.php
 .env.php
 .env
+*nohup.out*
+*.sublime-workspace
+*.sublime-project

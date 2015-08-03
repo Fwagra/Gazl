@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Dashboard</title>
+        <title>Dashboard - @yield('title')</title>
         <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('css/bootflat.min.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/bootflat.css')}}">
     </head>
     <body>
+        <div class="navbar navbar-default">dsd</div>
         <div class="container">
            @yield('content')
         </div>
