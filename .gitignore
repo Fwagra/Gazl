@@ -8,3 +8,4 @@ Homestead.yaml
 *nohup.out*
 *.sublime-workspace
 *.sublime-project
+*.sass-cache*
