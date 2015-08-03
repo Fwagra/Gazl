@@ -3,3 +3,12 @@
   float: none;
   margin: 0 auto;
 }
+
+/* line 9, ../scss/styles.scss */
+.main-nav {
+  background-color: #E9573F;
+}
+/* line 11, ../scss/styles.scss */
+.main-nav .navbar-brand {
+  color: #FFF;
+}

@@ -6,3 +6,9 @@
 	float: none;
 	margin: 0 auto;
 }
+.main-nav{
+	background-color: $bittersweet-dark;
+	.navbar-brand{
+		color: $white;
+	}
+}
