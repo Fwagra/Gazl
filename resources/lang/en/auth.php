@@ -10,7 +10,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'failed' => 'Ces certificats ne correspondent pas à nos enregistrements',
-    'throttle' => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
-    'register' => 'Créer un compte',
+    'failed' => 'This certificats do not match to ours.',
+    'throttle' => 'Too many connection attemps. You could retry in :seconds seconds.',
+    'register' => 'Register',
 ];

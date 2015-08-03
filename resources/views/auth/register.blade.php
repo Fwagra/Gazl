@@ -3,7 +3,7 @@
 @section('title', 'Register')
 @section('content')
 <div class="register-block col-center-block col-md-4">
-    <h2>Register</h2>
+    <h2>{{ trans('auth.register')}}</h2>
     <form method="POST" action="/auth/register">
         {!! csrf_field() !!}
     
