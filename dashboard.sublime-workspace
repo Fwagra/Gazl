@@ -1,0 +1,342 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fore",
+				"foreach	blade-foreach"
+			],
+			[
+				"m",
+				"margin"
+			],
+			[
+				"nor",
+				"no-repeat"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"new",
+				"ANF: New File"
+			],
+			[
+				"",
+				"ANF: New File"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			]
+		],
+		"width": 579.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/tmp/fz3temp-1/master_view.php",
+		"/tmp/fz3temp-1/post.php",
+		"/tmp/fz3temp-1/file.php",
+		"/tmp/fz3temp-1/plugin.php",
+		"/tmp/fz3temp-1/plupload.full.min.js",
+		"/tmp/fz3temp-1/adapter.nextgen_addgallery_pages.php",
+		"/tmp/fz3temp-1/admin-header.php",
+		"/tmp/fz3temp-1/post-services.php",
+		"/tmp/fz3temp-1/admin 3.php",
+		"/tmp/fz3temp-1/admin 2.php",
+		"/tmp/fz3temp-1/admin.php",
+		"/tmp/fz3temp-1/index.php",
+		"/var/www/joiesdu/app/database/seeds/post-content.txt",
+		"/var/www/joiesdu/app/database/seeds/PostsSeeder.php",
+		"/var/www/joiesdu/app/lang/fr/commons.php",
+		"/var/www/joiesdu/app/models/Post.php",
+		"/var/www/joiesdu/app/models/User.php",
+		"/var/www/joiesdu/app/views/frontend/layouts/default.blade.php",
+		"/var/www/joiesdu/app/tests/ExampleTest.php",
+		"/var/www/joiesdu/app/controllers/admin/UsersController.php",
+		"/var/www/joiesdu/app/controllers/gifs.php",
+		"/var/www/joiesdu/app/views/frontend/pages/contact-us.blade.php",
+		"/var/www/joiesdu/app/config/database.php",
+		"/var/www/joiesdu/joiesde.sublime-project",
+		"/var/www/html/app/routes.php",
+		"/var/www/html/app/config/auth.php",
+		"/var/www/html/app/controllers/AuthController.php",
+		"/var/www/html/app/database/migrations/2014_10_05_084431_create_users_table.php",
+		"/var/www/html/app/config/database.php",
+		"/var/www/html/app/config/app.php",
+		"/var/www/html/app/views/auth/login.blade.php",
+		"/tmp/fz3temp-1/routes.php",
+		"/var/www/html/app/database/seeds/DatabaseSeeder.php",
+		"/var/www/html/app/database/seeds/UserTableSeeder.php",
+		"/var/www/html/app/models/User.php",
+		"/var/www/html/app/database/migrations/2014_10_05_084301_create_users_table.php",
+		"/var/www/html/app/database/migrations/2014_10_05_083034_create_users_table.php",
+		"/home/fwagra/Sites/tertio/fabio.php",
+		"/home/fwagra/Sites/tertio/cw_mail.module",
+		"/home/fwagra/partage/Nouveau document texte.txt",
+		"/home/fwagra/Bureau/cron.log",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/js/scripts.js",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/html-elements.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/navigation.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/responsive.desktop.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/responsive.smartphone.portrait.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/responsive.smartphone.landscape.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/templates/node.tpl.php",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/node--realisations.tpl.php",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/responsive.tablet.landscape.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/responsive.tablet.portrait.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/template.php",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/templates/page.tpl.php",
+		"/home/fwagra/Téléchargements/fontello-0c40154f/css/fabio.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/articles.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/animations.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/blocks.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/color/colors.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/page.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/homebackup.html",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/css/responsive.custom.css",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/all/themes/sky/sky.info",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/default/settings.php",
+		"/home/fwagra/Sites/Fabiocerqueira.fr/sites/default/database.inc",
+		"/home/fwagra/Téléchargements/nav-target-master/nav-style.css",
+		"/home/fwagra/Téléchargements/nav-target-master/nav-structure.html",
+		"/home/fwagra/Téléchargements/fontello-0c40154f/css/fabio-ie7.css",
+		"/home/fwagra/Téléchargements/fontello-0c40154f/css/fabio-embedded.css",
+		"/home/fwagra/Téléchargements/fontello-0c40154f/css/fabio-ie7-codes.css",
+		"/home/fwagra/Téléchargements/fontello-0c40154f/css/animation.css",
+		"/home/fwagra/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/fwagra/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/tmp/fz3temp-1/navigation.css",
+		"/home/fwagra/Sites/test.html",
+		"/home/fwagra/Nouveau document"
+	],
+	"find":
+	{
+		"height": 43.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"base64",
+			"base",
+			"reso",
+			"base",
+			"image",
+			"li",
+			"<li>{{ $post->title }}</li>",
+			"li",
+			"$user",
+			"'/'",
+			"auth",
+			"atuh",
+			"				\n",
+			" (",
+			")<",
+			"drupal_mail",
+			"h1",
+			"h2",
+			"site-n",
+			"fefe",
+			"brandi",
+			"main-nav",
+			" \n",
+			"header",
+			"2.5",
+			"\n}",
+			";\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 42.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"post-c",
+				"app/database/seeds/post-content.txt"
+			],
+			[
+				"commons",
+				"app/lang/fr/commons.php"
+			],
+			[
+				"approut",
+				"app/routes.php"
+			],
+			[
+				"databsee",
+				"app/database/seeds/DatabaseSeeder.php"
+			],
+			[
+				"reali",
+				"sites/all/themes/sky/node--realisations.tpl.php"
+			],
+			[
+				"real",
+				"sites/all/themes/sky/node--realisations.tpl.php"
+			],
+			[
+				"bloc",
+				"sites/all/themes/sky/css/blocks.css"
+			],
+			[
+				"anima",
+				"sites/all/themes/sky/css/animations.css"
+			],
+			[
+				"arti",
+				"sites/all/themes/sky/css/articles.css"
+			],
+			[
+				"tablet",
+				"sites/all/themes/sky/css/responsive.tablet.portrait.css"
+			],
+			[
+				"resposmar",
+				"sites/all/themes/sky/css/responsive.smartphone.portrait.css"
+			],
+			[
+				"resposta",
+				"sites/all/themes/sky/css/responsive.tablet.landscape.css"
+			],
+			[
+				"",
+				"sites/all/themes/sky/css/responsive.custom.css"
+			],
+			[
+				"ani",
+				"sites/all/themes/sky/css/animations.css"
+			],
+			[
+				"colo",
+				"sites/all/themes/sky/color/colors.css"
+			],
+			[
+				"colors",
+				"sites/all/themes/sky/color/colors.css"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"quiz",
+				"/var/www/quizz/quizz.sublime-project"
+			],
+			[
+				"",
+				"/var/www/joiesdu/joiesde.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 250.0,
+	"status_bar_visible": true
+}
