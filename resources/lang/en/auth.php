@@ -19,4 +19,5 @@ return [
     'password' => 'Password',
     'password_confirmation' => 'Confirm password',
     'submit' => 'Submit',
+    'registration_effective' => 'You has been correctly created, we\'ll activate your acount soon',
 ];

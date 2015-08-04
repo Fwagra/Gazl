@@ -19,4 +19,5 @@ return [
     'password' => 'Mot de passe',
     'password_confirmation' => 'Confirmez le mot de passe',
     'submit' => 'Je m\'enregistre',
+    'registration_effective' => 'Votre compte a été créé. Il sera validé dans les plus brefs délais',
 ];

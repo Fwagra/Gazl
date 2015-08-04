@@ -4,6 +4,14 @@
 @section('content')
 <div class="register-block col-center-block col-md-4">
     <h2>{{ trans('auth.register')}}</h2>
+    @if ($errors->has())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>        
+            @endforeach
+        </div>
+    @endif
+
     {!! Form::open() !!}
         {!! csrf_field() !!}
         <div class="form-group">

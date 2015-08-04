@@ -14,7 +14,10 @@
 Route::get('/', array('as' => 'home', function () {
     return view('welcome');
 }));
-
+Route::get('home', function ()
+{
+	return view('welcome');
+});
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
