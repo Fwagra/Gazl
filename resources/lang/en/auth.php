@@ -10,7 +10,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'failed' => 'This certificats do not match to ours.',
+    'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many connection attemps. You could retry in :seconds seconds.',
     'register' => 'Register',
     'name' => 'Last Name',
@@ -20,4 +20,6 @@ return [
     'password_confirmation' => 'Confirm password',
     'submit' => 'Submit',
     'registration_effective' => 'You has been correctly created, we\'ll activate your acount soon',
+    'remember' => 'Remember me',
+    'login' => 'Login',
 ];

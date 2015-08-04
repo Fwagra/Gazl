@@ -1,6 +1,6 @@
 <!-- resources/views/auth/register.blade.php -->
 @extends('app')
-@section('title', 'Register')
+@section('title', {{ trans('auth.register') }})
 @section('content')
 <div class="register-block col-center-block col-md-4">
     <h2>{{ trans('auth.register')}}</h2>

@@ -171,7 +171,7 @@ blockquote {
 .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active, .btn-link.active, .btn-link.disabled, .btn-link[disabled] {
   border-color: transparent;
   background-color: transparent;
-  color: #3BAFDA;
+  color: #E9573F;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -201,18 +201,18 @@ blockquote {
 }
 /* line 103, ../scss/bootflat/_button.scss */
 .btn-primary, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
-  border-color: #3BAFDA;
-  background-color: #3BAFDA;
+  border-color: #E9573F;
+  background-color: #E9573F;
 }
 /* line 111, ../scss/bootflat/_button.scss */
 .btn-primary:hover, .btn-primary:focus {
-  border-color: #4FC1E9;
-  background-color: #4FC1E9;
+  border-color: #FC6E51;
+  background-color: #FC6E51;
 }
 /* line 117, ../scss/bootflat/_button.scss */
 .open .dropdown-toggle.btn-primary {
-  border-color: #4FC1E9;
-  background-color: #4FC1E9;
+  border-color: #FC6E51;
+  background-color: #FC6E51;
 }
 /* line 123, ../scss/bootflat/_button.scss */
 .btn-info, .btn-info:active, .btn-info.active, .btn-info.disabled, .btn-info[disabled] {
@@ -296,7 +296,7 @@ blockquote {
 }
 /* line 26, ../scss/bootflat/_button_group.scss */
 .btn-group .btn-primary, .btn-group .btn-primary:focus, .btn-group .btn-primary:active, .btn-group .btn-primary.active {
-  border-left-color: #269ecb;
+  border-left-color: #e53b1f;
 }
 /* line 33, ../scss/bootflat/_button_group.scss */
 .btn-group .btn-success, .btn-group .btn-success:focus, .btn-group .btn-success:active, .btn-group .btn-success.active {
@@ -325,7 +325,7 @@ blockquote {
 }
 /* line 77, ../scss/bootflat/_button_group.scss */
 .btn-group-vertical .btn-primary, .btn-group-vertical .btn-primary:focus, .btn-group-vertical .btn-primary:active, .btn-group-vertical .btn-primary.active, .btn-group-vertical .btn-group .btn-primary {
-  border-top-color: #269ecb !important;
+  border-top-color: #e53b1f !important;
 }
 /* line 85, ../scss/bootflat/_button_group.scss */
 .btn-group-vertical .btn-success, .btn-group-vertical .btn-success:focus, .btn-group-vertical .btn-success:active, .btn-group-vertical .btn-success.active, .btn-group-vertical .btn-group .btn-success {

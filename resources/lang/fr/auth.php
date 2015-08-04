@@ -10,7 +10,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'failed' => 'Ces certificats ne correspondent pas à nos enregistrements',
+    'failed' => 'L\'adresse email et le mot de passe ne correspondent pas.',
     'throttle' => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
     'register' => 'Créer un compte',
     'name' => 'Nom',
@@ -18,6 +18,8 @@ return [
     'email' => 'Email',
     'password' => 'Mot de passe',
     'password_confirmation' => 'Confirmez le mot de passe',
-    'submit' => 'Je m\'enregistre',
+    'submit' => 'Envoyer',
     'registration_effective' => 'Votre compte a été créé. Il sera validé dans les plus brefs délais',
+    'remember' => 'Se souvenir de moi',
+    'login' => 'Se connecter',
 ];
