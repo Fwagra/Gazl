@@ -6,6 +6,7 @@ Homestead.yaml
 .env.php
 .env
 *nohup.out*
-*.sublime-workspace
-*.sublime-project
+*.sublime-workspace*
+*.sublime-project*
 *.sass-cache*
+dashboard.sublime-workspace

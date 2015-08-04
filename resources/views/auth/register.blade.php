@@ -4,11 +4,11 @@
 @section('content')
 <div class="register-block col-center-block col-md-4">
     <h2>{{ trans('auth.register')}}</h2>
-    <form method="POST" action="/auth/register">
+    {!! Form::open() !!}
         {!! csrf_field() !!}
-    
         <div>
             Name
+
             <input class="form-control" type="text" name="name" value="{{ old('name') }}">
         </div>
     
@@ -30,6 +30,6 @@
         <div>
             <button type="submit">Register</button>
         </div>
-    </form>
+    {!!  Form::close() !!}
 </div>
 @endsection
