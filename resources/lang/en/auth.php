@@ -13,4 +13,10 @@ return [
     'failed' => 'This certificats do not match to ours.',
     'throttle' => 'Too many connection attemps. You could retry in :seconds seconds.',
     'register' => 'Register',
+    'name' => 'Last Name',
+    'first_name' => 'First name',
+    'email' => 'Email',
+    'password' => 'Password',
+    'password_confirmation' => 'Confirm password',
+    'submit' => 'Submit',
 ];

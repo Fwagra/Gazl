@@ -6,29 +6,28 @@
     <h2>{{ trans('auth.register')}}</h2>
     {!! Form::open() !!}
         {!! csrf_field() !!}
-        <div>
-            Name
-
-            <input class="form-control" type="text" name="name" value="{{ old('name') }}">
+        <div class="form-group">
+            {!! Form::label('name', trans('auth.name'))!!}
+            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('auth.name')])!!}
         </div>
-    
-        <div>
-            Email
-            <input class="form-control" type="email" name="email" value="{{ old('email') }}">
+        <div class="form-group">
+            {!! Form::label('first_name', trans('auth.first_name'))!!}
+            {!! Form::text('first_name', null, ['class' => 'form-control', 'placeholder' => trans('auth.first_name')])!!}
         </div>
-    
-        <div>
-            Password
-            <input class="form-control" type="password" name="password">
+        <div class="form-group">
+            {!! Form::label('email', trans('auth.email'))!!}
+            {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => trans('auth.email')])!!}
         </div>
-    
-        <div>
-            Confirm Password
-            <input class="form-control" type="password" name="password_confirmation">
+        <div class="form-group">
+            {!! Form::label('password', trans('auth.password'))!!}
+            {!! Form::password('password',['class' => 'form-control'])!!}
         </div>
-    
-        <div>
-            <button type="submit">Register</button>
+        <div class="form-group">
+            {!! Form::label('password_confirmation', trans('auth.password_confirmation'))!!}
+            {!! Form::password('password_confirmation',['class' => 'form-control'])!!}
+        </div>
+        <div class="form-group">
+            {!! Form::submit(trans('auth.submit'), ['class' => 'btn btn-primary'])!!}
         </div>
     {!!  Form::close() !!}
 </div>

@@ -13,4 +13,10 @@ return [
     'failed' => 'Ces certificats ne correspondent pas à nos enregistrements',
     'throttle' => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
     'register' => 'Créer un compte',
+    'name' => 'Nom',
+    'first_name' => 'Prénom',
+    'email' => 'Email',
+    'password' => 'Mot de passe',
+    'password_confirmation' => 'Confirmez le mot de passe',
+    'submit' => 'Je m\'enregistre',
 ];
