@@ -27,6 +27,7 @@ class AddValidationAndFirstName extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('first_name');
+            $table->dropColumn('validated');
         });
     }
 }
