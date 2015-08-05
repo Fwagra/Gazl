@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\View;
+use App\Project;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +27,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('projects.new');
     }
 
     /**
@@ -37,7 +38,9 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $project  = new Project;
+        $project->slug = $request->name;
+        dd($project);
     }
 
     /**

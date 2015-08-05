@@ -16,8 +16,7 @@ class Project extends Model
      */
     public function setSlugAttribute($value)
     {
-    	if(empty($value))
-    		$this->attributes['slug'] = Str::slug($this->name);
+    	$this->attributes['slug'] = Str::slug($value);
     }
 
     public function getRouteKey()
