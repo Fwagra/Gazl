@@ -16,6 +16,7 @@ class ProjectController extends Controller
      * Construct function
      */
     public function __construct() {
+      $this->middleware('guest.auth');
       $this->middleware('auth', ['only' => ['create', 'store']]);
     }
     /**
@@ -66,7 +67,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        echo "string";
     }
 
     /**
