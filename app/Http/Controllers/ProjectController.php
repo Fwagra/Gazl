@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\View;
 use App\Project;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use \Session;
+use \Redirect;
 
 class ProjectController extends Controller
 {
@@ -43,6 +45,8 @@ class ProjectController extends Controller
         $project->slug = $request->name;
         $project->public_id = $request->name;
         $project->save();
+        Session::flash('message', trans('project.success'));
+        return back();
     }
 
     /**

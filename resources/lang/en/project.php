@@ -12,4 +12,5 @@ return [
     */
     'name' => 'Project name',
     'create' => 'Create the project',
+    'success' => 'The project has been created!',
 ];
