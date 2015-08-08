@@ -13,6 +13,12 @@ use \Redirect;
 class ProjectController extends Controller
 {
     /**
+     * Construct function
+     */
+    public function __construct() {
+      $this->middleware('auth', ['only' => ['create', 'store']]);
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return Response
