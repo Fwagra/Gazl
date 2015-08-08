@@ -11,19 +11,13 @@
 |
 */
 
-Route::get('/', array('as' => 'home', function () {
-    return view('welcome');
-}));
-Route::get('home', function ()
-{
-	return view('welcome');
-});
+Route::get('/', array('as' => 'home', 'uses' => 'ProjectController@home'));
 
 //Projects routes
 Route::resource('project', 'ProjectController');
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::post('auth/login', ['as' => 'post.login', 'uses' => 'Auth\AuthController@postLogin']);
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Registration routes...

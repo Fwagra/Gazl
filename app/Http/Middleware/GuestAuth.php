@@ -18,7 +18,7 @@ class GuestAuth extends Authenticate
     {
         if($this->auth->guest()){
             $route = $request->route()->parameters();
-            $project = \DB::table('projects')->where('slug', $route['project'])->get();
+            $project = \DB::table('projects')->where('slug', $route['project'])->first();
             dd($project);
             dd($request->route());
         }

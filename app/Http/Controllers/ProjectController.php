@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use \Session;
 use \Redirect;
+use \Auth;
 
 class ProjectController extends Controller
 {
@@ -16,9 +17,23 @@ class ProjectController extends Controller
      * Construct function
      */
     public function __construct() {
-      $this->middleware('guest.auth');
-      $this->middleware('auth', ['only' => ['create', 'store']]);
+      $this->middleware('guest.auth', ['except' => ['home', 'index']]);
+      $this->middleware('auth', ['only' => ['create', 'store', 'index']]);
     }
+
+    /**
+     * Redirect the user whether it's a logged user, a guest user or a non-logged user
+     */
+    public function home()
+    {
+        if(Auth::check()){
+            echo "string";
+           return  Redirect::route('project.index');
+        }else{
+           return View::make('home.index');
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +41,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        echo "index";
     }
 
     /**
@@ -67,7 +82,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        echo "string";
+        echo "project";
     }
 
     /**
