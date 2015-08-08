@@ -39,8 +39,10 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $project  = new Project;
+        $project->name = $request->name;
         $project->slug = $request->name;
-        dd($project);
+        $project->public_id = $request->name;
+        $project->save();
     }
 
     /**
