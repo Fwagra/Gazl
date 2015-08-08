@@ -40,6 +40,9 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+        ]);
         $project  = new Project;
         $project->name = $request->name;
         $project->slug = $request->name;
