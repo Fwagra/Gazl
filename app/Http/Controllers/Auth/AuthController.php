@@ -94,13 +94,14 @@ class AuthController extends Controller
     public function postGuestLogin(Request $request)
     {
         $rules = array(
-            'public_id' => 'required|max:4|min:4',
+            'public_id' => 'required|max:4|min:4|exists:projects,public_id',
         );
 
         $messages = array(
             'public_id.required' => trans('auth.public_id_required'),
             'public_id.max' => trans('auth.public_id_max'),
             'public_id.min' => trans('auth.public_id_max'),
+            'public_id.exists' => trans('auth.not_a_project'),
         );
 
         $validator = Validator::make(Input::all(), $rules, $messages);
@@ -109,8 +110,8 @@ class AuthController extends Controller
                 $request, $validator
             );
         }
-
         $public_id = Input::get('public_id');
         echo $public_id;
+
     }
 }

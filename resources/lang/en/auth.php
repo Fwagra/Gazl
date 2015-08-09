@@ -25,4 +25,5 @@ return [
     'public_id' => 'Type your project code',
     'public_id_required' => 'You must enter a code',
     'public_id_max' => 'Your code is not correctly formatted',
+    'not_a_project' => 'This code does not match our records',
 ];
