@@ -21,5 +21,6 @@ return [
     'submit' => 'Envoyer',
     'registration_effective' => 'Votre compte a été créé. Il sera validé dans les plus brefs délais',
     'remember' => 'Se souvenir de moi',
-    'login' => 'Se connecter',
+    'login' => 'Connexion',
+    'public_id' => 'Entrez votre code de projet',
 ];

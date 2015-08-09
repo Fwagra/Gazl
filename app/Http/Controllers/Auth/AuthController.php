@@ -90,4 +90,8 @@ class AuthController extends Controller
        Session::flash('message', trans('auth.registration_effective')); 
         return redirect($this->redirectPath());
     }
+    public function postGuestLogin(Request $request)
+    {
+      
+    }
 }

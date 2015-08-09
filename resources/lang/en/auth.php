@@ -22,4 +22,5 @@ return [
     'registration_effective' => 'You has been correctly created, we\'ll activate your acount soon',
     'remember' => 'Remember me',
     'login' => 'Login',
+    'public_id' => 'Type your project code',
 ];
