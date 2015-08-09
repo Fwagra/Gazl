@@ -23,4 +23,6 @@ return [
     'remember' => 'Remember me',
     'login' => 'Login',
     'public_id' => 'Type your project code',
+    'public_id_required' => 'You must enter a code',
+    'public_id_max' => 'Your code is not correctly formatted',
 ];

@@ -7,6 +7,7 @@ use Auth;
 use Session;
 use Illuminate\Http\Request;
 use Validator;
+use \Input;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -92,6 +93,24 @@ class AuthController extends Controller
     }
     public function postGuestLogin(Request $request)
     {
-      
+        $rules = array(
+            'public_id' => 'required|max:4|min:4',
+        );
+
+        $messages = array(
+            'public_id.required' => trans('auth.public_id_required'),
+            'public_id.max' => trans('auth.public_id_max'),
+            'public_id.min' => trans('auth.public_id_max'),
+        );
+
+        $validator = Validator::make(Input::all(), $rules, $messages);
+        if($validator->fails()){
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $public_id = Input::get('public_id');
+        echo $public_id;
     }
 }
