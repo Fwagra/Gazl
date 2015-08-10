@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Auth;
+use Cookie;
+use Illuminate\Http\Response;
 use Session;
 use Illuminate\Http\Request;
 use Validator;
@@ -110,8 +112,8 @@ class AuthController extends Controller
                 $request, $validator
             );
         }
-        $public_id = Input::get('public_id');
-        echo $public_id;
+        $publicId = Input::get('public_id');
+        Cookie::queue('public_id', $publicId, 10000);
 
     }
 }
