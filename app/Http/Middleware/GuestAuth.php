@@ -19,8 +19,14 @@ class GuestAuth extends Authenticate
         if($this->auth->guest()){
             $route = $request->route()->parameters();
             $project = \DB::table('projects')->where('slug', $route['project'])->first();
-            dd($project);
-            dd($request->route());
+            if($request->cookie('public_id') == null || 
+               strtoupper($request->cookie('public_id')) != $project->public_id){
+                if ($request->ajax()) {
+                    return response('Unauthorized.', 401);
+                } else {
+                    return redirect('/');
+                }
+            }
         }
         return $next($request);
     }

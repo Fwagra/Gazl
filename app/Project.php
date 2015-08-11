@@ -41,4 +41,9 @@ class Project extends Model
     {
     	$this->slug;
     }
+    
+    public function scopePublicId($query, $id)
+    {
+        return $query->where('public_id',$id);
+    }
 }

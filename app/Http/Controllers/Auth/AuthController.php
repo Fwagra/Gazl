@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Project;
 use Auth;
 use Cookie;
 use Illuminate\Http\Response;
@@ -114,6 +115,7 @@ class AuthController extends Controller
         }
         $publicId = Input::get('public_id');
         Cookie::queue('public_id', $publicId, 10000);
-
+        $project = Project::publicId($publicId)->first();
+        return redirect('project/'.$project->slug);
     }
 }

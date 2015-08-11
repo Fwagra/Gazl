@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
-use App\Project;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Project;
 use \Session;
 use \Redirect;
 use \Auth;
@@ -24,11 +24,13 @@ class ProjectController extends Controller
     /**
      * Redirect the user whether it's a logged user, a guest user or a non-logged user
      */
-    public function home()
+    public function home(Request $request)
     {
         if(Auth::check()){
-            echo "string";
            return  Redirect::route('project.index');
+        }elseif (!Auth::check() && $request->cookie('public_id') != null) {
+            $project = Project::publicId($request->cookie('public_id'))->first();
+            return Redirect::route('project.show', [$project->slug]);
         }else{
            return View::make('home.index');
         }
