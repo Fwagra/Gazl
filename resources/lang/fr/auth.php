@@ -26,4 +26,5 @@ return [
     'public_id_required' => 'Vous devez entrer un code',
     'public_id_max' => 'Votre code ne respecte pas le bon format',
     'not_a_project' => 'Ce code ne correspond à aucun projet',
+    'logout' => 'Déconnexion',
 ];

@@ -16,6 +16,9 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{ route('home') }}">Dashboard</a>
                 </div>
+                <div class="navbar-text navbar-right">
+                    @include('auth.login-zone')
+                </div>
            </div>
         </div>
         <div class="container">
