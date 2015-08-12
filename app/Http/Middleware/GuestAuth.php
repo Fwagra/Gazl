@@ -18,7 +18,7 @@ class GuestAuth extends Authenticate
     {
         if($this->auth->guest()){
             $route = $request->route()->parameters();
-            $project = \DB::table('projects')->where('slug', $route['project'])->first();
+            $project = \DB::table('projects')->select('public_id')->where('slug', $route['project'])->first();
             if(count($project) == 0)
                 return redirect('/');   
             if($request->cookie('public_id') == null || 
