@@ -15,9 +15,15 @@ Route::get('/', array('as' => 'home', 'uses' => 'ProjectController@home'));
 
 //Projects routes
 Route::resource('project', 'ProjectController');
+
 // Authentication routes...
-Route::get('auth/login', 'Auth\AuthController@getLogin');
+
+///Guest users
 Route::post('guest/login', ['as' => 'guest.login', 'uses' => 'Auth\AuthController@postGuestLogin']);
+Route::get('guest/logout', ['as' => 'guest.logout', 'uses' => 'Auth\AuthController@getGuestLogout']);
+
+/// Authenticated users
+Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', ['as' => 'post.login', 'uses' => 'Auth\AuthController@postLogin']);
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 

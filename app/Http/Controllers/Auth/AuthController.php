@@ -94,6 +94,7 @@ class AuthController extends Controller
        Session::flash('message', trans('auth.registration_effective')); 
         return redirect($this->redirectPath());
     }
+
     public function postGuestLogin(Request $request)
     {
         $rules = array(
@@ -117,5 +118,10 @@ class AuthController extends Controller
         Cookie::queue('public_id', $publicId, 10000);
         $project = Project::publicId($publicId)->first();
         return redirect('project/'.$project->slug);
+    }
+
+    public function getGuestLogout()
+    {
+        return redirect('/')->withCookie(Cookie::forget('public_id'));
     }
 }

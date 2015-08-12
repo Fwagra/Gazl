@@ -84,7 +84,8 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        echo "project";
+        $project = Project::where('slug', $id)->first();
+       return View::make('projects.show', compact('project'));
     }
 
     /**
