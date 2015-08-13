@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use \Response;
 use App\Project;
 use \Session;
 use \Redirect;
+use \Input;
 use \Auth;
+use \DB;
 
 class ProjectController extends Controller
 {
@@ -18,7 +21,7 @@ class ProjectController extends Controller
      */
     public function __construct() {
       $this->middleware('guest.auth', ['except' => ['home', 'index']]);
-      $this->middleware('auth', ['only' => ['create', 'store', 'index']]);
+      $this->middleware('auth', ['only' => ['create', 'store', 'index', 'edit']]);
     }
 
     /**
@@ -43,7 +46,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        echo "index";
+        return View::make('projects.index');
     }
 
     /**
@@ -79,24 +82,24 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $project = Project::where('slug', $id)->first();
+        $project = Project::where('slug', $slug)->first();
        return View::make('projects.show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $project = Project::where('slug', $id)->first();
+        $project = Project::where('slug', $slug)->first();
        return View::make('projects.edit', compact('project'));
     }
 
@@ -104,12 +107,12 @@ class ProjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  int  $id
+     * @param  string  $slug
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        $project = Project::where('slug', $id)->first();
+        $project = Project::where('slug', $slug)->first();
         // Reset slug with mutator
         $request['slug'] = $request->name;
         $project->update($request->all());
@@ -127,4 +130,19 @@ class ProjectController extends Controller
         //
     }
 
+    public function searchProject()
+    {
+        $term = Input::get('term');  
+        $results = array();
+        $queries = DB::table('projects')
+            ->where('name', 'LIKE', '%'.$term.'%')
+            ->take(10)->get();
+        
+        foreach ($queries as $query)
+        {
+            $results[] = [ 'id' => $query->id, 'value' => $query->name, 'slug' => $query->slug];
+        }
+
+        return Response::json($results);
+    }
 }

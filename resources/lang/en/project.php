@@ -13,4 +13,8 @@ return [
     'name' => 'Project name',
     'create' => 'Create the project',
     'success' => 'The project has been created!',
+    'list_h1' => 'Type a project to search',
+    'list_title' => 'Search a project',
+    'search_placeholder' => 'A project name',
+    'search_button' => 'Search',
 ];

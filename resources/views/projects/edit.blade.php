@@ -2,6 +2,6 @@
 @section('content')
     @include('errors.form-error')
 	{!! Form::model($project, ['route' => ['project.update', $project->slug], 'method' => 'PUT']) !!}
-		@include('projects.form')
+		@include('projects.form-search')
     {!!  Form::close() !!}
 @endsection
