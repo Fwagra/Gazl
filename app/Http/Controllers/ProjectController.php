@@ -96,7 +96,8 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::where('slug', $id)->first();
+       return View::make('projects.edit', compact('project'));
     }
 
     /**
@@ -108,7 +109,9 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $project = Project::where('slug', $id)->first();
+        $project->update($request->all());
+        return redirect(route('project.show', $project->id));
     }
 
     /**
