@@ -110,6 +110,8 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         $project = Project::where('slug', $id)->first();
+        // Reset slug with mutator
+        $request['slug'] = $request->name;
         $project->update($request->all());
         return redirect(route('project.show', $project->id));
     }

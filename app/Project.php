@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class Project extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug'];
     /**
      * Set the unique project slug
      *
