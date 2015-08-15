@@ -4,6 +4,7 @@
         <title>Dashboard - @yield('title')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="{{ URL::asset('js/jquery-1.11.3.min.js') }}"></script>
+        <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
         <script src="{{ URL::asset('js/icheck.min.js') }}"></script>
         <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}">
@@ -43,6 +44,7 @@
         checkboxClass: 'icheckbox_flat-red',
         radioClass: 'iradio_flat-red'
       });
+      $('[data-toggle="tooltip"]').tooltip();
     });
     </script>
 </html>
