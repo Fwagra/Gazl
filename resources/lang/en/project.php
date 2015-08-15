@@ -16,5 +16,6 @@ return [
     'list_h1' => 'Type a project to search',
     'list_title' => 'Search a project',
     'search_placeholder' => 'A project name',
+    'no_results_found' => 'No results found',
     'search_button' => 'Search',
 ];
