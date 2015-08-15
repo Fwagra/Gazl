@@ -11,7 +11,7 @@ return [
     |
     */
     'name' => 'Nom du projet',
-    'create' => 'Créer le project',
+    'create' => 'Créer le projet',
     'success' => 'Le project a bien été créé!',
     'list_h1' => 'Entrez le projet recherché',
     'list_title' => 'Cherchez un projet',    
