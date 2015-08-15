@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Project;
 use App\Http\Requests;
+use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
 
 class AccessesController extends Controller
@@ -22,9 +23,9 @@ class AccessesController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index($projectSlug)
     {
-        echo "string";
+        $project = Project::where('slug', $projectSlug)->first();
     }
 
     /**
@@ -34,7 +35,7 @@ class AccessesController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('accesses.new');
     }
 
     /**
