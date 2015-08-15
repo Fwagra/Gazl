@@ -19,4 +19,5 @@ return [
     'tooltip_login' => 'Exemple : ftp_user, db_user',
     'password' => 'Password',
     'tooltip_password' => 'It\'s pretty explicit, I guess :)',
+    'success' => 'The accesses have been correctly created',
 ];

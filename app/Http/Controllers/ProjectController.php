@@ -87,7 +87,7 @@ class ProjectController extends Controller
      */
     public function show($slug)
     {
-        $project = Project::where('slug', $slug)->first();
+        $project = Project::slug($slug);
        return View::make('projects.show', compact('project'));
     }
 
@@ -99,7 +99,7 @@ class ProjectController extends Controller
      */
     public function edit($slug)
     {
-        $project = Project::where('slug', $slug)->first();
+        $project = Project::slug($slug);
        return View::make('projects.edit', compact('project'));
     }
 
@@ -112,7 +112,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        $project = Project::where('slug', $slug)->first();
+        $project = Project::slug($slug);
         // Reset slug with mutator
         $request['slug'] = $request->name;
         $project->update($request->all());

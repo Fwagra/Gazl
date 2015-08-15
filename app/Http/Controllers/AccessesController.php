@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use App\Access;
 use App\Http\Requests;
 use Illuminate\Support\Facades\View;
+use \Session;
 use App\Http\Controllers\Controller;
 
 class AccessesController extends Controller
@@ -25,7 +27,7 @@ class AccessesController extends Controller
      */
     public function index($projectSlug)
     {
-        $project = Project::where('slug', $projectSlug)->first();
+       $project = Project::slug($projectSlug);
     }
 
     /**
@@ -44,9 +46,13 @@ class AccessesController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store($project, Request $request)
     {
-        //
+        $project = Project::slug($project);
+        $request['project_id'] = $project->id;
+        Access::create($request->only('name', 'host', 'login', 'password', 'project_id'));
+        Session::flash('message', trans('access.success'));
+        return back();
     }
 
     /**
