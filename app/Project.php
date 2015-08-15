@@ -46,4 +46,9 @@ class Project extends Model
     {
         return $query->where('public_id',$id);
     }
+
+    public function accesses()
+    {
+        return $this->hasMany('Access', 'project_id', 'id');
+    }
 }
