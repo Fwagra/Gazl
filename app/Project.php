@@ -47,8 +47,13 @@ class Project extends Model
         return $query->where('public_id',$id);
     }
 
+    public function scopeSlug($query, $id)
+    {
+        return $query->where('slug', $id)->first();
+    }
+
     public function accesses()
     {
-        return $this->hasMany('Access', 'project_id', 'id');
+        return $this->hasMany('App\Access');
     }
 }
