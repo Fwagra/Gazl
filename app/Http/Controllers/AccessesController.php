@@ -28,6 +28,7 @@ class AccessesController extends Controller
     public function index($projectSlug)
     {
        $project = Project::slug($projectSlug);
+       $list = $project->accesses;
     }
 
     /**
