@@ -12,5 +12,11 @@ return [
     */
     'name' => 'Title',
     'create' => 'Save',
-    'tooltip_title' => 'Example : dev, production, www.example.com'
+    'tooltip_title' => 'Example : dev SQL, production FTP, www.example.com',
+    'host' => 'Host',
+    'tooltip_host' => 'Example : 127.0.0.1,  www.example.com',
+    'login' => 'Login',
+    'tooltip_login' => 'Exemple : ftp_user, db_user',
+    'password' => 'Password',
+    'tooltip_password' => 'It\'s pretty explicit, I guess :)',
 ];

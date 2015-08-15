@@ -33,9 +33,9 @@ class AccessesController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($project)
     {
-        return View::make('accesses.new');
+        return View::make('accesses.new', compact('project'));
     }
 
     /**
