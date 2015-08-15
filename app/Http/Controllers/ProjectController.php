@@ -20,8 +20,8 @@ class ProjectController extends Controller
      * Construct function
      */
     public function __construct() {
-      $this->middleware('guest.auth', ['except' => ['home', 'index']]);
-      $this->middleware('auth', ['only' => ['create', 'store', 'index', 'edit']]);
+      $this->middleware('guest.auth', ['except' => ['home', 'index', 'searchProject']]);
+      $this->middleware('auth', ['only' => ['create', 'store', 'index', 'edit', 'searchProject']]);
     }
 
     /**
