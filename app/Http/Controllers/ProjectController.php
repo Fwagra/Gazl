@@ -132,7 +132,9 @@ class ProjectController extends Controller
 
     public function searchProject()
     {
-        $term = Input::get('term');  
+        $term = Input::get('term'); 
+        if(is_null($term))
+            return Response::json('no result'); 
         $results = array();
         $queries = DB::table('projects')
             ->where('name', 'LIKE', '%'.$term.'%')
