@@ -14,8 +14,8 @@
 Route::get('/', array('as' => 'home', 'uses' => 'ProjectController@home'));
 
 //Projects routes
-Route::resource('project', 'ProjectController');
 Route::get('search/project', ['as' => 'project.search', 'uses' => 'ProjectController@searchProject']);
+Route::resource('project', 'ProjectController');
 
 // Authentication routes...
 
