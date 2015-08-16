@@ -19,5 +19,6 @@ return [
     'tooltip_login' => 'Exemple : ftp_user, db_user',
     'password' => 'Mot de passe',
     'tooltip_password' => 'Je pense que c\'est explicite :)',
-    'success' => 'Les identifiants ont bien été créés.'
+    'success' => 'Les identifiants ont bien été créés.',
+    'access_not_found' => 'Ces identifiants n\'existent pas pour ce projet'
 ];

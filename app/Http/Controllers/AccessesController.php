@@ -8,6 +8,7 @@ use App\Access;
 use App\Http\Requests;
 use Illuminate\Support\Facades\View;
 use \Session;
+use \Redirect;
 use App\Http\Controllers\Controller;
 
 class AccessesController extends Controller
@@ -29,6 +30,8 @@ class AccessesController extends Controller
     {
        $project = Project::slug($projectSlug);
        $list = $project->accesses;
+       // dd($list);
+       echo "list";
     }
 
     /**
@@ -38,7 +41,8 @@ class AccessesController extends Controller
      */
     public function create($project)
     {
-        return View::make('accesses.new', compact('project'));
+        $access = new Access;
+        return View::make('accesses.new', compact('project', 'access'));
     }
 
     /**
@@ -73,9 +77,13 @@ class AccessesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($projectSlug, $accessId)
     {
-        //
+        $project = Project::slug($projectSlug);
+        $access = Access::find($accessId);
+        if($project->id != $access->project_id){
+            return Redirect::action('AccessesController@index', $projectSlug)->withErrors(['message' => trans('access.access_not_found')]);
+        }
     }
 
     /**
