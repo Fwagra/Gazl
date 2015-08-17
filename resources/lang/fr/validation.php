@@ -112,6 +112,8 @@ return [
         "password" => "Mot de passe",
         "password_confirmation" => "Confirmation du mot de passe",
         "city" => "Ville",
+        "login" => "Identifiant",
+        "host" => "Hôte",
         "country" => "Pays",
         "address" => "Adresse",
         "phone" => "Téléphone",

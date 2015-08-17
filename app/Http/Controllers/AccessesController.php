@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\View;
 use \Session;
 use \Redirect;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAccessRequest;
 
 class AccessesController extends Controller
 {
@@ -51,7 +52,7 @@ class AccessesController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store($project, Request $request)
+    public function store($project, StoreAccessRequest $request)
     {
         $project = Project::slug($project);
         $request['project_id'] = $project->id;
@@ -84,6 +85,8 @@ class AccessesController extends Controller
         if($project->id != $access->project_id){
             return Redirect::action('AccessesController@index', $projectSlug)->withErrors(['message' => trans('access.access_not_found')]);
         }
+
+        return View::make('accesses.edit', compact('project','access'));
     }
 
     /**
@@ -93,9 +96,9 @@ class AccessesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreAccessRequest $request, $projectSlug, $accessId)
     {
-        //
+        dd($accessId);
     }
 
     /**
