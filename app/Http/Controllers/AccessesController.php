@@ -98,7 +98,10 @@ class AccessesController extends Controller
      */
     public function update(StoreAccessRequest $request, $projectSlug, $accessId)
     {
-        dd($accessId);
+        $project = Project::slug($projectSlug);
+        $access = Access::find($accessId);
+        $access->update($request->all());
+        return redirect(route('project.show', $project->slug));
     }
 
     /**
