@@ -25,6 +25,7 @@ class AccessesController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param string $projectSlug
      * @return Response
      */
     public function index($projectSlug)
@@ -49,12 +50,13 @@ class AccessesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  string  $projectSlug
+     * @param  StoreAccessRequest  $request
      * @return Response
      */
-    public function store($project, StoreAccessRequest $request)
+    public function store($projectSlug, StoreAccessRequest $request)
     {
-        $project = Project::slug($project);
+        $project = Project::slug($projectSlug);
         $request['project_id'] = $project->id;
         Access::create($request->only('name', 'host', 'login', 'password', 'project_id'));
         Session::flash('message', trans('access.success'));
@@ -92,8 +94,9 @@ class AccessesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  StoreAccessRequest  $request
+     * @param  string  $projectSlug
+     * @param  int  $accessId
      * @return Response
      */
     public function update(StoreAccessRequest $request, $projectSlug, $accessId)
@@ -107,11 +110,12 @@ class AccessesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string  $projectSlug
+     * @param  int  $accessId
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($projectSlug, $accessId)
     {
-        //
+        
     }
 }

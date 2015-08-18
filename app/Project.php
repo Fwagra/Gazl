@@ -37,21 +37,33 @@ class Project extends Model
         $this->attributes['public_id'] =  $newPublicId;
     }
 
+    /**
+     * Replace id by slug in urls
+     */
     public function getRouteKey()
     {
     	$this->slug;
     }
     
+    /**
+     * Query project by public Id
+     */
     public function scopePublicId($query, $id)
     {
         return $query->where('public_id',$id);
     }
 
+    /**
+     * Query project by sug
+     */
     public function scopeSlug($query, $id)
     {
         return $query->where('slug', $id)->first();
     }
 
+    /**
+     * A project may own many accesses
+     */
     public function accesses()
     {
         return $this->hasMany('App\Access');
