@@ -20,5 +20,6 @@ return [
     'password' => 'Password',
     'tooltip_password' => 'It\'s pretty explicit, I guess :)',
     'success' => 'The accesses have been correctly created',
-    'access_not_found' => 'These accesses do not exist for the current project'
+    'access_not_found' => 'These accesses do not exist for the current project',
+    'delete' => 'Delete',
 ];

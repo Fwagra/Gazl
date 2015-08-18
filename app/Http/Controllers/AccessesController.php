@@ -116,6 +116,9 @@ class AccessesController extends Controller
      */
     public function destroy($projectSlug, $accessId)
     {
-        
+        $project = Project::slug($projectSlug);
+        $access = Access::find($accessId);
+        $access->delete();
+        return redirect(route('project.show', $project->slug));
     }
 }
