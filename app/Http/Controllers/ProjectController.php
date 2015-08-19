@@ -20,7 +20,7 @@ class ProjectController extends Controller
      * Construct function
      */
     public function __construct() {
-      $this->middleware('guest.auth', ['except' => ['home', 'index', 'searchProject']]);
+      $this->middleware('guest.auth', ['except' => ['home', 'index', 'searchProject', 'create']]);
       $this->middleware('auth', ['only' => ['create', 'store', 'index', 'edit', 'searchProject']]);
     }
 
@@ -113,21 +113,25 @@ class ProjectController extends Controller
     public function update(Request $request, $slug)
     {
         $project = Project::slug($slug);
-        // Reset slug with mutator
-        $request['slug'] = $request->name;
         $project->update($request->all());
-        return redirect(route('project.show', $project->id));
+        // Reset slug with mutator
+        $project->slug = $project->name;
+        $project->save();
+        return redirect(route('project.show', $project->slug));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
-        //
+        $project = Project::slug($slug);
+        $project->delete();
+        Session::flash('message', trans('project.delete_success'));
+        return redirect(route('project.index'));
     }
 
     public function searchProject()
