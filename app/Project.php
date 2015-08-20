@@ -68,4 +68,16 @@ class Project extends Model
     {
         return $this->hasMany('App\Access');
     }
+
+    /**
+     * Handle children deletion on project removal
+     */
+    public static function boot()
+    {
+        parent::boot();    
+        static::deleted(function($product)
+        {
+            $product->accesses()->delete();
+        });
+    }
 }
