@@ -4,5 +4,5 @@
     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => trans('project.name')])!!}
 </div>
 <div class="form-group">
-    {!! Form::submit(trans('project.create'), ['class' => 'btn btn-primary'])!!}
+    {!! Form::submit(trans('project.save'), ['class' => 'btn btn-primary'])!!}
 </div>
