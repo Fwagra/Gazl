@@ -21,5 +21,8 @@ return [
     'tooltip_password' => 'Je pense que c\'est explicite :)',
     'success' => 'Les identifiants ont bien été créés.',
     'access_not_found' => 'Ces identifiants n\'existent pas pour ce projet',
-    'delete' => 'Supprimer'
+    'delete' => 'Supprimer',
+    'key' => 'Clé de chiffrage',    
+    'save_key' => 'Sauvegarder la clé',    
+    'key_enter' => 'Taper la clé de chiffrage',    
 ];

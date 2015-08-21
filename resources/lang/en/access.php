@@ -22,4 +22,7 @@ return [
     'success' => 'The accesses have been correctly created',
     'access_not_found' => 'These accesses do not exist for the current project',
     'delete' => 'Delete',
+    'key' => 'Encryption key',
+    'save_key' => 'Save the key',
+    'key_enter' => 'Type the encryption key',
 ];
