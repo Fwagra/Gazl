@@ -17,8 +17,10 @@ Route::get('/', array('as' => 'home', 'uses' => 'ProjectController@home'));
 Route::get('search/project', ['as' => 'project.search', 'uses' => 'ProjectController@searchProject']);
 Route::resource('project', 'ProjectController');
 
+//Accesses Routes
 Route::resource('project.access', 'AccessesController');
-
+Route::get('admin/key', ['as' => 'admin.key', 'uses' => 'AccessesController@setGlobalKey']);
+Route::post('admin/key', ['as' => 'admin.key.save', 'uses' => 'AccessesController@saveGlobalKey']);
 
 // Authentication routes...
 
