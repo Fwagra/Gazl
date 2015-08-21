@@ -9,6 +9,8 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\View;
 use \Session;
 use \Redirect;
+use File;
+use Input;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAccessRequest;
 
@@ -120,5 +122,39 @@ class AccessesController extends Controller
         $access = Access::find($accessId);
         $access->delete();
         return redirect(route('project.show', $project->slug));
+    }
+    /**
+     * Show the form for setting/editing the global encryption key
+     * @return Response
+     */
+    public function setGlobalKey()
+    {
+        return View::make('encryption_key.admin.form');
+    }
+
+    /**
+     * Save the new global key
+     * @param Request $request
+     * @return Response
+     */
+    public function saveGlobalKey(Request $request)
+    {
+        if(Input::get('key_old') !== false){
+            $this->validate($request, [
+                'old_key' => 'required|min:10',
+                'key' => 'required|min:10',
+            ]); 
+        }else{
+            $this->validate($request, [
+                'key' => 'required|min:10',
+            ]);
+        }
+        
+        if(File::exists(base_path('storage/.encryption_key'))){
+            // Get the current key and recrypt all the accesses with the new one
+        }
+
+        File::put(base_path('storage/.encryption_key'), Input::get('key'));
+        return back();
     }
 }
