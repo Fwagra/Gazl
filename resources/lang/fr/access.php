@@ -25,4 +25,6 @@ return [
     'key' => 'Clé de chiffrage',    
     'save_key' => 'Sauvegarder la clé',    
     'key_enter' => 'Taper la clé de chiffrage',    
+    'old_key' => 'Ancienne clé',
+    'old_key_enter' => 'Vous devez entrer la clé actuelle pour pouvoir la modifier',
 ];

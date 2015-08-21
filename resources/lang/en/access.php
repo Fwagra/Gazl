@@ -25,4 +25,6 @@ return [
     'key' => 'Encryption key',
     'save_key' => 'Save the key',
     'key_enter' => 'Type the encryption key',
+    'old_key' => 'Old key',
+    'old_key_enter' => 'You must type the current key to enter a new one'
 ];
