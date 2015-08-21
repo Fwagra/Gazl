@@ -2,6 +2,7 @@
 /node_modules
 Homestead.yaml
 /bootstrap/compiled.php
+storage/.encryption_key
 .env.*.php
 .env.php
 .env
