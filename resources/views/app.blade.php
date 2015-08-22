@@ -30,13 +30,16 @@
                     {{ Session::get('error') }}
                 </div>
             @endif
-            @if (Session::has('message'))
+            @if(Session::has('message'))
                 <div class="alert alert-success">
                     {{  Session::get('message') }}
                 </div>
             @endif
             @yield('content')
         </div>
+        <footer class="footer">
+            @include('footer')
+        </footer>
     </body>
     <script>
     $(document).ready(function(){
