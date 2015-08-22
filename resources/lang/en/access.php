@@ -2,12 +2,8 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Authentication Language Lines
+    | Accesses Language Lines
     |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
     |
     */
     'name' => 'Title',
@@ -28,5 +24,5 @@ return [
     'old_key' => 'Old key',
     'old_key_enter' => 'You must type the current key to enter a new one',
     'keys_not_matching' => 'The current key does not match our saved key'
-    'title_new_key' => 'Encryption key',
+    'title_new_key' => 'Encryption',
 ];
