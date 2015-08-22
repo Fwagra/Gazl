@@ -11,6 +11,7 @@ use \Session;
 use \Redirect;
 use File;
 use Input;
+use Cookie;
 use Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAccessRequest;
@@ -165,6 +166,34 @@ class AccessesController extends Controller
         else{
             $newKey = Input::get('key');
             File::put($path, Hash::make($newKey));
+        }
+        return back();
+    }
+    /**
+     * Show the form for editing the encryption key
+     * @return Response
+     */
+    public function setKey()
+    {
+        return View::make('encryption_key.form');
+    }
+
+    /**
+     * Save the encryption key
+     * @param Request $request
+     * @return Response
+     */
+    public function saveKey(Request $request)
+    {
+        $this->validate($request, [
+            'key' => 'required',
+        ]);
+
+        if(Hash::check(Input::get('key'), File::get(base_path('storage/.encryption_key')))){
+            Cookie::queue('key', Input::get('key'), 525948);
+            Session::flash('message', trans('access.key_saved'));
+        }else{
+            Session::flash('error', trans('access.key_not_matching'));
         }
         return back();
     }
