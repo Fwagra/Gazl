@@ -21,6 +21,8 @@ Route::resource('project', 'ProjectController');
 Route::resource('project.access', 'AccessesController');
 Route::get('admin/key', ['as' => 'admin.key', 'uses' => 'AccessesController@setGlobalKey']);
 Route::post('admin/key', ['as' => 'admin.key.save', 'uses' => 'AccessesController@saveGlobalKey']);
+Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
+Route::post('key/set', ['as' => 'key.save', 'uses' => 'AccessesController@saveKey']);
 
 // Authentication routes...
 
