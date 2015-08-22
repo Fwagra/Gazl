@@ -25,5 +25,7 @@ return [
     'old_key' => 'Ancienne clé',
     'old_key_enter' => 'Vous devez entrer la clé actuelle pour pouvoir la modifier',
     'keys_not_matching' => 'La clé actuelle ne correspond pas',
+    'key_not_matching' => 'Votre clé ne correspond pas à la clé de chiffrage',
     'title_new_key' => 'Clé de chiffrage',
+    'key_saved' => 'Vous avez correctement entré la clé de chiffrage'
 ];

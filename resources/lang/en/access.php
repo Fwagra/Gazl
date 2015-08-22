@@ -23,6 +23,8 @@ return [
     'key_enter' => 'Type the encryption key',
     'old_key' => 'Old key',
     'old_key_enter' => 'You must type the current key to enter a new one',
-    'keys_not_matching' => 'The current key does not match our saved key'
+    'keys_not_matching' => 'The current key does not match our saved key',
+    'key_not_matching' => 'Your key does not match our saved key',
     'title_new_key' => 'Encryption',
+    'key_saved' => 'Your key has been correctly entered',
 ];
