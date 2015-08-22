@@ -11,6 +11,7 @@ use \Session;
 use \Redirect;
 use File;
 use Input;
+use Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAccessRequest;
 
@@ -139,7 +140,8 @@ class AccessesController extends Controller
      */
     public function saveGlobalKey(Request $request)
     {
-        if(Input::get('key_old') !== false){
+        $path = base_path('storage/.encryption_key');
+        if(File::exists($path)){
             $this->validate($request, [
                 'old_key' => 'required|min:10',
                 'key' => 'required|min:10',
@@ -150,11 +152,20 @@ class AccessesController extends Controller
             ]);
         }
         
-        if(File::exists(base_path('storage/.encryption_key'))){
-            // Get the current key and recrypt all the accesses with the new one
+        if(File::exists($path)){
+            $currentKey = File::get($path);
+            if(Hash::check(Input::get('old_key'), $currentKey)){
+                $oldKey = Input::get('old_key');
+                $newKey = Input::get('key');
+                // Function to recrypt access
+            }else{
+                Session::flash('error', trans('access.keys_not_matching'));
+            }
         }
-
-        File::put(base_path('storage/.encryption_key'), Input::get('key'));
+        else{
+            $newKey = Input::get('key');
+            File::put($path, Hash::make($newKey));
+        }
         return back();
     }
 }

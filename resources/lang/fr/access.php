@@ -27,4 +27,6 @@ return [
     'key_enter' => 'Taper la clé de chiffrage',    
     'old_key' => 'Ancienne clé',
     'old_key_enter' => 'Vous devez entrer la clé actuelle pour pouvoir la modifier',
+    'keys_not_matching' => 'La clé actuelle ne correspond pas',
+    'title_new_key' => 'Clé de chiffrage',
 ];
