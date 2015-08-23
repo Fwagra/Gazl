@@ -10,4 +10,5 @@ return [
     'create_project' => 'Create project',
     'set_global_key' => 'Define the global key',
     'set_key' => 'Enter the key',
+    'edit_key' => 'Edit the key',
 ];

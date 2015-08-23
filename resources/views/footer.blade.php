@@ -3,9 +3,14 @@
 		@if(Auth::check()){
 			<dl class="footer-nav">
 				<dt class="nav-title">{{ trans('footer.management') }}</dt>
-				<dl class="nav-item">
+				<dd class="nav-item">
 					<a href="{{ route('project.create') }}">{{ trans('footer.create_project') }}</a>
-				</dl>
+				</dd>
+				@if(Cookie::get('key'))
+				<dd class="nav-item">
+					<a href="{{ route('key.set') }}">{{ trans('footer.edit_key') }}</a>
+				</dd>
+				@endif
 			</dl>
 			<dl class="footer-nav">
 				@if(!File::exists(base_path('storage/.encryption_key')))
