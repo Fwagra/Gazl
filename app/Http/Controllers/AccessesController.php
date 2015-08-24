@@ -48,7 +48,15 @@ class AccessesController extends Controller
     public function create($project)
     {
         $access = new Access;
-        return View::make('accesses.new', compact('project', 'access'));
+        if(Cookie::get('key') == null):
+            Session::flash('error', trans('access.no_key_flash'));
+            return redirect(route('key.set'));
+        elseif(!Hash::check(Cookie::get('key'), File::get(base_path('storage/.encryption_key')))):
+            Session::flash('error', trans('access.wrong_key_flash'));
+            return redirect(route('key.set'));
+        else:
+            return View::make('accesses.new', compact('project', 'access'));
+        endif;
     }
 
     /**
