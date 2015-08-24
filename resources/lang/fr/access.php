@@ -27,5 +27,7 @@ return [
     'keys_not_matching' => 'La clé actuelle ne correspond pas',
     'key_not_matching' => 'Votre clé ne correspond pas à la clé de chiffrage',
     'title_new_key' => 'Clé de chiffrage',
-    'key_saved' => 'Vous avez correctement entré la clé de chiffrage'
+    'key_saved' => 'Vous avez correctement entré la clé de chiffrage',
+    'no_key_flash' => 'Vous devez entrer une clé de chiffrage pour pouvoir ajouter des identifiants',
+    'wrong_key_flash' => 'Votre clé de chiffrage n\'est plus valide, veuillez entrer la clé actuelle',
 ];
