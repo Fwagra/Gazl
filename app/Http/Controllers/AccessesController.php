@@ -159,6 +159,8 @@ class AccessesController extends Controller
                 $oldKey = Input::get('old_key');
                 $newKey = Input::get('key');
                 // Function to recrypt accesses
+                File::put($path, Hash::make($newKey));
+
             }else{
                 Session::flash('error', trans('access.keys_not_matching'));
             }
