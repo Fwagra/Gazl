@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cookie;
+use Crypt;
+use Config;
 
 class Access extends Model
 {
@@ -19,10 +22,17 @@ class Access extends Model
     /**
      * Encrypt a password with the global key stored in a cookie
      * @param string $value
-     * @return string
+     * @return response
      */
     public function setPasswordAttribute($value)
     {
-    	# code...
+    	$key = Cookie::get('key');
+    	Crypt::setKey($key);
+    	$encryptedPass = Crypt::encrypt($value);
+    	// WARNING //
+    	// The user is logged out if we don't reapply the app key like this : 
+    	Crypt::setKey(Config::get('app.key'));
+    	/////////////
+    	$this->attributes['password'] = $encryptedPass;
     }
 }
