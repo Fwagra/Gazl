@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', trans('access.title_edit_access'))
 @section('content')
     @include('errors.form-error')
 	{!! Form::model($access, ['route' => ['project.access.update', $project->slug, $access], 'method' => 'PUT']) !!}

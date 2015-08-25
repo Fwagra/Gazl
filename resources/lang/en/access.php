@@ -29,4 +29,6 @@ return [
     'key_saved' => 'Your key has been correctly entered',
     'no_key_flash' => 'You must enter the encryption key before adding an access',
     'wrong_key_flash' => 'Your key is outdated, please type the current key',
+    'title_new_access' => 'New accesses',
+    'title_edit_access' => 'Edit the accesses',
 ];

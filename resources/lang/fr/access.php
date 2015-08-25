@@ -30,4 +30,6 @@ return [
     'key_saved' => 'Vous avez correctement entré la clé de chiffrage',
     'no_key_flash' => 'Vous devez entrer une clé de chiffrage pour pouvoir ajouter des identifiants',
     'wrong_key_flash' => 'Votre clé de chiffrage n\'est plus valide, veuillez entrer la clé actuelle',
+    'title_new_access' => 'Nouveaux identifiants',
+    'title_edit_access' => 'Modifier les identifiants',
 ];
