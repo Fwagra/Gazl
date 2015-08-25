@@ -32,4 +32,5 @@ return [
     'wrong_key_flash' => 'Votre clé de chiffrage n\'est plus valide, veuillez entrer la clé actuelle',
     'title_new_access' => 'Nouveaux identifiants',
     'title_edit_access' => 'Modifier les identifiants',
+    'no_key_get_pass' => 'Vous devez renseigner la clé de chiffrage pour voir ce mot de passe.',
 ];

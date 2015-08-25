@@ -85,7 +85,7 @@ class AccessesController extends Controller
      */
     public function show($projectSlug, $accessId)
     {
-        
+        $access = Access::find($accessId);
     }
 
     /**
