@@ -12,9 +12,11 @@ use \Redirect;
 use File;
 use Input;
 use Cookie;
+use Crypt;
 use Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAccessRequest;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class AccessesController extends Controller
 {
@@ -78,12 +80,12 @@ class AccessesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $accessId
      * @return Response
      */
-    public function show($id)
+    public function show($projectSlug, $accessId)
     {
-        //
+        
     }
 
     /**
@@ -152,12 +154,12 @@ class AccessesController extends Controller
         $path = base_path('storage/.encryption_key');
         if(File::exists($path)){
             $this->validate($request, [
-                'old_key' => 'required|min:10',
-                'key' => 'required|min:10',
+                'old_key' => 'required|min:32|max:32',
+                'key' => 'required|min:32|max:32',
             ]); 
         }else{
             $this->validate($request, [
-                'key' => 'required|min:10',
+                'key' => 'required|min:32|max:32',
             ]);
         }
         
@@ -196,7 +198,7 @@ class AccessesController extends Controller
     public function saveKey(Request $request)
     {
         $this->validate($request, [
-            'key' => 'required',
+            'key' => 'required|min:32|max:32',
         ]);
 
         if(Hash::check(Input::get('key'), File::get(base_path('storage/.encryption_key')))){
