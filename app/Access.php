@@ -15,4 +15,14 @@ class Access extends Model
     {
         return $this->belongsTo('App\Project');
     }
+
+    /**
+     * Encrypt a password with the global key stored in a cookie
+     * @param string $value
+     * @return string
+     */
+    public function setPasswordAttribute($value)
+    {
+    	# code...
+    }
 }
