@@ -11,8 +11,10 @@ use \Session;
 use \Redirect;
 use File;
 use Input;
+use Config;
 use Cookie;
 use Crypt;
+use DB;
 use Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAccessRequest;
@@ -86,6 +88,7 @@ class AccessesController extends Controller
     public function show($projectSlug, $accessId)
     {
         $access = Access::find($accessId);
+        echo $access->password;
     }
 
     /**
@@ -169,6 +172,7 @@ class AccessesController extends Controller
                 $oldKey = Input::get('old_key');
                 $newKey = Input::get('key');
                 // Function to recrypt accesses
+                $this->recryptPasswords($oldKey, $newKey);
                 File::put($path, Hash::make($newKey));
 
             }else{
@@ -208,5 +212,37 @@ class AccessesController extends Controller
             Session::flash('error', trans('access.key_not_matching'));
         }
         return back();
+    }
+
+
+    /**
+     * Recrypt all the passwords after changing the global key
+     * @param string $oldKey
+     * @param string $newKey
+     */
+    public function recryptPasswords($oldKey, $newKey)
+    {
+        $passwords = DB::table('accesses')->lists('password', 'id');
+
+        // Decrypting passwords with old key
+        Crypt::setKey($oldKey);
+        foreach ($passwords as $id => $password) {
+            try {
+                $passwords[$id] = Crypt::decrypt($password);
+            } catch (DecryptException $e) {
+                return "error";
+            }
+        }
+
+        // Encrypting passwords with new key
+        Crypt::setKey($newKey);
+        foreach ($passwords as $id => $password) {
+            $passwords[$id] = Crypt::encrypt($password);
+            DB::table('accesses')
+            ->where('id', $id)
+            ->update(array('password' => $passwords[$id]));
+        }
+        // Setting app key
+        Crypt::setKey(Config::get('app.key'));
     }
 }
