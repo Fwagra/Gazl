@@ -32,4 +32,5 @@ return [
     'title_new_access' => 'New accesses',
     'title_edit_access' => 'Edit the accesses',
     'no_key_get_pass' => 'You must enter the encryption key to see this password',
+    'wrong_key_get_pass' => 'Your encryption key is wrong or outdated',
 ];

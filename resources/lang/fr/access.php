@@ -33,4 +33,5 @@ return [
     'title_new_access' => 'Nouveaux identifiants',
     'title_edit_access' => 'Modifier les identifiants',
     'no_key_get_pass' => 'Vous devez renseigner la clé de chiffrage pour voir ce mot de passe.',
+    'wrong_key_get_pass' => 'Votre clé de chiffrage est incorrecte',
 ];
