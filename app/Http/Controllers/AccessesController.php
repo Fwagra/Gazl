@@ -160,6 +160,7 @@ class AccessesController extends Controller
         }
         return back();
     }
+
     /**
      * Show the form for editing the encryption key
      * @return Response

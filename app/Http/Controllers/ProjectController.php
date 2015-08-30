@@ -13,6 +13,7 @@ use \Redirect;
 use \Input;
 use \Auth;
 use \DB;
+use App\Access;
 
 class ProjectController extends Controller
 {
@@ -88,7 +89,9 @@ class ProjectController extends Controller
     public function show($slug)
     {
         $project = Project::slug($slug);
-       return View::make('projects.show', compact('project'));
+        $accesses = $project->accesses;
+        
+       return View::make('projects.show', compact('project', 'accesses'));
     }
 
     /**
