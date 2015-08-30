@@ -31,20 +31,6 @@ class AccessesController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @param string $projectSlug
-     * @return Response
-     */
-    public function index($projectSlug)
-    {
-       $project = Project::slug($projectSlug);
-       $list = $project->accesses;
-       // dd($list);
-       echo "list";
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return Response
@@ -79,17 +65,6 @@ class AccessesController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $accessId
-     * @return Response
-     */
-    public function show($projectSlug, $accessId)
-    {
-        $access = Access::find($accessId);
-        echo $access->password;
-    }
 
     /**
      * Show the form for editing the specified resource.

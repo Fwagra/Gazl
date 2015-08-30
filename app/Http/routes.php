@@ -18,7 +18,7 @@ Route::get('search/project', ['as' => 'project.search', 'uses' => 'ProjectContro
 Route::resource('project', 'ProjectController');
 
 //Accesses Routes
-Route::resource('project.access', 'AccessesController');
+Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
 Route::get('admin/key', ['as' => 'admin.key', 'uses' => 'AccessesController@setGlobalKey']);
 Route::post('admin/key', ['as' => 'admin.key.save', 'uses' => 'AccessesController@saveGlobalKey']);
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
