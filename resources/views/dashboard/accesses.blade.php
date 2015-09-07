@@ -13,13 +13,16 @@
 				    <div id="collapse-{{ $key }}" class="panel-collapse collapse">
 				      <div class="panel-body">
 				        <div class="group">
-				        	<span class="bold">{{ trans('access.host') }} : </span><span class="val">{{ $access->host }}</span>
+				        	<strong>{{ trans('access.host') }} : </strong><span class="val">{{ $access->host }}</span>
 				        </div>
 				        <div class="group">
-				        	<span class="bold">{{ trans('access.login') }} : </span><span class="val">{{ $access->login }}</span>
+				        	<strong>{{ trans('access.login') }} : </strong><span class="val">{{ $access->login }}</span>
 				        </div>
 				        <div class="group">
-				        	<span class="bold">{{ trans('access.password') }} : </span><span class="val">{{ $access->password }}</span>
+				        	<strong>{{ trans('access.password') }} : </strong><span class="val">{{ $access->password }}</span>
+				        </div>
+				        <div class="group">
+				        	<div class="text-right"><a href="{{ action('AccessesController@edit', [$project->slug, $access->id]) }}">{{ trans('access.edit') }}</a></div>
 				        </div>
 				      </div>
 				    </div>
