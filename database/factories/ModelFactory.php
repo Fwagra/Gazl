@@ -19,3 +19,13 @@ $factory->define(App\User::class, function ($faker) {
         'remember_token' => str_random(10),
     ];
 });
+$factory->define(App\Access::class, function ($faker) {
+    $projects =  App\Project::all()->lists('id')->toArray();
+    return [
+        'name' => $faker->name,
+        'host' => $faker->freeEmailDomain,
+        'login' => $faker->name,
+        'password' => str_random(10),
+        'project_id' => $faker->randomElement($projects),
+    ];
+});
