@@ -24,7 +24,13 @@ Route::post('admin/key', ['as' => 'admin.key.save', 'uses' => 'AccessesControlle
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
 Route::post('key/set', ['as' => 'key.save', 'uses' => 'AccessesController@saveKey']);
 
-// Authentication routes...
+//Checklist routes
+Route::group(array('prefix'=>'admin'),function(){
+	Route::resource('category', 'ChecklistCategoryController', ['except' => ['show']]);
+});
+
+//**** Authentication routes...****//
+/////////////////////////////////////
 
 ///Guest users
 Route::post('guest/login', ['as' => 'guest.login', 'uses' => 'Auth\AuthController@postGuestLogin']);
