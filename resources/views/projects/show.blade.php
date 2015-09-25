@@ -5,5 +5,7 @@
 	@include('dashboard.accesses')
 @endsection
 @section('info_head')
-	<span class="label float label-primary">{{ $project->public_id }}</span>
+	@if (Auth::check())
+		<span class="label float label-primary">{{ $project->public_id }}</span>
+	@endif
 @endsection
