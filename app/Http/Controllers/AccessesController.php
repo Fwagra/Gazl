@@ -76,11 +76,20 @@ class AccessesController extends Controller
     {
         $project = Project::slug($projectSlug);
         $access = Access::find($accessId);
+
         if($project->id != $access->project_id){
             return Redirect::action('AccessesController@index', $projectSlug)->withErrors(['message' => trans('access.access_not_found')]);
         }
 
-        return View::make('accesses.edit', compact('project','access'));
+        if(Cookie::get('key') == null):
+            Session::flash('error', trans('access.no_key_flash'));
+            return redirect(route('key.set'));
+        elseif(!Hash::check(Cookie::get('key'), File::get(base_path('storage/.encryption_key')))):
+            Session::flash('error', trans('access.wrong_key_flash'));
+            return redirect(route('key.set'));
+        else:
+            return View::make('accesses.edit', compact('project','access'));
+        endif;
     }
 
     /**
