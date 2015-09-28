@@ -18,4 +18,7 @@ return [
     'edit_my_key' => 'Edit my key',
     'keys_management' => 'Encryption keys management',
     'projects' => 'Projects',
+    'users' => 'Users',
+    'users_create' => 'All users',
+    'users_list' => 'Add an user',
 ];

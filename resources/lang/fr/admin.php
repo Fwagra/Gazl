@@ -18,4 +18,7 @@ return [
     'projects' => 'Projets',
     'title_admin' => 'Administration',
     'title_h1' => 'Administration',
+    'users' => 'Utilisateurs',
+    'users_create' => 'Ajouter un utilisateur',
+    'users_list' => 'Liste des utilisateurs',
 ];
