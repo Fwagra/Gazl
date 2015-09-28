@@ -26,7 +26,7 @@ Route::post('key/set', ['as' => 'key.save', 'uses' => 'AccessesController@saveKe
 
 //Checklist routes
 Route::group(array('prefix'=>'admin'),function(){
-	Route::resource('category', 'ChecklistCategoryController', ['except' => ['show']]);
+	Route::resource('checklist-category', 'ChecklistCategoryController', ['except' => ['show']]);
 });
 
 //**** Authentication routes...****//
