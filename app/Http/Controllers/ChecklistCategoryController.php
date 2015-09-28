@@ -9,13 +9,6 @@ use App\Http\Controllers\Controller;
 
 class ChecklistCategoryController extends Controller
 {
-    /**
-     * Construct function
-     */
-    public function __construct() {
-      $this->middleware('auth');
-    }
-
     
     /**
      * Display a listing of the resource.
@@ -24,7 +17,7 @@ class ChecklistCategoryController extends Controller
      */
     public function index()
     {
-        //
+        echo "string";
     }
 
     /**

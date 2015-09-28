@@ -19,14 +19,15 @@ Route::resource('project', 'ProjectController');
 
 //Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
-Route::get('admin/key', ['as' => 'admin.key', 'uses' => 'AccessesController@setGlobalKey']);
-Route::post('admin/key', ['as' => 'admin.key.save', 'uses' => 'AccessesController@saveGlobalKey']);
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
 Route::post('key/set', ['as' => 'key.save', 'uses' => 'AccessesController@saveKey']);
 
-//Checklist routes
-Route::group(array('prefix'=>'admin'),function(){
+//Admin routes
+Route::get('admin', ['as' => 'admin', 'uses' => 'AdminController@index']);
+Route::group(array('prefix'=>'admin', 'middleware' => 'auth'), function(){
 	Route::resource('checklist-category', 'ChecklistCategoryController', ['except' => ['show']]);
+	Route::get('key', ['as' => 'admin.key', 'uses' => 'AccessesController@setGlobalKey']);
+	Route::post('key', ['as' => 'admin.key.save', 'uses' => 'AccessesController@saveGlobalKey']);
 });
 
 //**** Authentication routes...****//
