@@ -42,6 +42,7 @@
             @include('footer')
         </footer>
     </body>
+    @yield('footer_js')
     <script>
     $(document).ready(function(){
       $('input').iCheck({

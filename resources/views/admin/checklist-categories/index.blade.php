@@ -8,17 +8,20 @@
    	   <li class="list-group-item" id="{{ $category->id }}"><i>grab</i> {{ $category->name }}</li>
    	   @endforeach
    	</ul>
-<script>
-	jQuery(document).ready(function($) {
-	    $('.sortable').sortable({
-	        cursor: 'move',
-	        axis: 'y',
-	        handle: 'i',
-	        update: function (event, ui) {
-	            var order = $(this).sortable('toArray');
-	            $.post('{{ route("sort.categories") }}', { order: order, "_token":"{{ csrf_token() }}" });
-	        }
-	    });
-	});
-</script>
+@endsection
+
+@section('footer_js')
+	<script>
+		jQuery(document).ready(function($) {
+		    $('.sortable').sortable({
+		        cursor: 'move',
+		        axis: 'y',
+		        handle: 'i',
+		        update: function (event, ui) {
+		            var order = $(this).sortable('toArray');
+		            $.post('{{ route("sort.categories") }}', { order: order, "_token":"{{ csrf_token() }}" });
+		        }
+		    });
+		});
+	</script>
 @endsection
