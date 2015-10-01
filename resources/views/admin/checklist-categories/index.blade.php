@@ -8,8 +8,15 @@
    	   <li class="list-group-item" id="{{ $category->id }}"><i>grab</i> {{ $category->name }}</li>
    	   @endforeach
    	</ul>
-   	
-   	<button class="btn btn-primary">{{ trans('checklist.add_category') }}</button>
+   	{!! Form::open(['route' => 'admin.checklist-category.store', 'id' => 'add_category']) !!}
+    	{!! csrf_field() !!}
+	   	<div class="input-group">
+		   	{!!  Form::text('name', null, ['class' => 'form-control','id' => 'name', 'placeholder' => trans('checklist.new_category')]) !!}
+		   	<div class="input-group-btn">
+		   	 	{!! Form::submit(trans('checklist.add_category'), ['class' => 'btn btn-primary']) !!}
+		   	</div>
+	   	</div>
+	{!!  Form::close() !!}
 @endsection
 
 @section('footer_js')
@@ -24,6 +31,17 @@
 		            $.post('{{ route("sort.categories") }}', { order: order, "_token":"{{ csrf_token() }}" });
 		        }
 		    });
+		});
+		$(document).on('submit', '#add_category', function(event){
+			event.preventDefault();
+				$.post(
+			        $(this).prop( 'action' ),
+			        $(this).serialize(),
+			        function(data) {
+			             console.log(data);
+			        },
+			        'json'
+			    );
 		});
 	</script>
 @endsection

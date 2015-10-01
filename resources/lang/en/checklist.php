@@ -9,4 +9,5 @@ return [
     */
     'add_category' => 'Add new',
     'list_categories' => 'Categories',
+    'new_category' => "New category",
 ];

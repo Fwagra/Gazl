@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ChecklistCategory;
 use \Input;
+use \Response;
 use View;
 
 class ChecklistCategoryController extends Controller
@@ -32,7 +33,10 @@ class ChecklistCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+            $input = Input::get('name');
+            return Response::json($input);
+        }
     }
 
     /**
@@ -64,7 +68,7 @@ class ChecklistCategoryController extends Controller
      */
     public function order(Request $request)
     {
-        if( $request->ajax() ){
+        if($request->ajax()){
             $input = Input::get('order');
             $i = 1;
              foreach($input as $value) {
