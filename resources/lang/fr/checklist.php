@@ -7,5 +7,6 @@ return [
     |
     |
     */
+    'add_category' => 'Ajouter',
     'list_categories' => 'Catégories',
 ];

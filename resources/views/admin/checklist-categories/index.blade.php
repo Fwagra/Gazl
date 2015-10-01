@@ -8,6 +8,8 @@
    	   <li class="list-group-item" id="{{ $category->id }}"><i>grab</i> {{ $category->name }}</li>
    	   @endforeach
    	</ul>
+   	
+   	<button class="btn btn-primary">{{ trans('checklist.add_category') }}</button>
 @endsection
 
 @section('footer_js')
