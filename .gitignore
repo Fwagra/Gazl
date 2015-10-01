@@ -11,3 +11,4 @@ storage/.encryption_key
 *.sublime-project*
 *.sass-cache*
 dashboard.sublime-workspace
+composer.lock
