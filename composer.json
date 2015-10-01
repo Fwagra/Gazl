@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "barryvdh/laravel-debugbar": "^2.0",
-        "laravelcollective/html": "~5.0"
+        "laravelcollective/html": "~5.0",
+        "devfactory/taxonomy": "3.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
