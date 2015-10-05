@@ -5,9 +5,6 @@
 			<a href="{{ action('ChecklistCategoryController@index') }} " class="list-group-item">
 				{{ trans('admin.categories_list') }}
 			</a>
-			<a href="{{ action('ChecklistCategoryController@create') }}" class="list-group-item">
-			{{ trans('admin.categories_create') }}
-			</a>
 		</div>
 	</div>
 </div>
