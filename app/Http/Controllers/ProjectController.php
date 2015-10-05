@@ -14,6 +14,7 @@ use \Input;
 use \Auth;
 use \DB;
 use App\Access;
+use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -61,26 +62,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|max:255',
-        ]);
-        $project  = new Project;
-        $project->name = $request->name;
-        $project->slug = $request->name;
-        $project->public_id = $request->name;
-        $project->save();
-        Session::flash('message', trans('project.success'));
-        return back();
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  string  $slug
@@ -107,19 +88,41 @@ class ProjectController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function store(StoreProjectRequest $request)
+    {
+        $project  = new Project;
+        $project->name = $request->name;
+        $project->public_id = $request->name;
+
+        $project->save();
+        
+        Session::flash('message', trans('project.success'));
+        
+        return back();
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  Request  $request
      * @param  string  $slug
      * @return Response
      */
-    public function update(Request $request, $slug)
+    public function update(StoreProjectRequest $request, $slug)
     {
         $project = Project::slug($slug);
         $project->update($request->all());
+
         // Reset slug with mutator
-        $project->slug = $project->name;
+        // $project->slug = $project->name;
+
         $project->save();
+
         return redirect(route('project.show', $project->slug));
     }
 

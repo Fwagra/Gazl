@@ -8,19 +8,24 @@ use Illuminate\Support\Str;
 class Project extends Model
 {
     protected $fillable = ['name', 'slug'];
+
     /**
-     * Set the unique project slug
+     * Set the unique project name and generate a slug automatically.
      *
      * @param  string  $value
      * @return string
      */
-    public function setSlugAttribute($value)
+    public function setNameAttribute($value)
     {
+        $this->attributes['name'] = $value;
+
+        // Set slug each time the name is set.
         $slug = Str::slug($value);
         $slugCount = count( $this->whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
-        $slugFinal = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
-        $this->attributes['slug'] = $slugFinal;
+        $slug = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
+        $this->attributes['slug'] = $slug;
     }
+
     /**
      * Generate a unique public_id
      *
