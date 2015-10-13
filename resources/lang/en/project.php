@@ -16,4 +16,5 @@ return [
     'search_button' => 'Search',
     'search_placeholder' => 'A project name',
     'success' => 'The project has been created!',
+    'cms' => 'CMS',
 ];

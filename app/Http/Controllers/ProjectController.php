@@ -15,6 +15,7 @@ use \Auth;
 use \DB;
 use App\Access;
 use App\Http\Requests\StoreProjectRequest;
+use \Taxonomy;
 
 class ProjectController extends Controller
 {
@@ -33,12 +34,15 @@ class ProjectController extends Controller
     {
         if(Auth::check()){
            return  Redirect::route('project.index');
-        }elseif (!Auth::check() && $request->cookie('public_id') != null) {
+        }
+        elseif (!Auth::check() && $request->cookie('public_id') != null) 
+        {
             $project = Project::publicId($request->cookie('public_id'))->first();
             return Redirect::route('project.show', [$project->slug]);
-        }else{
-           return View::make('home.index');
         }
+        else 
+            return View::make('home.index');
+
     }
 
     /**
@@ -48,7 +52,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return View::make('projects.index');
+        $projects = Project::all();
+
+        return View::make('projects.index', compact('projects'));
     }
 
     /**
@@ -58,7 +64,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return View::make('projects.new');
+        $cms = Taxonomy::getVocabularyByName('cms')->terms()->get()->lists('name', 'id');
+
+        return View::make('projects.new', compact('cms'));
     }
 
     /**
@@ -72,7 +80,7 @@ class ProjectController extends Controller
         $project = Project::slug($slug);
         $accesses = $project->accesses;
         
-       return View::make('projects.show', compact('project', 'accesses'));
+        return View::make('projects.show', compact('project', 'accesses'));
     }
 
     /**
@@ -84,7 +92,11 @@ class ProjectController extends Controller
     public function edit($slug)
     {
         $project = Project::slug($slug);
-       return View::make('projects.edit', compact('project'));
+        $cms = Taxonomy::getVocabularyByName('cms')->terms()->get()->lists('name', 'id');
+
+        $selected_cms = reset(($project->getTermsByVocabularyName('cms')->lists('term_id')));
+        
+        return View::make('projects.edit', compact('project', 'cms', 'selected_cms'));
     }
 
     /**
@@ -96,8 +108,14 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $project  = new Project;
+
         $project->name = $request->name;
         $project->public_id = $request->name;
+
+        if ($request->cms) {
+            foreach ($request->cms as $id)
+                $project->addTerm($id);
+        }
 
         $project->save();
         
@@ -116,10 +134,16 @@ class ProjectController extends Controller
     public function update(StoreProjectRequest $request, $slug)
     {
         $project = Project::slug($slug);
-        $project->update($request->all());
 
-        // Reset slug with mutator
-        // $project->slug = $project->name;
+        $project->name = $request->name;
+
+        // Remove terms before adding new ones.
+        $project->removeAllTerms();
+
+        if ($request->cms) {
+            foreach ($request->cms as $id)
+                $project->addTerm($id);
+        }
 
         $project->save();
 
@@ -135,23 +159,27 @@ class ProjectController extends Controller
     public function destroy($slug)
     {
         $project = Project::slug($slug);
+
         $project->delete();
+
         Session::flash('message', trans('project.delete_success'));
+
         return redirect(route('project.index'));
     }
 
     public function searchProject()
     {
-        $term = Input::get('term'); 
+        $term = Input::get('term');
+
         if(is_null($term))
-            return Response::json('no result'); 
-        $results = array();
+            return Response::json('no result');
+
         $queries = DB::table('projects')
             ->where('name', 'LIKE', '%'.$term.'%')
             ->take(10)->get();
         
-        foreach ($queries as $query)
-        {
+        $results = array();
+        foreach ($queries as $query) {
             $results[] = [ 'id' => $query->id, 'value' => $query->name, 'slug' => $query->slug];
         }
 

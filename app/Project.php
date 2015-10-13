@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class Project extends Model
 {
+    use \Devfactory\Taxonomy\TaxonomyTrait;
+    
     protected $fillable = ['name', 'slug'];
 
     /**
