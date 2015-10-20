@@ -12,20 +12,70 @@ class Project extends Model
     protected $fillable = ['name', 'slug'];
 
     /**
-     * Set the unique project name and generate a slug automatically.
+     * Set the unique project name and generate a slug automatically (each time 
+     * the name is set).
+     *
+     * There's 3 scenarios for settings a slug:
+     *   1. It doesn't exist
+     *   2. It exists and hasn't changed
+     *   3. It exists and has changed
      *
      * @param  string  $value
      * @return string
      */
     public function setNameAttribute($value)
     {
+        // Set name (yes, that's the original point of this method).
         $this->attributes['name'] = $value;
 
-        // Set slug each time the name is set.
+        // Generate slug from the project name.
         $slug = Str::slug($value);
-        $slugCount = count( $this->whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
-        $slug = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
+        
+        // If the entity is already saved, let's check if there really is the
+        // need to generate a slug.
+        if ($this->id) {
+            // Generate slugs from old name.
+            $oldSlug = Str::slug($this->name);
+
+            // Do nothing if there's no change.
+            if ($slug == $oldSlug)
+                return;
+        }
+
+        // Search for identical slugs.
+        $slugs_found = $this->whereRaw(
+            "slug REGEXP '^{$slug}(-[0-9]*)?$' AND id != ?", 
+            // Set Project ID to 0 if not defined to prevent SQL error.
+            array($this->id ? $this->id : '0')
+        )->get();
+ 
+        // If a slug is found and isn't associated with the current entity, 
+        // add a suffix to prevent conflicts.
+        if ($slugs_found->count()) {
+            for ($i = $slugs_found->count(); true; $i++) {
+                $_slug = $slug . '-' . $i;
+                
+                if ($this->slugIsAvailable($_slug)) {
+                    $slug = $_slug;
+                    break;
+                }
+                else
+                    continue;
+            }
+        }
+
         $this->attributes['slug'] = $slug;
+    }
+
+    /**
+     * Generate a unique public_id
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function slugIsAvailable($slug)
+    {
+        return !$this->whereRaw("slug = ?", array($slug))->get()->count();
     }
 
     /**

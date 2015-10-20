@@ -65,8 +65,9 @@ class ProjectController extends Controller
     public function create()
     {
         $cms = Taxonomy::getVocabularyByName('cms')->terms()->get()->lists('name', 'id');
-
-        return View::make('projects.new', compact('cms'));
+        $selected_cms = [];
+        
+        return View::make('projects.new', compact('cms', 'selected_cms'));
     }
 
     /**
