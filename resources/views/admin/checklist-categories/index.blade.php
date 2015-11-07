@@ -5,7 +5,7 @@
 
    	<ul class='sortable list-group'>
    	   @foreach($categories as $category)
-   	   <li class="list-group-item" id="{{ $category->id }}"><i>grab</i> {{ $category->name }}</li>
+   	   <li class="list-group-item" data-id="{{ $category->id }}"><i>grab</i> {{ $category->name }}</li>
    	   @endforeach
    	</ul>
    	{!! Form::open(['route' => 'admin.checklist-category.store', 'id' => 'add_category']) !!}
@@ -27,7 +27,8 @@
 		        axis: 'y',
 		        handle: 'i',
 		        update: function (event, ui) {
-		            var order = $(this).sortable('toArray');
+		            var order = $(this).sortable('toArray',	{attribute: 'data-id'});
+		            console.log(order);
 		            $.post('{{ route("sort.categories") }}', { order: order, "_token":"{{ csrf_token() }}" });
 		        }
 		    });
