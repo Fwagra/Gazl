@@ -21,12 +21,12 @@
 @section('footer_js')
 	<script>
 		var config = {
-			routes: [
-				{ 
-					sort: '{{ route("sort.categories") }}',
-					csrf: "{{ csrf_token() }}"
-				}
-			]
+			routes: [{ 
+				sort: '{{ route("sort.categories") }}',
+			}],
+			others: [{
+				csrf: "{{ csrf_token() }}"
+			}]
 		}
 	</script>
 	{!! Html::script('js/list_management_ajax.js'); !!}

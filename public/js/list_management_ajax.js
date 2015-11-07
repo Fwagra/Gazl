@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
         handle: 'i',
         update: function (event, ui) {
             var order = $(this).sortable('toArray',	{attribute: 'data-id'});
-            $.post(config.routes[0].sort, { order: order, "_token": config.routes[0].csrf });
+            $.post(config.routes[0].sort, { order: order, "_token": config.others[0].csrf });
         }
     });
 });
