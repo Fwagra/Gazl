@@ -6,7 +6,7 @@
    	<ul class='sortable list-group'>
    		@include('admin.checklist-categories.list')
    	</ul>
-   	{!! Form::open(['route' => 'admin.checklist-category.store', 'id' => 'add_category']) !!}
+   	{!! Form::open(['route' => 'admin.checklist-category.store', 'id' => 'add_category', 'class' => 'add_ajax']) !!}
     	{!! csrf_field() !!}
     	<div class="errors"></div>
 	   	<div class="input-group">
@@ -20,35 +20,14 @@
 
 @section('footer_js')
 	<script>
-		jQuery(document).ready(function($) {
-		    $('.sortable').sortable({
-		        cursor: 'move',
-		        axis: 'y',
-		        handle: 'i',
-		        update: function (event, ui) {
-		            var order = $(this).sortable('toArray',	{attribute: 'data-id'});
-		            $.post('{{ route("sort.categories") }}', { order: order, "_token":"{{ csrf_token() }}" });
-		        }
-		    });
-		});
-		$(document).on('submit', '#add_category', function(event){
-			event.preventDefault();
-				$.post(
-			        $(this).prop( 'action' ),
-			        $(this).serialize(),
-			        function(data) {
-			            $('.list-group').html(data.view);
-			            $('input[type="text"],textarea').val('');
-			        },
-			        'json'
-			    ).fail(function(data) {
-				    errorsHtml = '<div class="alert alert-danger"><ul>';
-				    $.each( data.responseJSON, function( key, value ) {
-				        errorsHtml += '<li>' + value[0] + '</li>';
-				    });
-				    errorsHtml += '</ul></diV>';
-				    $('.errors').html(errorsHtml);
-				});
-		});
+		var config = {
+			routes: [
+				{ 
+					sort: '{{ route("sort.categories") }}',
+					csrf: "{{ csrf_token() }}"
+				}
+			]
+		}
 	</script>
+	{!! Html::script('js/list_management_ajax.js'); !!}
 @endsection
