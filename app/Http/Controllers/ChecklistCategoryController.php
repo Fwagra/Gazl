@@ -26,6 +26,20 @@ class ChecklistCategoryController extends Controller
     }
 
     /**
+     * Returns a rendered list of resources for ajax requests.
+     *
+     * @return Response
+     */
+    public function returnList()
+    {
+        $categories = ChecklistCategory::orderBy('order')->get();
+        $data = [
+            'view' => View::make('admin.checklist-categories.list', compact('categories'))
+            ->render()
+        ];
+        return Response::json($data);
+    }
+    /**
      * Store a newly created resource in storage.
      *
      * @param  Request  $request
@@ -34,8 +48,16 @@ class ChecklistCategoryController extends Controller
     public function store(Request $request)
     {
         if($request->ajax()){
-            $input = Input::get('name');
-            return Response::json($input);
+            $this->validate($request, [
+                'name' => 'required|max:255',
+            ]);
+            // Getting last category to increment order of the new one
+            $highest = ChecklistCategory::orderBy('order', 'desc')->first();
+            $category = new ChecklistCategory;
+            $category->name = $request->name;
+            $category->order = intval($highest->order) +1;
+            $category->save();
+            return $this->returnList();
         }
     }
 

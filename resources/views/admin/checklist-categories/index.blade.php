@@ -4,12 +4,11 @@
    <h1>{{ trans('checklist.list_categories') }}</h1>
 
    	<ul class='sortable list-group'>
-   	   @foreach($categories as $category)
-   	   <li class="list-group-item" data-id="{{ $category->id }}"><i>grab</i> {{ $category->name }}</li>
-   	   @endforeach
+   		@include('admin.checklist-categories.list')
    	</ul>
    	{!! Form::open(['route' => 'admin.checklist-category.store', 'id' => 'add_category']) !!}
     	{!! csrf_field() !!}
+    	<div class="errors"></div>
 	   	<div class="input-group">
 		   	{!!  Form::text('name', null, ['class' => 'form-control','id' => 'name', 'placeholder' => trans('checklist.new_category')]) !!}
 		   	<div class="input-group-btn">
@@ -28,7 +27,6 @@
 		        handle: 'i',
 		        update: function (event, ui) {
 		            var order = $(this).sortable('toArray',	{attribute: 'data-id'});
-		            console.log(order);
 		            $.post('{{ route("sort.categories") }}', { order: order, "_token":"{{ csrf_token() }}" });
 		        }
 		    });
@@ -39,10 +37,18 @@
 			        $(this).prop( 'action' ),
 			        $(this).serialize(),
 			        function(data) {
-			             console.log(data);
+			            $('.list-group').html(data.view);
+			            $('input[type="text"],textarea').val('');
 			        },
 			        'json'
-			    );
+			    ).fail(function(data) {
+				    errorsHtml = '<div class="alert alert-danger"><ul>';
+				    $.each( data.responseJSON, function( key, value ) {
+				        errorsHtml += '<li>' + value[0] + '</li>';
+				    });
+				    errorsHtml += '</ul></diV>';
+				    $('.errors').html(errorsHtml);
+				});
 		});
 	</script>
 @endsection
