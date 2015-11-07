@@ -10,7 +10,8 @@
         "barryvdh/laravel-debugbar": "^2.0",
         "laravelcollective/html": "~5.0",
         "devfactory/taxonomy": "3.0.*",
-        "doctrine/dbal": "2.5.*"
+        "doctrine/dbal": "2.5.*",
+        "devfactory/taxonomy": "3.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
