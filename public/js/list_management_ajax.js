@@ -28,3 +28,15 @@ $(document).on('submit', '#add_category', function(event){
 		    $('.errors').html(errorsHtml);
 		});
 });
+$(document).on('submit', '.delete-element', function(event){
+	event.preventDefault();
+        if(confirm(config.others[0].deletemsg)) {
+            $.post(
+        		$(this).prop( 'action' ),
+        	    $(this).serialize(),
+        		function(id){
+        			$('li[data-id="'+id+'"]').remove();
+        		}	
+        	);
+        }
+});

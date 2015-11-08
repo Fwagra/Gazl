@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\ChecklistCategory;
 use \Input;
+use \Session;
 use \Response;
 use View;
 
@@ -74,14 +75,23 @@ class ChecklistCategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the category and the attached items
      *
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $category = ChecklistCategory::find($id);
+        $category->delete();
+
+        /* TODO remove the attached points */ 
+        if($request->ajax()){
+            return Response::json($id);
+        }else{
+            Session::flash('message', trans('checklist.deleted_category'));
+            return back();
+        }
     }
 
     /**

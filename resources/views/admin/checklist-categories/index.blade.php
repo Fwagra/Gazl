@@ -25,7 +25,8 @@
 				sort: '{{ route("sort.categories") }}',
 			}],
 			others: [{
-				csrf: "{{ csrf_token() }}"
+				csrf: "{{ csrf_token() }}",
+				deletemsg: "{{ trans('global.deletemsg') }}"
 			}]
 		}
 	</script>

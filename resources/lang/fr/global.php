@@ -9,4 +9,5 @@ return [
     */
     'edit' => 'Éditer',
     'delete' => 'Supprimer',
+    'deletemsg' => 'Voulez-vous supprimer ceci?'
 ];
