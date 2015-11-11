@@ -27,7 +27,7 @@ class ChecklistCategoryController extends Controller
     }
 
     /**
-     * Returns a rendered list of resources for ajax requests.
+     * Return a rendered list of resources for ajax requests.
      *
      * @return Response
      */
@@ -48,7 +48,6 @@ class ChecklistCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->ajax()){
             $this->validate($request, [
                 'name' => 'required|max:255',
             ]);
@@ -58,7 +57,11 @@ class ChecklistCategoryController extends Controller
             $category->name = $request->name;
             $category->order = intval($highest->order) +1;
             $category->save();
+        if($request->ajax()){
             return $this->returnList();
+        }else{
+            Session::flash('message', trans('checklist.added_category'));
+            return back();
         }
     }
 
@@ -71,7 +74,20 @@ class ChecklistCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'edit-input' => 'required|max:255',
+        ]);
+
+        $category = ChecklistCategory::find($id);
+        $category->name = $request->input('edit-input');
+        $category->save();
+
+        if($request->ajax()){
+            return Response::json($request->input('edit-input'));        
+        }else{
+            Session::flash('message', trans('checklist.updated_category'));
+            return back();
+        }
     }
 
     /**
@@ -80,7 +96,7 @@ class ChecklistCategoryController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id, Request $request)
+    public function destroy(Request $request, $id)
     {
         $category = ChecklistCategory::find($id);
         $category->delete();

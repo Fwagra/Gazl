@@ -6,7 +6,7 @@
    	<ul class='sortable list-group'>
    		@include('admin.checklist-categories.list')
    	</ul>
-   	{!! Form::open(['route' => 'admin.checklist-category.store', 'id' => 'add_category', 'class' => 'add_ajax']) !!}
+   	{!! Form::open(['route' => 'admin.checklist-category.store', 'id' => 'add_category', 'class' => 'add_element']) !!}
     	{!! csrf_field() !!}
     	<div class="errors"></div>
 	   	<div class="input-group">
@@ -23,6 +23,7 @@
 		var config = {
 			routes: [{ 
 				sort: '{{ route("sort.categories") }}',
+				edit: '{{ route ("admin.checklist-category.update", "url_id") }}'
 			}],
 			others: [{
 				csrf: "{{ csrf_token() }}",
