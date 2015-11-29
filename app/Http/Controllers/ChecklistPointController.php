@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ChecklistCategory;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use View;
 
 class ChecklistPointController extends Controller
 {
@@ -16,7 +17,7 @@ class ChecklistPointController extends Controller
      */
     public function index()
     {
-        
+        return View::make('admin.checklist-points.index', compact('categories'));
     }
 
 

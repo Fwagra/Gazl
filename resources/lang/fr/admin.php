@@ -15,6 +15,7 @@ return [
     'edit_global_key' => 'Modifier la clé globale',
     'edit_my_key' => 'Modifier ma clé',
     'keys_management' => 'Gestion des clés de chiffrage',
+    'points_list' => 'Liste des points de la checklist',
     'projects' => 'Projets',
     'title_admin' => 'Administration',
     'title_h1' => 'Administration',

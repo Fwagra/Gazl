@@ -17,6 +17,7 @@ return [
     'edit_global_key' => 'Edit the general key',
     'edit_my_key' => 'Edit my key',
     'keys_management' => 'Encryption keys management',
+    'points_list' => 'List of checklist points',
     'projects' => 'Projects',
     'users' => 'Users',
     'users_create' => 'All users',
