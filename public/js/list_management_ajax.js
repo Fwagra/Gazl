@@ -2,7 +2,6 @@
 jQuery(document).ready(function($) {
     $('.sortable').sortable({
         cursor: 'move',
-        axis: 'y',
         handle: 'i',
         update: function (event, ui) {
             var order = $(this).sortable('toArray',	{attribute: 'data-id'});
