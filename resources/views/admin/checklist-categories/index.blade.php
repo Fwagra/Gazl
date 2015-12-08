@@ -2,10 +2,11 @@
 @section('title', trans('checklist.list_categories'))
 @section('content')
    <h1>{{ trans('checklist.list_categories') }}</h1>
-
-   	<ul class='sortable list-group'>
-   		@include('admin.checklist-categories.list')
-   	</ul>
+	@if ($categories)
+	   	<ul class='sortable list-group'>
+	   		@include('admin.checklist-categories.list')
+	   	</ul>
+	@endif
    	{!! Form::open(['route' => 'admin.checklist-category.store', 'id' => 'add_category', 'class' => 'add_element']) !!}
     	{!! csrf_field() !!}
     	<div class="errors"></div>
