@@ -1,7 +1,10 @@
 /* Trigger sortable elements */
 jQuery(document).ready(function($) {
     $('.sortable').sortable({
+    	connectWith: '.sortable',
         cursor: 'move',
+        cancel: '.panel-heading',
+        items: '.list-group-item',
         handle: 'i',
         update: function (event, ui) {
             var order = $(this).sortable('toArray',	{attribute: 'data-id'});

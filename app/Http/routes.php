@@ -27,7 +27,8 @@ Route::get('admin', ['as' => 'admin', 'uses' => 'AdminController@index']);
 Route::group(array('prefix'=>'admin', 'middleware' => 'auth'), function(){
 	Route::resource('checklist-category', 'ChecklistCategoryController', ['except' => ['show', 'create']]);
 	Route::resource('checklist-point', 'ChecklistPointController', ['except' => ['show', 'create']]);
-	Route::post('sort',['as' => 'sort.categories','uses' => 'ChecklistCategoryController@order']);
+	Route::post('checklist-category/sort',['as' => 'sort.categories','uses' => 'ChecklistCategoryController@order']);
+	Route::post('checklist-point/sort',['as' => 'sort.checklist','uses' => 'ChecklistCategoryController@order']);
 	Route::get('key', ['as' => 'admin.key', 'uses' => 'AccessesController@setGlobalKey']);
 	Route::post('key', ['as' => 'admin.key.save', 'uses' => 'AccessesController@saveGlobalKey']);
 });
