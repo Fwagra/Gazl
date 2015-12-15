@@ -19,7 +19,7 @@ $(document).on('submit', '.add_element', function(event){
         $(this).prop( 'action' ),
         $(this).serialize(),
         function(data) {
-            $('.list-group').html(data.view);
+            $(data.selector).html(data.view);
             $('input[type="text"],textarea').val('');
         },
         'json'

@@ -36,7 +36,8 @@ class ChecklistCategoryController extends Controller
         $categories = ChecklistCategory::orderBy('order')->get();
         $data = [
             'view' => View::make('admin.checklist-categories.list', compact('categories'))
-            ->render()
+            ->render(),
+            'selector' => '.list-group'
         ];
         return Response::json($data);
     }
