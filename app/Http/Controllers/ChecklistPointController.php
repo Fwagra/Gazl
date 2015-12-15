@@ -96,14 +96,22 @@ class ChecklistPointController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified point from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $point = ChecklistPoint::find($id);
+        $point->delete();
+
+        if($request->ajax()){
+            return Response::json($id);
+        }else{
+            Session::flash('message', trans('checklist.deleted_point'));
+            return back();
+        }
     }
 
     /**

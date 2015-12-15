@@ -103,7 +103,6 @@ class ChecklistCategoryController extends Controller
         $category = ChecklistCategory::find($id);
         $category->delete();
 
-        /* TODO remove the attached points */ 
         if($request->ajax()){
             return Response::json($id);
         }else{

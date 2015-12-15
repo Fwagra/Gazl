@@ -5,6 +5,11 @@
 		</div>
 		@foreach ($category->points()->orderBy('order')->get() as $point)
 			<div class="list-group-item" data-id="{{ $point->id }}"><i class=" glyphicon glyphicon-th"></i> <span class="edit-element">{{ $point->name }}</span>
+			    {!! Form::open(['route' => ['admin.checklist-point.destroy', $point->id], 'method' => 'DELETE', 'class' => 'delete-element pull-right']) !!}
+					<div class="form-group">
+					    {!! Form::submit('×', ['class' => 'close'])!!}
+					</div>
+			    {!!  Form::close() !!}
 			</div>
 		@endforeach
 	</div>

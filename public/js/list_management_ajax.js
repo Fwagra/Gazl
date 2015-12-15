@@ -45,7 +45,7 @@ $(document).on('submit', '.delete-element', function(event){
     		$(this).prop( 'action' ),
     	    $(this).serialize(),
     		function(id){
-    			$('li[data-id="'+id+'"]').remove();
+    			$('.list-group-item[data-id="'+id+'"]').remove();
     		}
     	);
     }
