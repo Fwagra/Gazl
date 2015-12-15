@@ -1,16 +1,20 @@
 /* Trigger sortable elements */
-jQuery(document).ready(function($) {
-    $('.sortable').sortable({
+function sort_list(){
+    jQuery('.sortable').sortable({
     	connectWith: '.sortable',
         cursor: 'move',
         cancel: '.panel-heading',
         items: '.list-group-item',
         handle: 'i',
         update: function (event, ui) {
-            var order = $(this).sortable('toArray',	{attribute: 'data-id'});
-            $.post(config.routes[0].sort, { order: order, "_token": config.others[0].csrf });
+            var order = jQuery(this).sortable('toArray',	{attribute: 'data-id'});
+            var category = jQuery(this).data('category-id');
+            jQuery.post(config.routes[0].sort, { order: order, category: category, "_token": config.others[0].csrf });
         }
     });
+}
+jQuery(document).ready(function($) {
+	sort_list();
 });
 /* Add element */
 $(document).on('submit', '.add_element', function(event){
@@ -21,6 +25,7 @@ $(document).on('submit', '.add_element', function(event){
         function(data) {
             $(data.selector).html(data.view);
             $('input[type="text"],textarea').val('');
+            sort_list();
         },
         'json'
     ).fail(function(data) {

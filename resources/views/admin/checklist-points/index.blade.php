@@ -2,9 +2,14 @@
 @section('title', trans('checklist.list_points'))
 @section('content')
     <h1>{{ trans('checklist.list_points') }}</h1>
-    @if ($categories)
-            @include('admin.checklist-points.list')  
-    @endif
+    <div class="list-points">
+        @if ($categories)
+                @include('admin.checklist-points.list')
+        @else
+            {{ trans('checklist.no-category') }}
+        @endif
+    </div>
+    @include('admin.checklist-points.form')    
 @endsection
 
 @section('footer_js')

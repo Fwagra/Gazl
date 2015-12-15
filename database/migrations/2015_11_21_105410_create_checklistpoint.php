@@ -16,6 +16,7 @@ class CreateChecklistpoint extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('name');
+            $table->text('description');
             $table->integer('checklist_category_id');
             $table->integer('order');
         });

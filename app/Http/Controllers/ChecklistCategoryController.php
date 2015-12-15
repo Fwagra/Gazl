@@ -49,15 +49,16 @@ class ChecklistCategoryController extends Controller
      */
     public function store(Request $request)
     {
-            $this->validate($request, [
-                'name' => 'required|max:255',
-            ]);
-            // Getting last category to increment order of the new one
-            $highest = ChecklistCategory::orderBy('order', 'desc')->first();
-            $category = new ChecklistCategory;
-            $category->name = $request->name;
-            $category->order = intval($highest->order) +1;
-            $category->save();
+        $this->validate($request, [
+            'name' => 'required|max:255',
+        ]);
+        // Getting last category to increment order of the new one
+        $highest = ChecklistCategory::orderBy('order', 'desc')->first();
+        $highest = (is_object($highest))? $highest->order : 0;
+        $category = new ChecklistCategory;
+        $category->name = $request->name;
+        $category->order = intval($highest) +1;
+        $category->save();
         if($request->ajax()){
             return $this->returnList();
         }else{
