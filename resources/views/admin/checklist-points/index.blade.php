@@ -9,7 +9,9 @@
             {{ trans('checklist.no-category') }}
         @endif
     </div>
-    @include('admin.checklist-points.form')    
+    {!! Form::open(['route' => 'admin.checklist-point.store', 'id' => 'add_category', 'class' => 'add_element']) !!}
+    	@include('admin.checklist-points.form')
+    {!!  Form::close() !!}
 @endsection
 
 @section('footer_js')
@@ -17,7 +19,6 @@
 		var config = {
 			routes: [{ 
 				sort: '{{ route("sort.checklist") }}',
-				edit: '{{ route ("admin.checklist-category.update", "url_id") }}'
 			}],
 			others: [{
 				csrf: "{{ csrf_token() }}",

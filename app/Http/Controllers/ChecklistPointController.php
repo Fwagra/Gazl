@@ -37,7 +37,7 @@ class ChecklistPointController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'description' => 'required|max:500',
-            'category' => 'required',
+            'checklist_category_id' => 'required',
         ]);
         // Getting last category to increment order of the new one
         $highest = ChecklistPoint::orderBy('order', 'desc')->first();
@@ -46,7 +46,7 @@ class ChecklistPointController extends Controller
         $point->name = $request->name;
         $point->order = intval($highest) +1;
         $point->description = $request->description;
-        $point->checklist_category_id = $request->category;
+        $point->checklist_category_id = $request->checklist_category_id;
         $point->save();
         if($request->ajax()){
             return $this->returnList();
@@ -80,7 +80,9 @@ class ChecklistPointController extends Controller
      */
     public function edit($id)
     {
-        //
+        $point = ChecklistPoint::find($id);
+        $categoriesSelect = ChecklistCategory::lists('name', 'id');
+        return View::make('admin.checklist-points.edit', compact('point', 'categoriesSelect'));    
     }
 
     /**
@@ -92,7 +94,9 @@ class ChecklistPointController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $point = ChecklistPoint::find($id);
+        $point->update($request->all());
+        return redirect(route('admin.checklist-point.index'));
     }
 
     /**
