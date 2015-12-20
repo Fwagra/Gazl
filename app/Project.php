@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Project extends Model
-{
-    use \Devfactory\Taxonomy\TaxonomyTrait;
-    
+{    
     protected $fillable = ['name', 'slug'];
 
     /**
@@ -123,6 +121,14 @@ class Project extends Model
     public function accesses()
     {
         return $this->hasMany('App\Access');
+    }
+
+    /**
+     * A project may own many accesses
+     */
+    public function cms()
+    {
+        return $this->belongsTo('App\Cms');
     }
 
     /**

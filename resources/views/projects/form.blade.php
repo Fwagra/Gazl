@@ -5,7 +5,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('cms', trans('project.cms'))!!}
-    {!! Form::select('cms[]', $cms, $selected_cms, ['class' => 'form-control', 'placeholder' => '--', 'multiple']) !!}
+    {!! Form::select('cms', $cms, $selected_cms, ['class' => 'form-control', 'placeholder' => '--']) !!}
 </div>
 <div class="form-group">
     {!! Form::submit(trans('project.save'), ['class' => 'btn btn-primary'])!!}

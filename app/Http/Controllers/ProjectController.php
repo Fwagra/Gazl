@@ -14,8 +14,8 @@ use \Input;
 use \Auth;
 use \DB;
 use App\Access;
+use App\Cms;
 use App\Http\Requests\StoreProjectRequest;
-use \Taxonomy;
 
 class ProjectController extends Controller
 {
@@ -64,7 +64,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $cms = Taxonomy::getVocabularyByName('cms')->terms()->get()->lists('name', 'id');
+        $cms = Cms::lists('name', 'id');
         $selected_cms = [];
         
         return View::make('projects.new', compact('cms', 'selected_cms'));
@@ -93,10 +93,11 @@ class ProjectController extends Controller
     public function edit($slug)
     {
         $project = Project::slug($slug);
-        $cms = Taxonomy::getVocabularyByName('cms')->terms()->get()->lists('name', 'id');
 
-        $selected_cms = reset(($project->getTermsByVocabularyName('cms')->lists('term_id')));
-        
+        $cms = Cms::lists('name', 'id');
+        $selected_cms = $project->cms_id;
+        print_r(array($selected_cms));
+                
         return View::make('projects.edit', compact('project', 'cms', 'selected_cms'));
     }
 
@@ -112,11 +113,7 @@ class ProjectController extends Controller
 
         $project->name = $request->name;
         $project->public_id = $request->name;
-
-        if ($request->cms) {
-            foreach ($request->cms as $id)
-                $project->addTerm($id);
-        }
+        $project->cms_id = $request->cms;
 
         $project->save();
         
@@ -137,14 +134,7 @@ class ProjectController extends Controller
         $project = Project::slug($slug);
 
         $project->name = $request->name;
-
-        // Remove terms before adding new ones.
-        $project->removeAllTerms();
-
-        if ($request->cms) {
-            foreach ($request->cms as $id)
-                $project->addTerm($id);
-        }
+        $project->cms_id = $request->cms;
 
         $project->save();
 
