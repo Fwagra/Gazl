@@ -1,11 +1,17 @@
 {!! csrf_field() !!}
 <div class="form-group">
     {!! Form::label('name', trans('access.name'), 
-    	['data-toggle' =>"tooltip", 'data-original-title' => trans('access.tooltip_title'), 'data-placement' => 'right']
+        ['data-toggle' =>"tooltip", 'data-original-title' => trans('access.tooltip_title'), 'data-placement' => 'right']
     )!!}
     {!! Form::text('name', null, 
-    	['class' => 'form-control', 'placeholder' => trans('access.name')]
+        ['class' => 'form-control', 'placeholder' => trans('access.name')]
     )!!}
+</div>
+<div class="form-group">
+    {!! Form::label('name', trans('access.category'))!!}
+    {!! Form::select('access_category_id', $categories, $selected_category, 
+        ['class' => 'form-control', 'placeholder' => '--']
+    ) !!}
 </div>
 <div class="form-group">
 	{!! Form::label('host', trans('access.host'), 

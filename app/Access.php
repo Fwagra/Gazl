@@ -11,7 +11,14 @@ use Illuminate\Contracts\Encryption\DecryptException;
 
 class Access extends Model
 {
-	protected $fillable = ['name', 'login', 'password', 'host', 'project_id'];
+	protected $fillable = [
+        'name',
+        'login',
+        'password',
+        'host',
+        'project_id',
+        'access_category_id',
+    ];
 
 	/**
 	 * An access belongs to a project
@@ -19,6 +26,14 @@ class Access extends Model
     public function project()
     {
         return $this->belongsTo('App\Project');
+    }
+
+    /**
+     * Get access category name.
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\AccessCategory');
     }
 
     /**

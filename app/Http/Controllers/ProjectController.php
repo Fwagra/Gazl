@@ -96,7 +96,6 @@ class ProjectController extends Controller
 
         $cms = Cms::lists('name', 'id');
         $selected_cms = $project->cms_id;
-        print_r(array($selected_cms));
                 
         return View::make('projects.edit', compact('project', 'cms', 'selected_cms'));
     }

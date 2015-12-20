@@ -34,4 +34,5 @@ return [
     'tooltip_title' => 'Example : dev SQL, production FTP, www.example.com',
     'wrong_key_flash' => 'Your key is outdated, please type the current key',
     'wrong_key_get_pass' => 'Your encryption key is wrong or outdated',
+    'category' => 'Category',
 ];

@@ -5,7 +5,6 @@ return [
     | Accesses Language Lines
     |--------------------------------------------------------------------------
     |
-    |
     */
     'access_not_found' => 'Ces identifiants n\'existent pas pour ce projet',
     'create' => 'Envoyer',
@@ -35,4 +34,5 @@ return [
     'tooltip_title' => 'Par exemple : dev SQL, production FTP, www.exemple.com',
     'wrong_key_flash' => 'Votre clé de chiffrage n\'est plus valide, veuillez entrer la clé actuelle',
     'wrong_key_get_pass' => 'Votre clé de chiffrage est incorrecte',
+    'category' => 'Catégorie',
 ];

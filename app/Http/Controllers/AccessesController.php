@@ -19,6 +19,7 @@ use Hash;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAccessRequest;
 use Illuminate\Contracts\Encryption\DecryptException;
+use App\AccessCategory;
 
 class AccessesController extends Controller
 {
@@ -45,7 +46,10 @@ class AccessesController extends Controller
             Session::flash('error', trans('access.wrong_key_flash'));
             return redirect(route('key.set'));
         else:
-            return View::make('accesses.new', compact('project', 'access'));
+            $categories = AccessCategory::lists('name', 'id');
+            $selected_category = [];
+
+            return View::make('accesses.new', compact('project', 'access', 'categories', 'selected_category'));
         endif;
     }
 
@@ -60,7 +64,7 @@ class AccessesController extends Controller
     {
         $project = Project::slug($projectSlug);
         $request['project_id'] = $project->id;
-        Access::create($request->only('name', 'host', 'login', 'password', 'project_id'));
+        Access::create($request->only('name', 'host', 'login', 'password', 'project_id', 'access_category_id'));
         Session::flash('message', trans('access.success'));
         return back();
     }
@@ -88,7 +92,10 @@ class AccessesController extends Controller
             Session::flash('error', trans('access.wrong_key_flash'));
             return redirect(route('key.set'));
         else:
-            return View::make('accesses.edit', compact('project','access'));
+            $categories = AccessCategory::lists('name', 'id');
+            $selected_category = $access->access_category_id;
+
+            return View::make('accesses.edit', compact('project', 'access', 'categories', 'selected_category'));            
         endif;
     }
 

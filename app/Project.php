@@ -124,7 +124,7 @@ class Project extends Model
     }
 
     /**
-     * A project may own many accesses
+     * Get the project cms name.
      */
     public function cms()
     {
