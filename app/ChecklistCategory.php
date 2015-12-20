@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ChecklistCategory extends Model
 {
 	 /**
-     * A checklist category may own many accesses
+     * A checklist category may own many points
      */
     public function points()
     {

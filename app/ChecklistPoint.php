@@ -14,4 +14,12 @@ class ChecklistPoint extends Model
     {
         return $this->belongsTo('App\ChecklistCategory');
     }
+
+	/**
+	* A checklist point may own many anwsers
+	*/
+    public function answers()
+    {
+        return $this->hasMany('App\ChecklistAnswer');
+    }
 }
