@@ -124,6 +124,14 @@ class Project extends Model
     }
 
     /**
+     * A project may own many checklist answers
+     */
+    public function checklistAnswers()
+    {
+        return $this->hasMany('App\ChecklistAnswer');
+    }
+
+    /**
      * Get the project cms name.
      */
     public function cms()

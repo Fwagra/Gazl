@@ -13,4 +13,12 @@ class ChecklistAnswer extends Model
     {
         return $this->belongsTo('App\ChecklistPoint');
     }
+
+    /**
+	 * A checklist answer belongs to a project
+	 */
+    public function project()
+    {
+        return $this->belongsTo('App\Project');
+    }
 }

@@ -6,27 +6,24 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\ChecklistCategory;
+use App\ChecklistPoint;
+use App\Project;
+use View;
 
 class ChecklistAnswerController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the checklist form for a project.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($projectSlug)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $categories = ChecklistCategory::orderBy('order')->get();
+        $points = ChecklistPoint::orderBy('order')->get();
+        $project = Project::slug($projectSlug);
+        return View::make('checklist.index', compact('categories', 'points', 'project'));
     }
 
     /**
@@ -41,28 +38,6 @@ class ChecklistAnswerController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,17 +45,6 @@ class ChecklistAnswerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
     {
         //
     }
