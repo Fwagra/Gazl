@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(AccessTableSeeder::class);
+        $this->call(ChecklistPointsTableSeeder::class);
         $this->call(ChecklistCategoriesTableSeeder::class);
 
         Model::reguard();
