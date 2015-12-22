@@ -17,5 +17,6 @@ return [
     'list_points' => 'Validation points',
     'new_category' => "New category",
     'new_point' => 'New validation point',
+    'title_checklist' => 'Validation checklist',
     'updated_category' => "The category has been updated",
 ];

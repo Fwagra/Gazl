@@ -21,9 +21,9 @@ class ChecklistAnswerController extends Controller
     public function index($projectSlug)
     {
         $categories = ChecklistCategory::orderBy('order')->get();
-        $points = ChecklistPoint::orderBy('order')->get();
         $project = Project::slug($projectSlug);
-        return View::make('checklist.index', compact('categories', 'points', 'project'));
+        $answers = $project->checklistAnswers();
+        return View::make('checklist.index', compact('categories', 'project', 'answers'));
     }
 
     /**
