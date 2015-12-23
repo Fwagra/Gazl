@@ -20,7 +20,10 @@
                     <a class="navbar-brand" href="{{ route('home') }}">Dashboard</a>
                 </div>
                 <div class="navbar-text navbar-right">
-                @yield('info_head')
+                    @yield('info_head')
+                    @if (isset($project))
+                        <span class="label float label-primary">{{ $project->public_id }}</span>
+                    @endif
                     @include('auth.login-zone')
                 </div>
            </div>

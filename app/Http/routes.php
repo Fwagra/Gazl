@@ -17,7 +17,9 @@ Route::get('/', array('as' => 'home', 'uses' => 'ProjectController@home'));
 Route::get('search/project', ['as' => 'project.search', 'uses' => 'ProjectController@searchProject']);
 Route::resource('project', 'ProjectController');
 
+//Checklist routes
 Route::resource('project.checklist','ChecklistAnswerController', ['except' => ['show', 'edit', 'delete', 'create']]);
+
 //Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
