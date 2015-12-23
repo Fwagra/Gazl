@@ -14,6 +14,14 @@ use View;
 class ChecklistAnswerController extends Controller
 {
     /**
+     * Construct function
+     */
+    public function __construct() {
+      $this->middleware('guest.auth', ['only' => ['index']]);
+      $this->middleware('auth', ['except' => ['index']]);
+    }
+
+    /**
      * Display the checklist form for a project.
      *
      * @return \Illuminate\Http\Response
@@ -22,7 +30,7 @@ class ChecklistAnswerController extends Controller
     {
         $categories = ChecklistCategory::orderBy('order')->get();
         $project = Project::slug($projectSlug);
-        $answers = $project->checklistAnswers();
+        $answers = $project->checklistAnswers->keyBy('checklist_point_id');
         return View::make('checklist.index', compact('categories', 'project', 'answers'));
     }
 
