@@ -15,14 +15,29 @@
 					$comment = ($answer)? $answer->comment : '';
 					$commentClass = (empty($comment))? 'disabled' : '';
 				?>
-				<div class="list-group-item">
-					@if (Auth::check())
-						@include('checklist.auth-point')
-					@else
+				@if (Auth::check())
+					@include('checklist.auth-point')
+				@else
+					@if ($active)
 						@include('checklist.guest-point')
 					@endif
-				</div>
+				@endif
 			@endforeach
 		</div>
 	@endforeach
+@endsection
+@section('footer_js')
+	<script>
+		var config = {
+			routes: [{ 
+				sort: '{{ route("sort.categories") }}',
+				edit: '{{ route ("admin.checklist-category.update", "url_id") }}'
+			}],
+			others: [{
+				csrf: "{{ csrf_token() }}",
+				deletemsg: "{{ trans('global.deletemsg') }}"
+			}]
+		}
+	</script>
+	{!! Html::script('js/checklist_ajax.js'); !!}
 @endsection
