@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChecklistAnswer extends Model
 {
+    protected $fillable  = ['project_id', 'checklist_point_id', 'check', 'active', 'comment'];
     /**
 	 * A checklist answer belongs to a checklist point
 	 */
