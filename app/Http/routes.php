@@ -18,7 +18,7 @@ Route::get('search/project', ['as' => 'project.search', 'uses' => 'ProjectContro
 Route::resource('project', 'ProjectController');
 
 //Checklist routes
-Route::resource('project.checklist','ChecklistAnswerController', ['except' => ['show', 'edit', 'delete', 'create']]);
+Route::resource('project.checklist','ChecklistAnswerController', ['except' => ['show','store', 'edit', 'delete', 'create']]);
 
 //Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
