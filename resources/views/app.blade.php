@@ -21,9 +21,7 @@
                 </div>
                 <div class="navbar-text navbar-right">
                     @yield('info_head')
-                    @if (isset($project))
-                        <span class="label float label-primary">{{ $project->public_id }}</span>
-                    @endif
+                    @include('projects.info')
                     @include('auth.login-zone')
                 </div>
            </div>
