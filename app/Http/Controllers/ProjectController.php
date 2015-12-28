@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use \Response;
-use App\Project;
-use \Session;
-use \Redirect;
-use \Input;
 use \Auth;
 use \DB;
+use \Input;
+use \Redirect;
+use \Response;
+use \Session;
 use App\Access;
+use App\ChecklistPoint;
 use App\Cms;
+use App\Http\Controllers\Controller;
+use App\Http\Requests;
 use App\Http\Requests\StoreProjectRequest;
+use App\Project;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class ProjectController extends Controller
 {
@@ -79,9 +80,9 @@ class ProjectController extends Controller
     public function show($slug)
     {
         $project = Project::slug($slug);
+        $answers = $this->getChecklistStatus($project);
         $accesses = $project->accesses;
-        
-        return View::make('projects.show', compact('project', 'accesses'));
+        return View::make('projects.show', compact('project', 'accesses', 'answers'));
     }
 
     /**
@@ -157,6 +158,9 @@ class ProjectController extends Controller
         return redirect(route('project.index'));
     }
 
+    /**
+     * Search through project names for ajax autocomplete
+     */
     public function searchProject()
     {
         $term = Input::get('term');
@@ -174,5 +178,30 @@ class ProjectController extends Controller
         }
 
         return Response::json($results);
+    }
+
+    /**
+     * Check the checklist status for the current project
+     * @param object $project
+     * @return Array
+     */
+    public function getChecklistStatus($project)
+    {
+        // Checked and active answers
+        $answers['checked'] = $project->checklistAnswers()
+                            ->where('check', 1)
+                            ->where('active', 1)
+                            ->count();
+
+        // Default number of points in a checklist
+        $checklistPoints = ChecklistPoint::all()->count();
+
+        // Inactive points
+        $inactivePoints = $project->checklistAnswers()->where('active', 0)->count();
+
+        // Total of points that should be counted since the inactive ones are subtracted
+        $answers['total'] = $checklistPoints - $inactivePoints;
+
+        return $answers;
     }
 }

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+
 class Project extends Model
 {    
     protected $fillable = ['name', 'slug'];
@@ -108,7 +109,7 @@ class Project extends Model
     }
 
     /**
-     * Query project by sug
+     * Query project by slug
      */
     public function scopeSlug($query, $id)
     {
