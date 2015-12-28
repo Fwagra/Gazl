@@ -148,6 +148,7 @@ class Project extends Model
         static::deleted(function($product)
         {
             $product->accesses()->delete();
+            $product->checklistAnswers()->delete();
         });
     }
 }
