@@ -6,27 +6,33 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Project;
+use View;
 
 class BugController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param string $projectSlug
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($projectSlug)
     {
-        //
+        $project = Project::slug($projectSlug);
+        return View::make('bugs.index', compact('project'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param string $projectSlug
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($projectSlug)
     {
-        //
+        $project = Project::slug($projectSlug);
+        return View::make('bugs.new', compact('project'));
     }
 
     /**
