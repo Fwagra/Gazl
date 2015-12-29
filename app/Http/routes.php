@@ -13,19 +13,22 @@
 
 Route::get('/', array('as' => 'home', 'uses' => 'ProjectController@home'));
 
-//Projects routes
+// Projects routes
 Route::get('search/project', ['as' => 'project.search', 'uses' => 'ProjectController@searchProject']);
 Route::resource('project', 'ProjectController');
 
-//Checklist routes
+// Checklist routes
 Route::resource('project.checklist','ChecklistAnswerController', ['except' => ['show','store', 'edit', 'delete', 'create']]);
 
-//Accesses Routes
+// Bug reporting routes
+Route::resource('project.bug', 'BugController');
+
+// Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
 Route::post('key/set', ['as' => 'key.save', 'uses' => 'AccessesController@saveKey']);
 
-//Admin routes
+// Admin routes
 Route::get('admin', ['as' => 'admin', 'uses' => 'AdminController@index']);
 Route::group(array('prefix'=>'admin', 'middleware' => 'auth'), function(){
 	Route::resource('checklist-category', 'ChecklistCategoryController', ['except' => ['show', 'create']]);
@@ -39,11 +42,11 @@ Route::group(array('prefix'=>'admin', 'middleware' => 'auth'), function(){
 //**** Authentication routes...****//
 /////////////////////////////////////
 
-///Guest users
+// Guest users
 Route::post('guest/login', ['as' => 'guest.login', 'uses' => 'Auth\AuthController@postGuestLogin']);
 Route::get('guest/logout', ['as' => 'guest.logout', 'uses' => 'Auth\AuthController@getGuestLogout']);
 
-/// Authenticated users
+// Authenticated users
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', ['as' => 'post.login', 'uses' => 'Auth\AuthController@postLogin']);
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
