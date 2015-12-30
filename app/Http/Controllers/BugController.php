@@ -12,6 +12,14 @@ use View;
 class BugController extends Controller
 {
     /**
+     * Construct function
+     */
+    public function __construct() {
+      $this->middleware('guest.auth', ['except' => []]);
+      $this->middleware('auth', ['only' => ['edit']]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @param string $projectSlug
