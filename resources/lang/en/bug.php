@@ -16,7 +16,7 @@ return [
     'email' => "My email address",
     'email_placeholder' => "myemail@address.com",
     'email_tooltip' => "This email will only be used to send notifications on a new comment.",
-    'images' => "Add a screenshot",
+    'images' => "Add  screenshot(s)",
     'images_tooltip' => "Adding a screenshot is very likely to help us understand and fix your bug.",
     'list_title' => "Bug reporting",
     'list_h1' => "Bug reporting",

@@ -19,12 +19,12 @@
 @else
 	<div class="form-group">
 	    {!! Form::label('private', trans('bug.private'),['data-toggle' =>"tooltip", 'data-original-title' => trans('bug.private_tooltip'), 'data-placement' => 'right'])!!}
-	    {!! Form::checkbox('private', 0, ['class' => 'form-control'])!!}
+	    {!! Form::checkbox('private', 1, ['class' => 'form-control'])!!}
 	</div>
 @endif
 <div class="form-group">
     {!! Form::label('images', trans('bug.images'), ['data-toggle' =>"tooltip", 'data-original-title' => trans('bug.images_tooltip'), 'data-placement' => 'right'])!!}
-    {!! Form::file('images')!!}
+    {!! Form::file('images[]', ['multiple' => true])!!}
 </div>
 <div class="form-group">
     {!! Form::label('description', trans('bug.description'))!!}

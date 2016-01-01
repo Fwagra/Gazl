@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use \Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Project;
+use App\Bug;
 use View;
+use \Session;
 
 class BugController extends Controller
 {
@@ -47,11 +50,30 @@ class BugController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param string $projectSlug
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $projectSlug)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'description' => 'required|max:1500',
+            'images[]' => 'image',
+        ]);
+        $project = Project::slug($projectSlug);
+        // if($request->hasFile('images')){
+        //     dd($request->file('images'));
+        // }
+        $request->merge([
+            'project_id' => $project->id,
+            'guest' => (Auth::check())? 0 : 1,
+            'state' => 1
+        ]);
+
+        Bug::create($request->all());
+
+        Session::flash('message', trans('bug.success'));
+        return back();
     }
 
     /**

@@ -16,7 +16,7 @@ return [
     'email' => "Adresse email",
     'email_placeholder' => "monadresse@email.com",
     'email_tooltip' => "Votre adresse ne servira qu'à recevoir des notifications lors de la publication de nouveaux commentaires.",
-    'images' => "Ajouter un screenshot",
+    'images' => "Ajouter un ou plusieurs screenshots",
     'images_tooltip' => "Ajouter une image nous permettra de comprendre et de corriger votre bug plus rapidement.",
     'list_title' => "Rapport de bugs",
     'list_h1' => "Rapport de bugs",
