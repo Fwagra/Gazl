@@ -25,6 +25,7 @@ return [
     'private' => "Bug privé?",
     'private_tooltip' => "Si coché, le bug n'apparaîtra qu'aux utilisateurs connectés.",
     'save' => "Envoyer le rapport de bug",
+    'success' => "Votre bug a bien été signalé. Nous tâcherons d'y remédier le plus rapidement.",
     'url' => "Url du bug",
     'url_placeholder' => "Ex : www.monsite.com/contact",
 ];

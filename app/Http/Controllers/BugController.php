@@ -9,7 +9,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\Bug;
+use Image;
 use View;
+use Validator;
 use \Session;
 
 class BugController extends Controller
@@ -58,19 +60,47 @@ class BugController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'description' => 'required|max:1500',
-            'images[]' => 'image',
+            // 'images' => 'image',
         ]);
         $project = Project::slug($projectSlug);
-        // if($request->hasFile('images')){
-        //     dd($request->file('images'));
-        // }
+        if($request->hasFile('images')){
+            $images = $request->file('images');
+            $imagesStored = [];
+            foreach ($images as $key => $image) {
+                $rules = array('file' => 'image|max:500');
+                $validator = Validator::make(array('file'=> $image), $rules);
+
+                if($validator->passes()) {
+                    // Saving images
+                    $destinationPath = 'uploads/screenshots';
+                    $filename = $projectSlug . '-screenshot-' . uniqid() . '.' . $image->getClientOriginalExtension();
+                    $upload_success = $image->move($destinationPath, $filename);
+                    // Resize image 
+                    $imageresize = Image::make($destinationPath.'/'.$filename);
+                    $imageresize->resize(1920, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    });
+                    $imageresize->save();
+                    $imagesStored[] = $filename;
+                } else {
+                    // redirect back with errors.
+                    return back()->withInput()->withErrors($validator);
+                }
+            }
+        }
         $request->merge([
             'project_id' => $project->id,
             'guest' => (Auth::check())? 0 : 1,
             'state' => 1
         ]);
 
-        Bug::create($request->all());
+        $fields = $request->all();
+
+        $fields['images'] = (isset($imagesStored))? serialize($imagesStored) : '';
+
+
+        Bug::create($fields);
 
         Session::flash('message', trans('bug.success'));
         return back();

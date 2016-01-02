@@ -25,6 +25,7 @@ return [
     'private' => "Private bug?",
     'private_tooltip' => "If checked, this bug report will only be seen by logged users",
     'save' => "Send my bug report",
+    'success' => "Your bug has been submitted. We'll fix it as soon as possible.",
     'url' => "Link to the bug",
     'url_placeholder' => "Ex : www.mysite.com/contact",
 ];
