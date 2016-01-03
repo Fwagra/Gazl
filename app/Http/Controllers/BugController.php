@@ -103,7 +103,7 @@ class BugController extends Controller
         Bug::create($fields);
 
         Session::flash('message', trans('bug.success'));
-        return back();
+        return redirect()->action('BugController@index', ['projectSlug' => $projectSlug]);
     }
 
     /**
