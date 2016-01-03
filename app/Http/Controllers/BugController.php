@@ -33,7 +33,23 @@ class BugController extends Controller
     public function index($projectSlug)
     {
         $project = Project::slug($projectSlug);
-        return View::make('bugs.index', compact('project'));
+        $bugs  = $this->getAllBugs($project);
+        return View::make('bugs.index', compact('project', 'bugs'));
+    }
+
+    /**
+     * Return a bug list filtered and sorted
+     * @param object $project
+     * @return \Illuminate\Http\Response
+     */
+    protected function getAllBugs($project)
+    {
+        if(!Auth::check()){
+            $bugs = $project->bugs()->where('private', 0)->get();
+        }else{
+            $bugs = $project->bugs;
+        }
+        return $bugs;
     }
 
     /**

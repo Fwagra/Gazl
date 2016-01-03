@@ -133,6 +133,14 @@ class Project extends Model
     }
 
     /**
+     * A project may own many reported bugs
+     */
+    public function bugs()
+    {
+        return $this->hasMany('App\Bug');
+    }
+
+    /**
      * Get the project cms name.
      */
     public function cms()
@@ -150,6 +158,7 @@ class Project extends Model
         {
             $product->accesses()->delete();
             $product->checklistAnswers()->delete();
+            $product->bugs()->delete();
         });
     }
 }
