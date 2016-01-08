@@ -45,11 +45,12 @@ class BugController extends Controller
     protected function getAllBugs($project)
     {
         if(!Auth::check()){
-            $bugs = $project->bugs()->where('private', 0)->get();
+            $bugs = $project->bugs()->where('private', 0);
         }else{
-            $bugs = $project->bugs;
+            $bugs = $project->bugs();
         }
-        return $bugs;
+        $bugs->orderBy('created_at', 'desc');
+        return $bugs->paginate(50);
     }
 
     /**
