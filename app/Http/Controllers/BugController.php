@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\Bug;
 use Image;
+use Input;
 use View;
 use Validator;
 use \Session;
@@ -44,12 +45,20 @@ class BugController extends Controller
      */
     protected function getAllBugs($project)
     {
+        // Get only the public bugs if the user is not logged
         if(!Auth::check()){
             $bugs = $project->bugs()->where('private', 0);
         }else{
             $bugs = $project->bugs();
         }
+
+        // Sort the bugs by state if needed
+        if(Input::get('order') && Input::get('order') == 'state'){
+            $bugs->orderBy('state', 'asc');
+        }
+        // Sort them by date anyway 
         $bugs->orderBy('created_at', 'desc');
+
         return $bugs->paginate(50);
     }
 
