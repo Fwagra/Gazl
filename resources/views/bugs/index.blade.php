@@ -2,6 +2,7 @@
 @section('title', trans('bug.list_title'))
 @section('content')
 	<h1>{!! trans('bug.list_h1') !!}</h1>
+	@include('bugs.navbar')
 	@if (count($bugs))
 		<ul class="list-group">
 			@foreach ($bugs as $bug)
@@ -20,5 +21,5 @@
 		</ul>
 	@endif
 	{!! $bugs->appends(Input::except('page'))->render(); !!}
-	<a href="{{ action('BugController@create', $project->slug) }}">{{ trans('bug.add_bug') }}</a>
+	
 @endsection

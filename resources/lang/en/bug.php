@@ -23,6 +23,8 @@ return [
     'list_h1' => "Bug reporting",
     'name' => "Bug title",
     'name_placeholder' => "eg. : Missing button on the contact form...",
+    'order_time' => "Sort by date",
+    'order_state' => "Sort by state",
     'private' => "Private bug?",
     'private_bug' => "Private",
     'private_tooltip' => "If checked, this bug report will only be seen by logged users",

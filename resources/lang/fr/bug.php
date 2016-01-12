@@ -23,6 +23,8 @@ return [
     'list_h1' => "Rapport de bugs",
     'name' => "Titre du bug",
     'name_placeholder' => "Ex : Bouton manquant sur le formulaire de contact...",
+    'order_time' => "Trier par date",
+    'order_state' => "Trier par avancement",
     'private' => "Bug privé?",
     'private_bug' => "Privé",
     'private_tooltip' => "Si coché, le bug n'apparaîtra qu'aux utilisateurs connectés.",
