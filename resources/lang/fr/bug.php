@@ -23,6 +23,7 @@ return [
     'list_h1' => "Rapport de bugs",
     'name' => "Titre du bug",
     'name_placeholder' => "Ex : Bouton manquant sur le formulaire de contact...",
+    'no_bugs' => "Aucun bug rapporté pour l'instant",
     'order_time' => "Trier par date",
     'order_state' => "Trier par avancement",
     'private' => "Bug privé?",

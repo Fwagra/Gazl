@@ -23,6 +23,7 @@ return [
     'list_h1' => "Bug reporting",
     'name' => "Bug title",
     'name_placeholder' => "eg. : Missing button on the contact form...",
+    'no_bugs' => "There is no bugs reported, currently",
     'order_time' => "Sort by date",
     'order_state' => "Sort by state",
     'private' => "Private bug?",

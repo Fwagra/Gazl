@@ -6,6 +6,10 @@
 	<div class="bug-content">
 		@if (count($bugs))
 			@include('bugs.list')
+		@else
+			<div class="well">
+				{{ trans('bug.no_bugs') }}
+			</div>
 		@endif
 	</div>
 	{!! $bugs->appends(Input::except('page'))->render(); !!}
