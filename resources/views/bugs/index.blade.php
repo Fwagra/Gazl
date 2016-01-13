@@ -15,3 +15,15 @@
 	{!! $bugs->appends(Input::except('page'))->render(); !!}
 	
 @endsection
+@section('footer_js')
+	<script>
+		var config = {
+			selectors: [{ 
+				form: '.form-search',
+				input: '#bug-input',
+				replace:'.bug-content',
+			}],
+		}
+	</script>
+	{!! Html::script('js/search_ajax.js'); !!}
+@endsection

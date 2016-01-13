@@ -21,6 +21,7 @@ Route::resource('project', 'ProjectController');
 Route::resource('project.checklist','ChecklistAnswerController', ['except' => ['show','store', 'edit', 'delete', 'create']]);
 
 // Bug reporting routes
+Route::post('project/{project}/bug/search', ['as' => 'bug.search', 'uses' => 'BugController@search']);
 Route::resource('project.bug', 'BugController');
 
 // Accesses Routes

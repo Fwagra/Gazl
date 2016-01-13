@@ -9,11 +9,14 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Project;
 use App\Bug;
+use Carbon\Carbon;
+use DB;
 use Image;
 use Input;
 use View;
 use Validator;
 use \Session;
+use Response;
 
 class BugController extends Controller
 {
@@ -22,7 +25,7 @@ class BugController extends Controller
      */
     public function __construct() {
       $this->middleware('guest.auth', ['except' => []]);
-      $this->middleware('auth', ['only' => ['edit']]);
+      $this->middleware('auth', ['only' => ['edit', 'destroy']]);
     }
 
     /**
@@ -175,5 +178,37 @@ class BugController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Search through bug names.
+     * @param string $projectSlug
+     */
+    public function search($projectSlug)
+    {
+        $term = Input::get('bug');
+        $project = Project::slug($projectSlug);
+
+        if(is_null($term))
+            return Response::json(trans('bug.no_result'));
+
+        $bugs = DB::table('bugs')
+            ->where('name', 'LIKE', '%'.$term.'%')
+            ->where('project_id', $project->id)
+            ->get();
+        
+        $data = array();
+        if(count($bugs)){
+            // Parsing the date that curiously, is no more a Carbon object here.
+            foreach ($bugs as $key => $bug) {
+                $bug->created_at = Carbon::parse($bug->created_at);
+            }
+            $data['html'] = View::make('bugs.list', compact('project', 'bugs'))->render();
+        }
+        else {
+            $data['html'] = trans('bug.no_result');
+        }
+
+        return Response::json($data);
     }
 }

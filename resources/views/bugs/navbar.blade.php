@@ -14,6 +14,13 @@
 		 title="{{ trans('bug.order_state') }}">
 		<i class="glyphicon glyphicon-ok-circle"></i></a>
 		<p class="navbar-text navbar-right">
+			{!! Form::open(['action' => ['BugController@search', $project->slug], 'method' => 'POST', 'class' => "form-search"]) !!}
+			    {!! Form::text('bug', '', ['id' =>  'bug-input', 'placeholder' =>  trans('bug.search_placeholder')])!!}
+			    {{-- {!!  Form::token() !!} --}}
+			    {!! Form::submit(trans('bug.search_button'), array('class' => 'button expand')) !!}
+			    <div id="empty-message"></div>
+			{!! Form::close() !!}
+
 			<a class="navbar-link" href="{{ action('BugController@create', $project->slug) }}">{{ trans('bug.add_bug') }}</a>
 		</p>
 	</div>
