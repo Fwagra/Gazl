@@ -3,6 +3,9 @@
 		<li class="list-group-item clearfix" data-id="{{ $bug->id }}">
 			<div class="col-md-1 state">{{ $bug->state }}</div>
 			<div class="col-md-10">
+				<span class="number">
+					#{{$bug->id}} 
+				</span>
 				<a href="{{ action('BugController@show', [$project->slug, $bug->id]) }}"> {{ $bug->name }}</a>
 				@if ($bug->private == 1)
 					<span class="private">{{ trans('bug.private_bug') }}</span>

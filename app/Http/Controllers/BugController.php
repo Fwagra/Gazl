@@ -124,6 +124,11 @@ class BugController extends Controller
             'state' => 1
         ]);
 
+        if(Auth::check()){
+            $request->merge([
+                'author' => Auth::user()->id,
+            ]);
+        }
         $fields = $request->all();
 
         $fields['images'] = (isset($imagesStored))? serialize($imagesStored) : '';
@@ -138,12 +143,15 @@ class BugController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  string  $projectSlug
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($projectSlug, $id)
     {
-        //
+        $project = Project::slug($projectSlug);
+        $bug = Bug::find($id); 
+        return View::make('bugs.show', compact('project', 'bug'));
     }
 
     /**

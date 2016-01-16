@@ -8,7 +8,9 @@ return [
     */
     'add_bug' => "Report a bug",
     'author' => "My name", 
+    'author_bug' => "Author",
     'author_placeholder' => "John Smith",
+    'bug_state' => "Bug state",
     'create_h1' => "Report a new bug",
     'create_title' => "Report a new bug",
     'delete' => "Delete",

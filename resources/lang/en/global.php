@@ -9,5 +9,6 @@ return [
     */
     'edit' => 'Edit',
     'delete' => 'Delete',
-    'deletemsg' => 'Are you sure you want to delete?'
+    'deletemsg' => 'Are you sure you want to delete?',
+    'undefined_username' => "Anonymous",
 ];

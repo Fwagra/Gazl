@@ -8,7 +8,9 @@ return [
     */
     'add_bug' => "Signaler un bug",
     'author' => "Mon nom",
+    'author_bug' => "Auteur",
     'author_placeholder' => "Ex : Godefroy Amaury de Malefète, comte de Montmirail, d'Apremont et de Papincourt.",
+    'bug_state' => "État du bug",
     'create_h1' => "Signaler un nouveau bug",
     'create_title' => "Signaler un nouveau bug",
     'delete' => "Supprimer",
