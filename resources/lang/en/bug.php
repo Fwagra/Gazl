@@ -12,6 +12,7 @@ return [
     'create_h1' => "Report a new bug",
     'create_title' => "Report a new bug",
     'delete' => "Delete",
+    'deleted_bug' => "The bug has been deleted",
     'description' => "Bug description",
     'description_placeholder' => "Describe your bug with as accurately as possible.",
     'email' => "My email address",

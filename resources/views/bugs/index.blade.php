@@ -23,7 +23,11 @@
 				input: '#bug-input',
 				replace:'.bug-content',
 			}],
+			others: [{
+				deletemsg: "{{ trans('global.deletemsg') }}",
+			}],
 		}
 	</script>
 	{!! Html::script('js/search_ajax.js'); !!}
+	{!! Html::script('js/list_management_ajax.js'); !!}
 @endsection

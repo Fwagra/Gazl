@@ -172,12 +172,21 @@ class BugController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  string  $slug
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $projectSlug, $id)
     {
-        //
+        $bug = Bug::find($id);
+        $bug->delete();
+        
+        if($request->ajax()){
+            return Response::json($id);
+        }else{
+            Session::flash('message', trans('bug.deleted_bug'));
+            Redirect::action('BugController@index', [$projectSlug]);
+        }
     }
 
     /**

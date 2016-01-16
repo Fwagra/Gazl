@@ -12,6 +12,7 @@ return [
     'create_h1' => "Signaler un nouveau bug",
     'create_title' => "Signaler un nouveau bug",
     'delete' => "Supprimer",
+    'deleted_bug' => "Le bug a bien été supprimé",
     'description' => "Description du bug",
     'description_placeholder' => "Décrivez votre bug le plus précisement possible.",
     'email' => "Adresse email",
