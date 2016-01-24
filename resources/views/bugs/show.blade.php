@@ -24,5 +24,24 @@
 			<div class="label">{{ trans('bug.description') }}</div>
 			{{ $bug->description }}
 		</div>
+		<div class="images">
+			<div class="wrapper">
+				@include('bugs.images')
+			</div>
+			<div class="add_image">
+			   	{!! Form::open(['route' => ['bug.image.add', $project->slug, $bug->id], 'id' => 'add_image', 'class' => 'add_element']) !!}
+			    	<div class="errors"></div>
+				   	<div class="input-group">
+				   		<div class="form-group">
+				   		    {!! Form::label('images', trans('bug.images'), ['data-toggle' =>"tooltip", 'data-original-title' => trans('bug.images_tooltip'), 'data-placement' => 'right'])!!}
+				   		    {!! Form::file('images[]', ['multiple' => true])!!}
+				   		</div>
+					   	<div class="input-group-btn">
+					   	 	{!! Form::submit(trans('bug.upload'), ['class' => 'btn btn-primary']) !!}
+					   	</div>
+				   	</div>
+				{!!  Form::close() !!}
+			</div>
+		</div>
 	</div>
 @endsection

@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use DB;
 use Image;
 use Input;
+use File;
 use View;
 use Validator;
 use \Session;
@@ -98,19 +99,8 @@ class BugController extends Controller
             foreach ($images as $key => $image) {
                 $rules = array('file' => 'image|max:500');
                 $validator = Validator::make(array('file'=> $image), $rules);
-
                 if($validator->passes()) {
-                    // Saving images
-                    $destinationPath = 'uploads/screenshots';
-                    $filename = $projectSlug . '-screenshot-' . uniqid() . '.' . $image->getClientOriginalExtension();
-                    $upload_success = $image->move($destinationPath, $filename);
-                    // Resize image 
-                    $imageresize = Image::make($destinationPath.'/'.$filename);
-                    $imageresize->resize(1920, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                        $constraint->upsize();
-                    });
-                    $imageresize->save();
+                    $filename = $this->saveImage($projectSlug, $image);
                     $imagesStored[] = $filename;
                 } else {
                     // redirect back with errors.
@@ -138,6 +128,48 @@ class BugController extends Controller
 
         Session::flash('message', trans('bug.success'));
         return redirect()->action('BugController@index', ['projectSlug' => $projectSlug]);
+    }
+
+    /**
+     * Add images to a bug
+     * @param string $projectSlug
+     * @param object $image
+     */
+    public function addImage($projectSlug, $id)
+    {
+        
+    }
+
+    /**
+     * Resize, save and create a thumbnail for a bug image
+     * @param string $projectSlug
+     * @param object $image
+     * @return string $filename
+     */
+    public function saveImage($projectSlug, $image)
+    {
+        // Directories creation
+        $destinationPath = 'uploads/screenshots/';
+        $destinationPathThumbs = 'uploads/screenshots/thumbnails/';
+        if(!File::isDirectory($destinationPathThumbs))
+            File::makeDirectory($destinationPathThumbs,  0775, true);
+        
+        // Saving image
+        $filename = $projectSlug . '-screenshot-' . uniqid() . '.' . $image->getClientOriginalExtension();
+        $upload_success = $image->move($destinationPath, $filename);
+
+        // Resize image 
+        $imageresize = $imageThumb = Image::make($destinationPath.$filename);
+        $imageresize->resize(1920, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $imageresize->save();
+
+        // Generating thumbnail
+        $imageThumb->resize(200, 150)->save($destinationPathThumbs . $filename);
+
+        return $filename;
     }
 
     /**
