@@ -28,6 +28,7 @@ return [
     'name_placeholder' => "Ex : Bouton manquant sur le formulaire de contact...",
     'no_bugs' => "Aucun bug rapporté pour l'instant",
     'no_result' => "Aucun résultat trouvé",
+    'no_screen' => "Aucun screenshot ajouté",
     'order_time' => "Trier par date",
     'order_state' => "Trier par avancement",
     'private' => "Bug privé?",
@@ -38,6 +39,7 @@ return [
     'search_button' => "Rechercher",
     'search_placeholder' => "Rechercher un bug",
     'success' => "Votre bug a bien été signalé. Nous tâcherons d'y remédier le plus rapidement.",
+    'upload' => "Envoyer",
     'url' => "Url du bug",
     'url_placeholder' => "Ex : www.monsite.com/contact",
 ];

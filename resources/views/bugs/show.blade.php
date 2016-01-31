@@ -29,7 +29,7 @@
 				@include('bugs.images')
 			</div>
 			<div class="add_image">
-			   	{!! Form::open(['route' => ['bug.image.add', $project->slug, $bug->id], 'id' => 'add_image', 'class' => 'add_element']) !!}
+			   	{!! Form::open(['route' => ['bug.image.add', $project->slug, $bug->id], 'files' => true, 'class' => 'add-element']) !!}
 			    	<div class="errors"></div>
 				   	<div class="input-group">
 				   		<div class="form-group">
@@ -44,4 +44,7 @@
 			</div>
 		</div>
 	</div>
+@endsection
+@section('footer_js')
+	{!! Html::script('js/bug_ajax.js'); !!}
 @endsection

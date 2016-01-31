@@ -6,5 +6,5 @@
 	@endforeach
 	</ul>
 @else
-	{{ trans('bugs.no_screen') }}
+	{{ trans('bug.no_screen') }}
 @endif

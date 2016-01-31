@@ -28,6 +28,7 @@ return [
     'name_placeholder' => "eg. : Missing button on the contact form...",
     'no_bugs' => "There is no bugs reported, currently",
     'no_result' => "No results.",
+    'no_screen' => "There is no screenshot uploaded",
     'order_time' => "Sort by date",
     'order_state' => "Sort by state",
     'private' => "Private bug?",
@@ -38,6 +39,7 @@ return [
     'search_button' => "Search",
     'search_placeholder' => "Search a bug",
     'success' => "Your bug has been submitted. We'll fix it as soon as possible.",
+    'upload' => "Upload",
     'url' => "Link to the bug",
     'url_placeholder' => "Ex : www.mysite.com/contact",
 ];

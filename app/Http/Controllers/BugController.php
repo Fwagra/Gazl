@@ -131,13 +131,40 @@ class BugController extends Controller
     }
 
     /**
-     * Add images to a bug
+     * Add image(s) to a bug
      * @param string $projectSlug
      * @param object $image
      */
-    public function addImage($projectSlug, $id)
+    public function addImage(Request $request, $projectSlug, $id)
     {
-        
+        $bug = Bug::find($id);
+        $savedImages = (empty($bug->images))? array() : unserialize($bug->images);
+        if($request->hasFile('images')){
+            $images = $request->file('images');
+            $imagesStored = [];
+            foreach ($images as $key => $image) {
+                $rules = array('file' => 'image|max:500');
+                $validator = Validator::make(array('file'=> $image), $rules);
+                if($validator->passes()) {
+                    $filename = $this->saveImage($projectSlug, $image);
+                    $imagesStored[] = $filename;
+                    
+                } else {
+                    // redirect back with errors.
+                    return Response::json($validator->getMessageBag()->toArray(), 422);
+                }
+            }
+            if(isset($imagesStored)){
+                $bug->images = serialize(array_merge($savedImages,$imagesStored));
+                $bug->save();
+                $data = [
+                    'view' => View::make('bugs.images', compact('bug'))
+                    ->render(),
+                    'selector' => '.images .wrapper'
+                ];
+            }
+        }
+        return Response::json($data);
     }
 
     /**
