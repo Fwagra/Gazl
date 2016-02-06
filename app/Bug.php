@@ -67,5 +67,4 @@ class Bug extends Model
         }
         return $value;
     }
-
 }

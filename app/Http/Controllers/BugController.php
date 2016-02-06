@@ -243,8 +243,10 @@ class BugController extends Controller
      */
     public function deleteFileImage($filename)
     {
-        File::delete($this->destinationImages.$filename);
-        File::delete($this->destinationImagesThumbs.$filename);
+        if(File::isFile($this->destinationImages.$filename))
+            File::delete($this->destinationImages.$filename);
+        if(File::isFile($this->destinationImagesThumbs.$filename))
+            File::delete($this->destinationImagesThumbs.$filename);
     }
 
     /**
@@ -294,8 +296,16 @@ class BugController extends Controller
     public function destroy(Request $request, $projectSlug, $id)
     {
         $bug = Bug::find($id);
+        $images = $bug->images;
         $bug->delete();
-        
+
+        // Delete the associated images
+        if($images){
+            foreach ($images as $key => $image) {
+                $this->deleteFileImage($image);
+            }
+        }
+
         if($request->ajax()){
             return Response::json($id);
         }else{
