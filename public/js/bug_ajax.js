@@ -27,4 +27,21 @@
         }
       });
    });
+
+   // Delete images function
+   $(document).on('submit', '.delete-element', function(event){
+      event.preventDefault();
+       if(confirm(config.others[0].deletemsg)) {
+           $.post(
+            $(this).prop( 'action' ),
+             $(this).serialize(),
+            function(id){
+               if(id != null){
+                  $('li[data-id='+id+']').remove();
+               }
+               // $('.list-group-item[data-id="'+id+'"]').remove();
+            }
+         );
+       }
+   });
 })(jQuery);

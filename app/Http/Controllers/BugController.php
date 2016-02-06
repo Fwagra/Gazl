@@ -21,6 +21,10 @@ use Response;
 
 class BugController extends Controller
 {
+
+    protected $destinationImages = 'uploads/screenshots/';
+    protected $destinationImagesThumbs = 'uploads/screenshots/thumbnails/';
+
     /**
      * Construct function
      */
@@ -132,12 +136,15 @@ class BugController extends Controller
 
     /**
      * Add image(s) to a bug
+     * @param  \Illuminate\Http\Request  $request
      * @param string $projectSlug
-     * @param object $image
+     * @param int $id
+     * @return \Illuminate\Http\Response
      */
     public function addImage(Request $request, $projectSlug, $id)
     {
         $bug = Bug::find($id);
+        $project = Project::slug($projectSlug);
         $savedImages = (empty($bug->images))? array() : unserialize($bug->images);
         if($request->hasFile('images')){
             $images = $request->file('images');
@@ -158,7 +165,7 @@ class BugController extends Controller
                 $bug->images = serialize(array_merge($savedImages,$imagesStored));
                 $bug->save();
                 $data = [
-                    'view' => View::make('bugs.images', compact('bug'))
+                    'view' => View::make('bugs.images', compact('bug', 'project'))
                     ->render(),
                     'selector' => '.images .wrapper'
                 ];
@@ -176,8 +183,11 @@ class BugController extends Controller
     public function saveImage($projectSlug, $image)
     {
         // Directories creation
-        $destinationPath = 'uploads/screenshots/';
-        $destinationPathThumbs = 'uploads/screenshots/thumbnails/';
+        $destinationPath = $this->destinationImages;
+        $destinationPathThumbs = $this->destinationImagesThumbs;
+
+        if(!File::isDirectory($destinationPath))
+            File::makeDirectory($destinationPath,  0775, true);
         if(!File::isDirectory($destinationPathThumbs))
             File::makeDirectory($destinationPathThumbs,  0775, true);
         
@@ -197,6 +207,44 @@ class BugController extends Controller
         $imageThumb->resize(200, 150)->save($destinationPathThumbs . $filename);
 
         return $filename;
+    }
+
+
+    /**
+     * Remove an image from a bug
+     * @param  \Illuminate\Http\Request  $request
+     * @param string $projectSlug
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteImage(Request $request, $projectSlug, $id)
+    {
+        $bug = Bug::find($id);
+        $savedImages = (empty($bug->images))? array() : unserialize($bug->images);
+        $return = null;
+        if($toDeleteImage = $request->input('image_name')){
+
+            // Search through the current images and delete the provided one
+            if(($key = array_search($toDeleteImage, $savedImages)) !== false) {
+                unset($savedImages[$key]);
+                $this->deleteFileImage($toDeleteImage);
+                $bug->images = serialize($savedImages);
+                $bug->save();
+                $return = (string) $key;
+            }           
+        }
+
+        return Response::json($return);
+    }
+
+    /**
+     * Delete the provided image file
+     * @param string $filename
+     */
+    public function deleteFileImage($filename)
+    {
+        File::delete($this->destinationImages.$filename);
+        File::delete($this->destinationImagesThumbs.$filename);
     }
 
     /**

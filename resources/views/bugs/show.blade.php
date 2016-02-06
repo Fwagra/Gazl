@@ -46,5 +46,13 @@
 	</div>
 @endsection
 @section('footer_js')
+	<script>
+		var config = {
+			others: [{
+				csrf: "{{ csrf_token() }}",
+				deletemsg: "{{ trans('global.deletemsg') }}"
+			}]
+		}
+	</script>
 	{!! Html::script('js/bug_ajax.js'); !!}
 @endsection
