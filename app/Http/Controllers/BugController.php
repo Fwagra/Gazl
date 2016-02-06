@@ -125,7 +125,7 @@ class BugController extends Controller
         }
         $fields = $request->all();
 
-        $fields['images'] = (isset($imagesStored))? serialize($imagesStored) : '';
+        $fields['images'] = (isset($imagesStored))? $imagesStored : '';
 
 
         Bug::create($fields);
@@ -145,7 +145,7 @@ class BugController extends Controller
     {
         $bug = Bug::find($id);
         $project = Project::slug($projectSlug);
-        $savedImages = (empty($bug->images))? array() : unserialize($bug->images);
+        $savedImages = (empty($bug->images))? array() : $bug->images;
         if($request->hasFile('images')){
             $images = $request->file('images');
             $imagesStored = [];
@@ -162,7 +162,7 @@ class BugController extends Controller
                 }
             }
             if(isset($imagesStored)){
-                $bug->images = serialize(array_merge($savedImages,$imagesStored));
+                $bug->images = array_merge($savedImages,$imagesStored);
                 $bug->save();
                 $data = [
                     'view' => View::make('bugs.images', compact('bug', 'project'))
@@ -220,7 +220,7 @@ class BugController extends Controller
     public function deleteImage(Request $request, $projectSlug, $id)
     {
         $bug = Bug::find($id);
-        $savedImages = (empty($bug->images))? array() : unserialize($bug->images);
+        $savedImages = (empty($bug->images))? array() : $bug->images;
         $return = null;
         if($toDeleteImage = $request->input('image_name')){
 
@@ -228,7 +228,7 @@ class BugController extends Controller
             if(($key = array_search($toDeleteImage, $savedImages)) !== false) {
                 unset($savedImages[$key]);
                 $this->deleteFileImage($toDeleteImage);
-                $bug->images = serialize($savedImages);
+                $bug->images = $savedImages;
                 $bug->save();
                 $return = (string) $key;
             }           

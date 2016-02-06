@@ -19,6 +19,12 @@ class Bug extends Model
         'private',
         'state',
     ];
+    /**
+     * Automatic (un)serialization for bug's images
+     */
+    protected $casts = [
+        'images' => 'array',
+    ];
 
     protected $guestID;
     /**
@@ -48,7 +54,7 @@ class Bug extends Model
     }
 
     /**
-     * Replaces the email value by the user's mail if it's not "guest" bug
+     * Replaces the email value by the user's mail if it's not a "guest" bug
      */
     protected function getEmailAttribute($value)
     {
@@ -61,4 +67,5 @@ class Bug extends Model
         }
         return $value;
     }
+
 }

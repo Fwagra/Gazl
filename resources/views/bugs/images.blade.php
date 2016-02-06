@@ -1,5 +1,5 @@
 @if ($bug && !empty($bug->images))
-	<?php $images = unserialize($bug->images) ?>
+	<?php $images = $bug->images ?>
 	<ul>
 	@foreach ($images as $key => $image)
 		<li data-id="{{ $key }}"><a href="/uploads/screenshots/{{ $image }}"><img src="/uploads/screenshots/thumbnails/{{ $image}}" /></a>
