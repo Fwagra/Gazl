@@ -21,9 +21,12 @@ use Response;
 
 class BugController extends Controller
 {
-
+    /* Defining pathes for images saving */
     protected $destinationImages = 'uploads/screenshots/';
     protected $destinationImagesThumbs = 'uploads/screenshots/thumbnails/';
+
+    /* Defining available states for bugs */
+    protected $availableStates = [1,2,3];
 
     /**
      * Construct function
@@ -260,7 +263,8 @@ class BugController extends Controller
     {
         $project = Project::slug($projectSlug);
         $bug = Bug::find($id); 
-        return View::make('bugs.show', compact('project', 'bug'));
+        $states = $this->availableStates;
+        return View::make('bugs.show', compact('project', 'bug', 'states'));
     }
 
     /**
