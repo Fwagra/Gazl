@@ -24,6 +24,7 @@ Route::resource('project.checklist','ChecklistAnswerController', ['except' => ['
 Route::post('project/{project}/bug/search', ['as' => 'bug.search', 'uses' => 'BugController@search']);
 Route::post('project/{project}/bug/{bug}/add/image', ['as' => 'bug.image.add', 'uses' => 'BugController@addImage']);
 Route::post('project/{project}/bug/{bug}/delete/image', ['as' => 'bug.image.delete', 'uses' => 'BugController@deleteImage']);
+Route::post('project/{project}/bug/{bug}/state/change', ['as' => 'bug.state.change', 'uses' => 'BugController@stateChange']);
 Route::resource('project.bug', 'BugController');
 
 // Accesses Routes

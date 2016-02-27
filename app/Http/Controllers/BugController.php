@@ -293,7 +293,8 @@ class BugController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $slug
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $projectSlug
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -348,5 +349,25 @@ class BugController extends Controller
         }
 
         return Response::json($data);
+    }
+
+    /**
+     * Change the state of a bug
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $projectSlug
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function stateChange(Request $request, $projectSlug, $id)
+    {
+        if($request->ajax()){
+            if(in_array($request->state, $this->availableStates)){
+                $bug = Bug::find($id);
+                $bug->state = $request->state;
+                $bug->save();
+                return Response::json(['state' => $request->state]);   
+            }
+        }
     }
 }

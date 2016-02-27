@@ -44,4 +44,27 @@
          );
        }
    });
+
+   $(document).on('click', '.state .btn', function(event){
+      event.preventDefault();
+      $.ajax({
+         headers: { 'X-XSRF-TOKEN' : config.others[0].csrf }, 
+         url: config.routes[0].state,
+         type: 'POST',
+         data: {
+            state: $(this).attr('data-state'),
+            "_token": config.others[0].csrf
+         },
+      })
+      .done(function(data) {
+         updateStates(data.state);
+      });
+   });
+
+
+   function updateStates(state) {
+      $('.state .btn').removeClass('active');
+      $('.btn.state-'+state).addClass('active');
+   }
+
 })(jQuery);

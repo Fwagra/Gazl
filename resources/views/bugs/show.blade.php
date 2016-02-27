@@ -51,6 +51,9 @@
 @section('footer_js')
 	<script>
 		var config = {
+			routes: [{ 
+				state: '{{ route("bug.state.change", [$project->slug, $bug->id]) }}'
+			}],
 			others: [{
 				csrf: "{{ csrf_token() }}",
 				deletemsg: "{{ trans('global.deletemsg') }}"
