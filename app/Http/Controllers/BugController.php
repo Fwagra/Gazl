@@ -33,7 +33,7 @@ class BugController extends Controller
      */
     public function __construct() {
       $this->middleware('guest.auth', ['except' => []]);
-      $this->middleware('auth', ['only' => ['edit', 'destroy']]);
+      $this->middleware('auth', ['only' => ['edit', 'destroy', 'stateChange']]);
     }
 
     /**

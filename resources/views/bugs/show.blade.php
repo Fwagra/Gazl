@@ -24,9 +24,11 @@
 			<div class="label">{{ trans('bug.description') }}</div>
 			{{ $bug->description }}
 		</div>
-		<div class="state">
-			@include('bugs.state')
-		</div>
+		@if (Auth::check())
+			<div class="state">
+				@include('bugs.state')
+			</div>
+		@endif
 		<div class="images">
 			<div class="wrapper">
 				@include('bugs.images')
