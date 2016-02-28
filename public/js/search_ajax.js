@@ -1,4 +1,9 @@
 var selectors = config.selectors[0];
+
+jQuery(document).ready(function($) {
+	$(selectors.input).val('');
+});
+
 // Search resource on submit
 $(document).on('submit', selectors.form, function(event){
 	event.preventDefault();
@@ -12,6 +17,9 @@ $(document).on('submit', selectors.form, function(event){
         $(this).serialize(),
         function(data) {
             $(selectors.replace).html(data.html);
+            if(selectors.reini){
+            	$(selectors.reini).removeClass('hide');
+            }
         },
         'json'
     ).fail(function(data) {

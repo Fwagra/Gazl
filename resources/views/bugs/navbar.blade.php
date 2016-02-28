@@ -19,6 +19,7 @@
 			    {{-- {!!  Form::token() !!} --}}
 			    {!! Form::submit(trans('bug.search_button'), array('class' => 'button expand')) !!}
 			    <div id="empty-message"></div>
+			    {!! Form::button(trans('bug.reini_btn'), array('class' => 'reini-btn hide', "onclick" => "location.reload();")) !!}
 			{!! Form::close() !!}
 
 			<a class="navbar-link" href="{{ action('BugController@create', $project->slug) }}">{{ trans('bug.add_bug') }}</a>

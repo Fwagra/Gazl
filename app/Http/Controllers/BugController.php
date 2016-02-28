@@ -330,11 +330,18 @@ class BugController extends Controller
 
         if(is_null($term))
             return Response::json(trans('bug.no_result'));
-
-        $bugs = DB::table('bugs')
-            ->where('name', 'LIKE', '%'.$term.'%')
-            ->where('project_id', $project->id)
-            ->get();
+        if(Auth::check()){
+            $bugs = DB::table('bugs')
+                ->where('name', 'LIKE', '%'.$term.'%')
+                ->where('project_id', $project->id)
+                ->get();
+        }else{
+            $bugs = DB::table('bugs')
+                ->where('name', 'LIKE', '%'.$term.'%')
+                ->where('project_id', $project->id)
+                ->where('private', 0)
+                ->get();
+        }
         
         $data = array();
         if(count($bugs)){

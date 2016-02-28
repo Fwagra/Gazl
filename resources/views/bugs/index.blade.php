@@ -22,6 +22,7 @@
 				form: '.form-search',
 				input: '#bug-input',
 				replace:'.bug-content',
+				reini:'.reini-btn',
 			}],
 			others: [{
 				deletemsg: "{{ trans('global.deletemsg') }}",
