@@ -27,6 +27,15 @@ class Bug extends Model
     ];
 
     protected $guestID;
+
+    /**
+     * A bug may own many reported comments
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\BugComment');
+    }
+
     /**
      * Checking if the provided URL has the http prefix
      */
