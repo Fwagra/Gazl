@@ -76,4 +76,16 @@ class Bug extends Model
         }
         return $value;
     }
+
+    /**
+     * Handle children deletion on project removal
+     */
+    public static function boot()
+    {
+        parent::boot();    
+        static::deleted(function($bug)
+        {
+            $bug->comments()->delete();
+        });
+    }
 }
