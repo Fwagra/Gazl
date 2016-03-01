@@ -22,4 +22,16 @@ class ChecklistPoint extends Model
     {
         return $this->hasMany('App\ChecklistAnswer');
     }
+
+    /**
+     * Handle children deletion on resource removal
+     */
+    public static function boot()
+    {
+        parent::boot();    
+        static::deleted(function($product)
+        {
+            $product->answers()->delete();
+        });
+    }
 }
