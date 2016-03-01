@@ -31,8 +31,10 @@ class ProjectComposer
     {
         if(Request::segment(1) == 'project' && !empty(Request::segment(2))){
             $project = Project::slug(Request::segment(2));
-            $projectPID = $project->public_id;
-            $view->with("projectPID", $projectPID );
+            if(isset($project->name)){ 
+                $projectPID = $project->public_id;
+                $view->with("projectPID", $projectPID );
+            }
         }
     }
 }
