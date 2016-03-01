@@ -63,7 +63,7 @@ class ChecklistPointController extends Controller
      */
     public function returnList()
     {
-        $categories = ChecklistCategory::get();
+        $categories = ChecklistCategory::orderBy('order')->get();
         $data = [
             'view' => View::make('admin.checklist-points.list', compact('categories'))
             ->render(),
