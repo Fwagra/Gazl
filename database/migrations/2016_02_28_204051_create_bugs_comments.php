@@ -12,7 +12,7 @@ class CreateBugsComments extends Migration
      */
     public function up()
     {
-        Schema::create('bugs_comments', function (Blueprint $table) {
+        Schema::create('bug_comments', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->integer('bug_id');
@@ -29,6 +29,6 @@ class CreateBugsComments extends Migration
      */
     public function down()
     {
-        Schema::drop('bugs_comments');
+        Schema::drop('bug_comments');
     }
 }
