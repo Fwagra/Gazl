@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class BugComment extends Model
 {
+	protected $fillable =  [
+		'name',
+		'comment',
+		'guest',
+		'bug_id'
+	]; 
+
     /**
 	 * A comment  belongs to a bug
 	 */
