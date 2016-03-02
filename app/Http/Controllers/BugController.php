@@ -264,7 +264,8 @@ class BugController extends Controller
         $project = Project::slug($projectSlug);
         $bug = Bug::find($id); 
         $states = $this->availableStates;
-        return View::make('bugs.show', compact('project', 'bug', 'states'));
+        $comments = $bug->comments;
+        return View::make('bugs.show', compact('project', 'bug', 'states', 'comments'));
     }
 
     /**

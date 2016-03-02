@@ -26,6 +26,8 @@ Route::post('project/{project}/bug/{bug}/add/image', ['as' => 'bug.image.add', '
 Route::post('project/{project}/bug/{bug}/delete/image', ['as' => 'bug.image.delete', 'uses' => 'BugController@deleteImage']);
 Route::post('project/{project}/bug/{bug}/state/change', ['as' => 'bug.state.change', 'uses' => 'BugController@stateChange']);
 Route::resource('project.bug', 'BugController');
+// Bug comments
+Route::resource('project.bug.comment', 'BugCommentController', ['only' => ['store','update', 'destroy']]);
 
 // Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);

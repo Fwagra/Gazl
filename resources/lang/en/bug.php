@@ -12,6 +12,7 @@ return [
     'author_placeholder' => "John Smith",
     'bug_state' => "Bug state",
     'change_state' => "Change bug state",
+    'comments_title' => "Comments",
     'create_h1' => "Report a new bug",
     'create_title' => "Report a new bug",
     'delete' => "Delete",
@@ -28,6 +29,7 @@ return [
     'name' => "Bug title",
     'name_placeholder' => "eg. : Missing button on the contact form...",
     'no_bugs' => "There is no bugs reported, currently",
+    'no_comments_message' => "There is no published comments currently. Please fill the form below to publish your own."
     'no_result' => "No results.",
     'no_screen' => "There is no screenshot uploaded",
     'order_time' => "Sort by date",
