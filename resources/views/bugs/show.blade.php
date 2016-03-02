@@ -48,6 +48,15 @@
 				{!!  Form::close() !!}
 			</div>
 		</div>
+		<div class="comments row">
+			<h2>{{ trans('bugs.comments_title') }}</h2>
+			<div class="list_comments">
+				@include('bugs.comments.list')
+			</div>
+			<div class="form_comments">
+				@include('bugs.comments.form')
+			</div>
+		</div>
 	</div>
 @endsection
 @section('footer_js')
