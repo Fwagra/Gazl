@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\BugComment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
+use \Redirect;
+use Session;
 
 class BugCommentController extends Controller
 {
@@ -17,9 +20,43 @@ class BugCommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $projectSlug, $bugId)
     {
-        //
+        if(Auth::check()){
+
+            $this->validate($request, [
+                'comment' => 'required|max:1500',
+            ]);
+
+            $user = Auth::user();
+
+            $request->merge([
+                'name' => $user->id,
+                'guest' => 0
+            ]);
+
+        }else{
+
+            $this->validate($request, [
+                'name' => 'required|max:255',
+                'comment' => 'required|max:1500',
+            ]); 
+
+            $request->merge([
+                'guest' => 1
+            ]);
+        }
+        
+        $request->merge([
+            'bug_id' => $bugId
+        ]);
+
+        $fields = $request->all();
+        BugComment::create($fields);
+
+        Session::flash('message', trans('bug.added_comment'));
+        return Redirect::action('BugController@show', [$projectSlug, $bugId]);
+
     }
 
     /**

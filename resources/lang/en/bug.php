@@ -7,11 +7,15 @@ return [
     |
     */
     'add_bug' => "Report a bug",
+    'add_comment_title' => "Add a comment",
+    'added_comment' => "Your comment has been added. Our team have been notified and we'll try to anwser you as soon as possible.",
     'author' => "My name", 
     'author_bug' => "Author",
     'author_placeholder' => "John Smith",
     'bug_state' => "Bug state",
     'change_state' => "Change bug state",
+    'comment_label' => "My comment",
+    'comment_name' => "Your name",
     'comments_title' => "Comments",
     'create_h1' => "Report a new bug",
     'create_title' => "Report a new bug",
@@ -41,6 +45,7 @@ return [
     'save' => "Send my bug report",
     'search_button' => "Search",
     'search_placeholder' => "Search a bug",
+    'send_comment' => "Send",
     'state_1' => "New",
     'state_2' => "Open",
     'state_3' => "Closed",

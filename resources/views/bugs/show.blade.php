@@ -1,6 +1,7 @@
 @extends('app')
 @section('title', "#". $bug->id.' '.$bug->name )
 @section('content')
+	@include('errors.form-error')
 	<h1>#{{ $bug->id }}  {{ $bug->name }}</h1>
 	<div class="col-md-12">
 		<div class="row">
@@ -49,7 +50,7 @@
 			</div>
 		</div>
 		<div class="comments row">
-			<h2>{{ trans('bugs.comments_title') }}</h2>
+			<h2>{{ trans('bug.comments_title') }}</h2>
 			<div class="list_comments">
 				@include('bugs.comments.list')
 			</div>

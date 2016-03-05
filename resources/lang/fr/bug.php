@@ -7,10 +7,14 @@ return [
     |
     */
     'add_bug' => "Signaler un bug",
+    'add_comment_title' => "Ajouter un commentaire",
+    'added_comment' => "Votre commentaire a été ajouté, notre équipe a été prévenue et nous tâcherons d'y répondre le plus rapidement.",
     'author' => "Mon nom",
     'author_bug' => "Auteur",
     'author_placeholder' => "Ex : Godefroy Amaury de Malefète, comte de Montmirail, d'Apremont et de Papincourt.",
     'bug_state' => "État du bug",
+    'comment_label' => "Mon commentaire",
+    'comment_name' => "Votre nom",
     'comments_title' => "Commentaires",
     'create_h1' => "Signaler un nouveau bug",
     'create_title' => "Signaler un nouveau bug",
@@ -41,6 +45,7 @@ return [
     'save' => "Envoyer le rapport de bug",
     'search_button' => "Rechercher",
     'search_placeholder' => "Rechercher un bug",
+    'send_comment' => "Envoyer",
     'state_1' => "Nouveau",
     'state_2' => "Ouvert",
     'state_3' => "Fermé",
