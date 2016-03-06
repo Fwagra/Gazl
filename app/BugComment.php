@@ -13,6 +13,9 @@ class BugComment extends Model
 		'bug_id'
 	]; 
 
+    protected $guestID;
+
+
     /**
 	 * A comment  belongs to a bug
 	 */

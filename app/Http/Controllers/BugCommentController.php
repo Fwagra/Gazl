@@ -31,7 +31,7 @@ class BugCommentController extends Controller
             $user = Auth::user();
 
             $request->merge([
-                'name' => $user->id,
+                'name' => $user->first_name . ' ' . $user->name,
                 'guest' => 0
             ]);
 
