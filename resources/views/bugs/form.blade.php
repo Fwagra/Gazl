@@ -19,13 +19,16 @@
 @else
 	<div class="form-group">
 	    {!! Form::label('private', trans('bug.private'),['data-toggle' =>"tooltip", 'data-original-title' => trans('bug.private_tooltip'), 'data-placement' => 'right'])!!}
-	    {!! Form::checkbox('private', 1, ['class' => 'form-control'])!!}
+	    <?php $check = (isset($bug) && $bug->private == 1)? true : null; ?>
+	    {!! Form::checkbox('private', 1, $check, ['class' => 'form-control'])!!}
 	</div>
 @endif
-<div class="form-group">
-    {!! Form::label('images', trans('bug.images'), ['data-toggle' =>"tooltip", 'data-original-title' => trans('bug.images_tooltip'), 'data-placement' => 'right'])!!}
-    {!! Form::file('images[]', ['multiple' => true])!!}
-</div>
+@if (!isset($bug))
+	<div class="form-group">
+	    {!! Form::label('images', trans('bug.images'), ['data-toggle' =>"tooltip", 'data-original-title' => trans('bug.images_tooltip'), 'data-placement' => 'right'])!!}
+	    {!! Form::file('images[]', ['multiple' => true])!!}
+	</div>
+@endif
 <div class="form-group">
     {!! Form::label('description', trans('bug.description'))!!}
     {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => trans('bug.description_placeholder')]) !!}

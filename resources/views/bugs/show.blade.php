@@ -8,10 +8,9 @@
 			@if ($bug->url)
 				<a href="{!! $bug->url !!}">URL</a>
 			@endif
-			<div class="group state">
-				<span class="label">{{ trans('bug.bug_state') }}</span>
-				<span class="value">{{ $bug->state }}</span>
-			</div>
+			@if (Auth::check())
+				<a href="{{ action('BugController@edit', [$project->slug, $bug->id]) }}">{{ trans('bug.edit_bug_infos') }}</a>
+			@endif
 			<div class="group author">
 				<span class="label">{{ trans('bug.author_bug') }}</span>
 				<span class="value">{{ $bug->author }}</span>

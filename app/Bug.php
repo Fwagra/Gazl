@@ -42,7 +42,9 @@ class Bug extends Model
     protected function getUrlAttribute($value)
     {
         if(strpos($value, 'http') === false || strpos($value, 'http') != 0)
-            return 'http://'.$value;
+            $value =  'http://'.$value;
+
+        return $value;
     }
 
     /**

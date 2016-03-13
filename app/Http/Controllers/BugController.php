@@ -97,7 +97,6 @@ class BugController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255',
             'description' => 'required|max:1500',
-            // 'images' => 'image',
         ]);
         $project = Project::slug($projectSlug);
         if($request->hasFile('images')){
@@ -257,7 +256,7 @@ class BugController extends Controller
      *
      * @param  string  $projectSlug
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show($projectSlug, $id)
     {
@@ -271,24 +270,43 @@ class BugController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+     * @param  string  $projectSlug
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function edit($id)
+    public function edit($projectSlug, $id)
     {
-        //
+        $project = Project::slug($projectSlug);
+        $bug = Bug::find($id);
+        return View::make('bugs.edit', compact('project', 'bug'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $projectSlug
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return View    
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $projectSlug, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'description' => 'required|max:1500',
+        ]);
+        $project = Project::slug($projectSlug);
+        $bug = Bug::find($id);
+
+        if($request->private  == null){
+           $request->merge([
+               'private' => 0,
+           ]);
+        }
+        $fields = $request->all();
+        $bug->update($fields);
+
+        Session::flash('message', trans('bug.success_edit'));
+        return redirect()->action('BugController@index', ['projectSlug' => $projectSlug]);
     }
 
     /**
