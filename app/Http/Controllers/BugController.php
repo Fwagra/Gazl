@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use \Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Notification;
 use App\Project;
 use App\Bug;
 use Carbon\Carbon;
@@ -46,7 +47,12 @@ class BugController extends Controller
     {
         $project = Project::slug($projectSlug);
         $bugs  = $this->getAllBugs($project);
-        return View::make('bugs.index', compact('project', 'bugs'));
+        $notification = null;
+
+        if($user = Auth::user())
+            $notification = (count(Notification::projectUser($project->id, $user->id)->first()))? true : null;
+
+        return View::make('bugs.index', compact('project', 'bugs', 'notification'));
     }
 
     /**

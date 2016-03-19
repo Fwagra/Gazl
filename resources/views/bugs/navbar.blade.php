@@ -21,7 +21,14 @@
 			    <div id="empty-message"></div>
 			    {!! Form::button(trans('bug.reini_btn'), array('class' => 'reini-btn hide', "onclick" => "location.reload();")) !!}
 			{!! Form::close() !!}
-
+			@if (Auth::check())
+				<div class="group">
+					{!! Form::open(['route' => ['project.subscribe', $project->slug], 'method' =>'POST', 'class' => "auto-submit"]) !!}
+						{!! Form::label('subscribe', trans('notification.notification_label'),  ['data-toggle' =>"tooltip", 'data-original-title' => trans('notification.subscription_tooltip'), 'data-placement' => 'right'])!!}
+						{!! Form::checkbox('subscribe', 1, $notification) !!}
+					{!! Form::close() !!}
+				</div>
+			@endif
 			<a class="navbar-link" href="{{ action('BugController@create', $project->slug) }}">{{ trans('bug.add_bug') }}</a>
 		</p>
 	</div>

@@ -29,6 +29,9 @@ Route::resource('project.bug', 'BugController');
 // Bug comments
 Route::resource('project.bug.comment', 'BugCommentController', ['only' => ['store','update', 'destroy']]);
 
+// Notifications
+Route::post('project/{project}/subscribe', ['as' => 'project.subscribe', 'uses' => 'NotificationController@switchNotification']);
+
 // Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
