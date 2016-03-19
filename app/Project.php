@@ -141,6 +141,14 @@ class Project extends Model
     }
 
     /**
+     * A project may own many notifcation subscriptions
+     */
+    public function notifications()
+    {
+        return $this->hasMany('App\Notification');
+    }
+
+    /**
      * Get the project cms name.
      */
     public function cms()
