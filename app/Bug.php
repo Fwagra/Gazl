@@ -31,6 +31,14 @@ class Bug extends Model
     /**
      * A bug may own many reported comments
      */
+    public function project()
+    {
+        return $this->belongsTo('App\Project');
+    }
+
+    /**
+     * A bug may own many reported comments
+     */
     public function comments()
     {
         return $this->hasMany('App\BugComment');
