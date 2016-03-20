@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BugComment;
+use App\Events\NewBugComment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use Event;
 use \Redirect;
 use Session;
 
@@ -52,7 +54,9 @@ class BugCommentController extends Controller
         ]);
 
         $fields = $request->all();
-        BugComment::create($fields);
+        
+        $bugComment = BugComment::create($fields);
+        Event::fire(new NewBugComment($bugComment));
 
         Session::flash('message', trans('bug.added_comment'));
         return Redirect::action('BugController@show', [$projectSlug, $bugId]);

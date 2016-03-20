@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use \Auth;
+use App\Events\NewBug;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Notification;
@@ -12,6 +13,7 @@ use App\Project;
 use App\Bug;
 use Carbon\Carbon;
 use DB;
+use Event;
 use Image;
 use Input;
 use File;
@@ -136,7 +138,8 @@ class BugController extends Controller
         $fields['images'] = (isset($imagesStored))? $imagesStored : '';
 
 
-        Bug::create($fields);
+        $bug = Bug::create($fields);
+        Event::fire(new NewBug($bug));
 
         Session::flash('message', trans('bug.success'));
         return redirect()->action('BugController@index', ['projectSlug' => $projectSlug]);
