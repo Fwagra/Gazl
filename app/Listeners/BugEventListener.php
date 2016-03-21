@@ -34,12 +34,10 @@ class BugEventListener {
 
         if(count($emails))
         {
-
-            Mail::send('email.bugs.new', [], function($message) use ($emails)
+            Mail::send('email.bugs.new', ['bug' => $bug, 'project' => $project], function($message) use ($emails, $project)
             {    
-                $message->to($emails)->subject('This is test e-mail');    
+                $message->to($emails)->subject(trans('email.new_bug_subject', ['project' => $project->name]));    
             });
-
         }
 
     }
