@@ -1,14 +1,16 @@
 <?php namespace App\Listeners;
 
 use Auth;
+use App\Bug;
+use App\Project;
 use App\User;
 use Mail;
 
-class BugEventListener { 
+class BugEventListener {
 
     /**
-     * Handle new bug posted. 
-     */ 
+     * Handle new bug posted.
+     */
     public function onNewBug($event)
     {
         $bug = $event->bug;
@@ -26,17 +28,17 @@ class BugEventListener {
 
         if($notifieds)
         {
-            foreach ($notifieds as $key => $notifications) 
+            foreach ($notifieds as $key => $notifications)
             {
-                $emails = User::find($notifications->user_id)->email;
+                $emails[] = User::find($notifications->user_id)->email;
             }
         }
 
         if(count($emails))
         {
             Mail::send('email.bugs.new', ['bug' => $bug, 'project' => $project], function($message) use ($emails, $project)
-            {    
-                $message->to($emails)->subject(trans('email.new_bug_subject', ['project' => $project->name]));    
+            {
+                $message->to($emails)->subject(trans('email.new_bug_subject', ['project' => $project->name]));
             });
         }
 
@@ -45,19 +47,49 @@ class BugEventListener {
     /**
      * Handle new bug comment.
      */
-    public function onNewBugComment($event) {
+    public function onNewBugComment($event)
+    {
+      $comment = $event->comment;
+      $bug = Bug::find($comment->bug_id);
+      $project = $bug->project;
+      $emails = [];
+
+      if($comment->guest == 1)
+      {
+        $notifieds =  $project->notifications;
+
+        if($notifieds)
+        {
+            foreach ($notifieds as $key => $notifications)
+            {
+                $emails[] = User::find($notifications->user_id)->email;
+            }
+        }
+      }
+      elseif (!empty($bug->email))
+      {
+        $emails = $bug->email;
+      }
+
+      if(count($emails))
+      {
+        Mail::send('email.bugs.newcomment', ['bug' => $bug, 'project' => $project, 'comment' => $comment], function($message) use ($emails, $project, $bug)
+        {
+            $message->to($emails)->subject(trans('email.new_bugcomment_subject', ['project' => $project->name, 'id' => $bug->id]));
+        });
+      }
     }
-    
+
     public function subscribe($events)
     {
         $events->listen(
             'App\Events\NewBug',
             'App\Listeners\BugEventListener@onNewBug'
         );
-    
+
         $events->listen(
             'App\Events\NewBugComment',
-            'App\Listeners\BugEventListener@onNewBugComment'
+              'App\Listeners\BugEventListener@onNewBugComment'
         );
     }
 }
