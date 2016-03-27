@@ -7,6 +7,7 @@ return [
     |
     */
     'access_not_found' => 'These accesses do not exist for the current project',
+    'add_access_btn' => "Add accesses",
     'create' => 'Save',
     'delete' => 'Delete',
     'edit' => 'Edit',
