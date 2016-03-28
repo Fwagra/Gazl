@@ -36,12 +36,12 @@ class ProjectController extends Controller
         if(Auth::check()){
            return  Redirect::route('project.index');
         }
-        elseif (!Auth::check() && $request->cookie('public_id') != null) 
+        elseif (!Auth::check() && $request->cookie('public_id') != null)
         {
             $project = Project::publicId($request->cookie('public_id'))->first();
             return Redirect::route('project.show', [$project->slug]);
         }
-        else 
+        else
             return View::make('home.index');
 
     }
@@ -67,7 +67,7 @@ class ProjectController extends Controller
     {
         $cms = Cms::lists('name', 'id');
         $selected_cms = [];
-        
+
         return View::make('projects.new', compact('cms', 'selected_cms'));
     }
 
@@ -82,7 +82,13 @@ class ProjectController extends Controller
         $project = Project::slug($slug);
         $answers = $this->getChecklistStatus($project);
         $accesses = $project->accesses;
-        return View::make('projects.show', compact('project', 'accesses', 'answers'));
+        $bugs = $this->getBugsCounts($project);
+        return View::make('projects.show', compact(
+          'project',
+          'accesses',
+          'answers',
+          'bugs'
+        ));
     }
 
     /**
@@ -97,7 +103,7 @@ class ProjectController extends Controller
 
         $cms = Cms::lists('name', 'id');
         $selected_cms = $project->cms_id;
-                
+
         return View::make('projects.edit', compact('project', 'cms', 'selected_cms'));
     }
 
@@ -116,9 +122,9 @@ class ProjectController extends Controller
         $project->cms_id = $request->cms;
 
         $project->save();
-        
+
         Session::flash('message', trans('project.success'));
-        
+
         return back();
     }
 
@@ -171,7 +177,7 @@ class ProjectController extends Controller
         $queries = DB::table('projects')
             ->where('name', 'LIKE', '%'.$term.'%')
             ->take(10)->get();
-        
+
         $results = array();
         foreach ($queries as $query) {
             $results[] = [ 'id' => $query->id, 'value' => $query->name, 'slug' => $query->slug];
@@ -203,5 +209,26 @@ class ProjectController extends Controller
         $answers['total'] = $checklistPoints - $inactivePoints;
 
         return $answers;
+    }
+
+    /**
+     * Get the number of new bugs and the total number of bugs for the provided project
+     * @param object $project
+     * @return Array
+     */
+    public function getBugsCounts($project)
+    {
+      if (Auth::check())
+      {
+        $bugs['new'] = count($project->bugs()->where('state', 1)->get());
+        $bugs['total'] = count($project->bugs);
+      }
+      else
+      {
+        $bugs['new'] = count($project->bugs()->where('state', 1)->where('private', 0)->get());
+        $bugs['total'] = count($project->bugs()->where('private', 0)->get());
+      }
+
+      return $bugs;
     }
 }
