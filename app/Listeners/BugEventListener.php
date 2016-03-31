@@ -66,7 +66,7 @@ class BugEventListener {
             }
         }
       }
-      elseif (!empty($bug->email))
+      elseif($bug->guest == 1)
       {
         $emails = $bug->email;
       }
