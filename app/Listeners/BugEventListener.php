@@ -51,24 +51,27 @@ class BugEventListener {
     {
       $comment = $event->comment;
       $bug = Bug::find($comment->bug_id);
+      $user = Auth::user();
       $project = $bug->project;
       $emails = [];
 
       if($comment->guest == 1)
       {
         $notifieds =  $project->notifications;
-
-        if($notifieds)
-        {
-            foreach ($notifieds as $key => $notifications)
-            {
-                $emails[] = User::find($notifications->user_id)->email;
-            }
-        }
       }
       elseif($bug->guest == 1)
       {
-        $emails = $bug->email;
+        $emails[] = $bug->email;
+      }else{
+        $notifieds =  $project->notifications()->where('user_id','!=', $user->id)->get();
+      }
+
+      if($notifieds)
+      {
+          foreach ($notifieds as $key => $notifications)
+          {
+              $emails[] = User::find($notifications->user_id)->email;
+          }
       }
 
       if(count($emails))
