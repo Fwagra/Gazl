@@ -17,6 +17,7 @@ class CreateMemo extends Migration
             $table->timestamps();
             $table->integer('project_id');
             $table->string('name');
+            $table->integer('order');
             $table->boolean('active', 0);
         });
     }

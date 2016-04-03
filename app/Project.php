@@ -7,11 +7,11 @@ use Illuminate\Support\Str;
 
 
 class Project extends Model
-{    
+{
     protected $fillable = ['name', 'slug'];
 
     /**
-     * Set the unique project name and generate a slug automatically (each time 
+     * Set the unique project name and generate a slug automatically (each time
      * the name is set).
      *
      * There's 3 scenarios for settings a slug:
@@ -29,7 +29,7 @@ class Project extends Model
 
         // Generate slug from the project name.
         $slug = Str::slug($value);
-        
+
         // If the entity is already saved, let's check if there really is the
         // need to generate a slug.
         if ($this->id) {
@@ -43,17 +43,17 @@ class Project extends Model
 
         // Search for identical slugs.
         $slugs_found = $this->whereRaw(
-            "slug REGEXP '^{$slug}(-[0-9]*)?$' AND id != ?", 
+            "slug REGEXP '^{$slug}(-[0-9]*)?$' AND id != ?",
             // Set Project ID to 0 if not defined to prevent SQL error.
             array($this->id ? $this->id : '0')
         )->get();
- 
-        // If a slug is found and isn't associated with the current entity, 
+
+        // If a slug is found and isn't associated with the current entity,
         // add a suffix to prevent conflicts.
         if ($slugs_found->count()) {
             for ($i = $slugs_found->count(); true; $i++) {
                 $_slug = $slug . '-' . $i;
-                
+
                 if ($this->slugIsAvailable($_slug)) {
                     $slug = $_slug;
                     break;
@@ -99,7 +99,7 @@ class Project extends Model
     {
     	$this->slug;
     }
-    
+
     /**
      * Query project by public Id
      */
@@ -149,6 +149,14 @@ class Project extends Model
     }
 
     /**
+     * A project may own many memos
+     */
+    public function memos()
+    {
+        return $this->hasMany('App\Memo');
+    }
+
+    /**
      * Get the project cms name.
      */
     public function cms()
@@ -161,7 +169,7 @@ class Project extends Model
      */
     public static function boot()
     {
-        parent::boot();    
+        parent::boot();
         static::deleted(function($product)
         {
             $product->accesses()->delete();
