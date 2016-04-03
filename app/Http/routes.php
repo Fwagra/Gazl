@@ -33,6 +33,8 @@ Route::resource('project.bug.comment', 'BugCommentController', ['only' => ['stor
 Route::post('project/{project}/subscribe', ['as' => 'project.subscribe', 'uses' => 'NotificationController@switchNotification']);
 
 // Mémos
+Route::post('memo/sort',['as' => 'sort.memos','uses' => 'MemoController@order']);
+Route::put('memo/{memo}', ['as' => 'memo.update', 'uses' => 'MemoController@update']);
 Route::resource('project.memo', 'MemoController', ['except' => ['show', 'create']]);
 
 // Accesses Routes
