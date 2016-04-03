@@ -32,6 +32,9 @@ Route::resource('project.bug.comment', 'BugCommentController', ['only' => ['stor
 // Notifications
 Route::post('project/{project}/subscribe', ['as' => 'project.subscribe', 'uses' => 'NotificationController@switchNotification']);
 
+// Mémos
+Route::resource('project.memo', 'MemoController', ['except' => ['show', 'create']]);
+
 // Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
