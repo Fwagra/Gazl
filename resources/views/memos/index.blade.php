@@ -33,4 +33,5 @@
 		}
 	</script>
 	{!! Html::script('js/list_management_ajax.js'); !!}
+  {!! Html::script('js/checklist_ajax.js'); !!}
 @endsection

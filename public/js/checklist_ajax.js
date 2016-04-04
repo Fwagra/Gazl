@@ -16,7 +16,7 @@
 		    // errorsHtml += '</ul></diV>';
 		    // $('.errors').html(errorsHtml);
 		});
-   }  
+   }
    $(document).ready(function() {
    	$('form textarea').on('change', function(event) {
    		event.preventDefault();

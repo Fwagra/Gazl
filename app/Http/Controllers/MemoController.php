@@ -144,4 +144,18 @@ class MemoController extends Controller
              }
         }
     }
+
+    /**
+     * Change the memo session_status
+     * @param Request $request
+     * @param int $id
+     */
+    public function check(Request $request, $id)
+    {
+      if($request->ajax()){
+         $memo = Memo::find($id);
+         $memo->active = ($memo->active == 0)? 1 : 0;
+         $memo->save();
+      }
+    }
 }

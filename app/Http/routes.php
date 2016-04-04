@@ -35,6 +35,7 @@ Route::post('project/{project}/subscribe', ['as' => 'project.subscribe', 'uses' 
 // Mémos
 Route::post('memo/sort',['as' => 'sort.memos','uses' => 'MemoController@order']);
 Route::put('memo/{memo}', ['as' => 'memo.update', 'uses' => 'MemoController@update']);
+Route::post('memo/check/{memo}', ['as' => 'memo.check', 'uses' => 'MemoController@check']);
 Route::resource('project.memo', 'MemoController', ['except' => ['show', 'create']]);
 
 // Accesses Routes
