@@ -83,11 +83,13 @@ class ProjectController extends Controller
         $answers = $this->getChecklistStatus($project);
         $accesses = $project->accesses;
         $bugs = $this->getBugsCounts($project);
+        $memos = $this->getMemos($project);
         return View::make('projects.show', compact(
           'project',
           'accesses',
           'answers',
-          'bugs'
+          'bugs',
+          'memos'
         ));
     }
 
@@ -230,5 +232,17 @@ class ProjectController extends Controller
       }
 
       return $bugs;
+    }
+
+    /**
+     * Return the number of memos and their status
+     */
+    public function getMemos($project)
+    {
+      $memos['total'] = count($project->memos);
+      $memos['active'] = count($project->memos()->where('active', 1)->get());
+      $memos['left'] = $memos['total'] - $memos['active'];
+      
+      return $memos;
     }
 }
