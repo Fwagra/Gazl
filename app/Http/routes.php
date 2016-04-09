@@ -38,6 +38,9 @@ Route::put('memo/{memo}', ['as' => 'memo.update', 'uses' => 'MemoController@upda
 Route::post('memo/check/{memo}', ['as' => 'memo.check', 'uses' => 'MemoController@check']);
 Route::resource('project.memo', 'MemoController', ['except' => ['show', 'create']]);
 
+// Documentation
+Route::resource('project.doc', 'DocumentationController', ['except' => ['index']]);
+
 // Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);

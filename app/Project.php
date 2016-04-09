@@ -157,6 +157,14 @@ class Project extends Model
     }
 
     /**
+     * A project may have one documentation
+     */
+    public function documentation()
+    {
+        return $this->hasOne('App\Documentation');
+    }
+
+    /**
      * Get the project cms name.
      */
     public function cms()
