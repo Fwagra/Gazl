@@ -27,7 +27,7 @@
            </div>
         </div>
         <div class="container">
-            @if(Session::has('error')) 
+            @if(Session::has('error'))
                 <div class="alert alert-danger">
                     {{ Session::get('error') }}
                 </div>
@@ -51,6 +51,12 @@
         radioClass: 'iradio_flat-red'
       });
       $('[data-toggle="tooltip"]').tooltip();
+    });
+    $(document).ajaxComplete(function(){
+      $('input').iCheck({
+        checkboxClass: 'icheckbox_flat-red',
+        radioClass: 'iradio_flat-red'
+      });
     });
     </script>
 </html>

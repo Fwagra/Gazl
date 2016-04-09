@@ -24,7 +24,11 @@
    	});
    	// Since the checkboxes use iCheck, we use the iCheck Callback 'ifToggled'
    	// https://github.com/fronteed/iCheck
-   	$('input').on('ifToggled', function(event) {
+   	$(document).on('ifToggled', 'input[type="checkbox"],input[type="radio"]', function(event) {
+   		event.preventDefault();
+   		 updateChecklistPoint($(this).parents('form'));
+   	});
+    $(document).on('change', 'input[type="checkbox"],input[type="radio"]', function(event) {
    		event.preventDefault();
    		updateChecklistPoint($(this).parents('form'));
    	});
