@@ -39,8 +39,10 @@ Route::post('memo/check/{memo}', ['as' => 'memo.check', 'uses' => 'MemoControlle
 Route::resource('project.memo', 'MemoController', ['except' => ['show', 'create']]);
 
 // Documentation
+Route::get('project/{project}/doc/', ['as' => 'project.doc.index', 'uses' => 'DocumentationController@index']);
 Route::get('project/{project}/doc/edit', ['as' => 'project.doc.edit', 'uses' => 'DocumentationController@edit']);
-Route::resource('project.doc', 'DocumentationController', ['except' => ['show', 'create', 'edit']]);
+Route::put('project/{project}/doc', ['as' => 'project.doc.update', 'uses' => 'DocumentationController@update']);
+Route::delete('project/{project}/delete', ['as' => 'project.doc.delete', 'uses' => 'DocumentationController@delete']);
 
 // Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
