@@ -14,8 +14,8 @@ class DocumentationController extends Controller
      * Construct method
      */
     public function __construct() {
-      $this->middleware('guest.auth', ['only' => ['show']]);
-      $this->middleware('auth', ['except' => ['show']]);
+      $this->middleware('guest.auth', ['only' => ['index']]);
+      $this->middleware('auth', ['except' => ['index']]);
     }
     /**
      * Display a listing of the resource.
