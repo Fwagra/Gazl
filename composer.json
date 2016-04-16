@@ -10,7 +10,8 @@
         "barryvdh/laravel-debugbar": "^2.0",
         "laravelcollective/html": "~5.0",
         "doctrine/dbal": "2.5.*",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "vtalbot/markdown": "2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

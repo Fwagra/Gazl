@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
 use View;
+use Markdown;
 
 class DocumentationController extends Controller
 {
@@ -52,7 +53,8 @@ class DocumentationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update / Create the specified resource in storage.
+     * Convert the markdown into html and store it for usage
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $projectSlug
@@ -63,8 +65,12 @@ class DocumentationController extends Controller
         $project = Project::slug($projectSlug);
         $doc = $project->documentation;
 
+        $mdText = $request->get('md_value');
+        $htmlText = Markdown::string($mdText);
+
         $request->merge([
           'project_id' => $project->id,
+          'html_value' => $htmlText,
         ]);
         $fields = $request->all();
 
