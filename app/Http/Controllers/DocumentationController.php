@@ -8,6 +8,7 @@ use App\Documentation;
 use App\Project;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Redirect;
 use Session;
 use View;
 use Markdown;
@@ -95,6 +96,13 @@ class DocumentationController extends Controller
      */
     public function destroy($projectSlug)
     {
-        //
+      $project = Project::slug($projectSlug);
+      $doc = $project->documentation;
+
+      if($doc != null)
+        $doc->delete();
+
+      Session::flash('message', trans('doc.deleted_doc'));
+      return Redirect::action('ProjectController@show', $projectSlug);
     }
 }
