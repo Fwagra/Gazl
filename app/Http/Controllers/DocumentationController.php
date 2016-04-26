@@ -34,8 +34,14 @@ class DocumentationController extends Controller
     {
         $project = Project::slug($projectSlug);
         $doc = $project->documentation;
-
-        return View::make('documentation.index', compact('project', 'doc'));
+        if($doc != null)
+        {
+          return View::make('documentation.index', compact('project', 'doc'));
+        }
+        else
+        {
+          return redirect()->action('DocumentationController@edit', ['projectSlug' => $projectSlug]);
+        }
     }
 
 

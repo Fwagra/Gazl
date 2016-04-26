@@ -4,7 +4,7 @@
 	<h1>{!! trans('doc.form_h1') !!}</h1>
   {!! Form::model($doc, ['method' => 'PUT', 'url' => action('DocumentationController@update', $project->slug), 'class' => 'form-horizontal']) !!}
     <div class="form-group">
-        {!! Form::textarea('md_value', null, ['class' => 'form-control', 'required' => 'required']) !!}
+        {!! Form::textarea('md_value', null, ['class' => 'form-control', 'required' => 'required', 'rows' => '40']) !!}
         <small class="text-danger">{{ $errors->first('md_value') }}</small>
     </div>
       <div class="btn-group pull-right">
