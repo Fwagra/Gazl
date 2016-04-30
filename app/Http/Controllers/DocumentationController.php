@@ -12,6 +12,7 @@ use Redirect;
 use Session;
 use View;
 use Markdown;
+use Auth;
 
 class DocumentationController extends Controller
 {
@@ -34,6 +35,13 @@ class DocumentationController extends Controller
     {
         $project = Project::slug($projectSlug);
         $doc = $project->documentation;
+
+        if(!Auth::check() && ($doc == null || $doc->active == 0))
+        {
+          Session::flash('error', trans('doc.no_access'));
+          return redirect()->action('ProjectController@show', ['projectSlug' => $projectSlug]);
+        }
+
         if($doc != null)
         {
           return View::make('documentation.index', compact('project', 'doc'));

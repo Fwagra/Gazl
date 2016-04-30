@@ -13,6 +13,7 @@ return [
     'doc_title' => "Documentation",
     'form_h1' => "Edit the documentation",
     'link_to_edit' => "Edit",
+    'no_access' => "This page is not available currently.",
     'publish' => "Publier",
     'save' => "Save the documentation",
     'success_edit' => "The documentation has been saved",
