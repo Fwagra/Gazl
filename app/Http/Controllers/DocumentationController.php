@@ -113,9 +113,38 @@ class DocumentationController extends Controller
       $doc = $project->documentation;
 
       if($doc != null)
+      {
         $doc->delete();
+        Session::flash('message', trans('doc.deleted_doc'));
+      }
+      else
+      {
+        Session::flash('error', trans('doc.no_doc_matching'));
+      }
 
-      Session::flash('message', trans('doc.deleted_doc'));
       return Redirect::action('ProjectController@show', $projectSlug);
+    }
+
+    /**
+     * Publish the documentation
+     * @param string $projectSlug
+     */
+    public function publish($projectSlug)
+    {
+      $project = Project::slug($projectSlug);
+      $doc = $project->documentation;
+
+      if($doc != null)
+      {
+        $doc->active = 1;
+        $doc->save();
+        Session::flash('message', trans('doc.published_doc'));
+      }
+
+      else{
+        Session::flash('error', trans('doc.no_doc_matching'));
+      }
+
+      return redirect()->back();
     }
 }

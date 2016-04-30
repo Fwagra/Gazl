@@ -14,6 +14,13 @@
   			     {{ trans('doc.edit_doc') }}
           @endif
   			</a>
+
+        @if ($doc && $doc->active  == 0)
+          <a href="{{ action('DocumentationController@publish', [$project->slug]) }}">
+              {!! trans('doc.publish_dash') !!}
+    			</a>
+        @endif
+
       @endif
       @if($doc)
         <a href="{{ action('DocumentationController@index', [$project->slug]) }}">
