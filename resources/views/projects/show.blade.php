@@ -6,4 +6,5 @@
 	@include('dashboard.checklist')
 	@include('dashboard.bugs')
 	@include('dashboard.memos')
+	@include('dashboard.doc')
 @endsection

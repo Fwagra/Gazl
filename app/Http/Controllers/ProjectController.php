@@ -84,12 +84,14 @@ class ProjectController extends Controller
         $accesses = $project->accesses;
         $bugs = $this->getBugsCounts($project);
         $memos = $this->getMemos($project);
+        $doc = $project->documentation;
         return View::make('projects.show', compact(
           'project',
           'accesses',
           'answers',
           'bugs',
-          'memos'
+          'memos',
+          'doc'
         ));
     }
 
@@ -242,7 +244,7 @@ class ProjectController extends Controller
       $memos['total'] = count($project->memos);
       $memos['active'] = count($project->memos()->where('active', 1)->get());
       $memos['left'] = $memos['total'] - $memos['active'];
-      
+
       return $memos;
     }
 }
