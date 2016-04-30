@@ -9,9 +9,18 @@
         {!! Form::textarea('md_value', null, ['class' => 'form-control', 'required' => 'required', 'rows' => '40']) !!}
         <small class="text-danger">{{ $errors->first('md_value') }}</small>
     </div>
-      <div class="btn-group pull-right">
-          {!! Form::submit(trans('doc.save'), ['class' => 'btn btn-success']) !!}
-      </div>
+		<div class="form-group">
+		    <div class="checkbox">
+		        <label for="active">
+								{!! Form::hidden('active', false) !!}
+		            {!! Form::checkbox('active', true, $active, ['id' => 'active']) !!} {!! trans('doc.publish') !!}
+		        </label>
+		    </div>
+		    <small class="text-danger">{{ $errors->first('checkbox_id') }}</small>
+		</div>
+    <div class="btn-group pull-right">
+        {!! Form::submit(trans('doc.save'), ['class' => 'btn btn-success']) !!}
+    </div>
   {!! Form::close() !!}
 	@if($doc != null)
 	  {!! Form::open(['method' => 'DELETE', 'url' => action('DocumentationController@destroy', $project->slug), 'class' => 'form-horizontal delete-form']) !!}

@@ -8,13 +8,15 @@
   <div id="documentation">
     {!! $doc->html_value !!}
   </div>
+
   <script type="text/javascript">
-  jQuery('document').ready(function(){
-    jQuery('#toc').toc({
-      'selectors' : 'h2, h3, h4'
-    });
-  });
+	  jQuery('document').ready(function(){
+	    jQuery('#toc').toc({
+	      'selectors' : 'h2, h3, h4'
+	    });
+	  });
   </script>
+
 @endsection
 @section('footer_js')
   {!! Html::script('js/toc.min.js'); !!}

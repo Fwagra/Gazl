@@ -55,8 +55,8 @@ class DocumentationController extends Controller
     {
         $project = Project::slug($projectSlug);
         $doc = $project->documentation;
-
-        return View::make('documentation.form', compact('project', 'doc'));
+        $active = (isset($doc->active))? $doc->active : 0;
+        return View::make('documentation.form', compact('project', 'doc', 'active'));
     }
 
     /**
@@ -80,7 +80,6 @@ class DocumentationController extends Controller
           'html_value' => $htmlText,
         ]);
         $fields = $request->all();
-
         if($doc == null)
         {
           $doc = Documentation::create($fields);
