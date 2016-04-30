@@ -1,7 +1,9 @@
 @extends('app')
 @section('title', trans('doc.doc_title'))
 @section('content')
-	<h1>{!! trans('doc.form_h1') !!}</h1>
+	<h1>{!! trans('doc.form_h1') !!}</h1>@if (isset($doc->id))
+		<a class="btn btn-success" href="{{ action('DocumentationController@index', [$project->slug]) }}">{!! trans('doc.view') !!}</a>
+	@endif
   {!! Form::model($doc, ['method' => 'PUT', 'url' => action('DocumentationController@update', $project->slug), 'class' => 'form-horizontal']) !!}
     <div class="form-group">
         {!! Form::textarea('md_value', null, ['class' => 'form-control', 'required' => 'required', 'rows' => '40']) !!}
