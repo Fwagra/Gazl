@@ -12,6 +12,7 @@ return [
     'delete_message' => "Are you sure you want to delete this documentation?",
     'doc_h1' => "Documentation",
     'doc_title' => "Documentation",
+    'download_pdf' => "Download PDF version",
     'edit_doc' => "Edit the documentation",
     'form_h1' => "Edit the documentation",
     'link_to_edit' => "Edit",

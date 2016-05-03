@@ -13,6 +13,7 @@ use Session;
 use View;
 use Markdown;
 use Auth;
+use PDF;
 
 class DocumentationController extends Controller
 {
@@ -146,5 +147,18 @@ class DocumentationController extends Controller
       }
 
       return redirect()->back();
+    }
+
+    /**
+     * Generate a PDF version of the index page.
+     *  @param string $projectSlug
+     */
+    public function generatePdf($projectSlug)
+    {
+      $project = Project::slug($projectSlug);
+      $doc = $project->documentation;
+
+      $pdf = PDF::loadView('documentation.index', compact('project', 'doc'));
+      return $pdf->download('documentation.pdf');
     }
 }

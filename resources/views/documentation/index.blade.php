@@ -4,6 +4,7 @@
 	<h1>{!! trans('doc.doc_h1') !!}</h1> @if (Auth::check())
 		<a class="btn btn-success" href="{{ action('DocumentationController@edit', [$project->slug]) }}">{!! trans('doc.link_to_edit') !!}</a>
 	@endif
+	<a href="{{ action('DocumentationController@generatePdf',[$project->slug]) }}" class="btn btn-success">{!! trans('doc.download_pdf') !!}</a>
   <div id="toc"></div>
   <div id="documentation">
     {!! $doc->html_value !!}

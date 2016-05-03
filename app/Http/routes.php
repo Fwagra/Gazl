@@ -42,6 +42,7 @@ Route::resource('project.memo', 'MemoController', ['except' => ['show', 'create'
 Route::get('project/{project}/doc/', ['as' => 'project.doc.index', 'uses' => 'DocumentationController@index']);
 Route::get('project/{project}/doc/edit', ['as' => 'project.doc.edit', 'uses' => 'DocumentationController@edit']);
 Route::get('project/{project}/doc/publish', ['as' => 'project.doc.publish', 'uses' => 'DocumentationController@publish']);
+Route::get('project/{project}/doc/pdf', ['as' => 'project.doc.pdf', 'uses' => 'DocumentationController@generatePdf']);
 Route::put('project/{project}/doc', ['as' => 'project.doc.update', 'uses' => 'DocumentationController@update']);
 Route::delete('project/{project}/destroy', ['as' => 'project.doc.destroy', 'uses' => 'DocumentationController@destroy']);
 
