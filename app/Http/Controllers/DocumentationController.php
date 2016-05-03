@@ -159,6 +159,8 @@ class DocumentationController extends Controller
       $doc = $project->documentation;
 
       $pdf = PDF::loadView('documentation.index', compact('project', 'doc'));
+      $pdf->setOption('user-style-sheet', base_path('public/css/pdf.css'));
+      
       return $pdf->download('documentation.pdf');
     }
 }
