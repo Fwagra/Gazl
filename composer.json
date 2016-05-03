@@ -11,7 +11,9 @@
         "laravelcollective/html": "~5.0",
         "doctrine/dbal": "2.5.*",
         "intervention/image": "^2.3",
-        "vtalbot/markdown": "2.0"
+        "vtalbot/markdown": "2.0",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
+        "barryvdh/laravel-snappy": "^0.3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

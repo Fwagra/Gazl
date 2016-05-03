@@ -149,6 +149,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         VTalbot\Markdown\MarkdownServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
 
     ],
 
@@ -188,6 +189,7 @@ return [
         'Mail'      => Illuminate\Support\Facades\Mail::class,
         'Markdown'  => VTalbot\Markdown\Facades\Markdown::class,
         'Password'  => Illuminate\Support\Facades\Password::class,
+        'PDF'       => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'Queue'     => Illuminate\Support\Facades\Queue::class,
         'Redirect'  => Illuminate\Support\Facades\Redirect::class,
         'Redis'     => Illuminate\Support\Facades\Redis::class,
