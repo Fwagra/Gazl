@@ -157,6 +157,22 @@ class Project extends Model
     }
 
     /**
+     * A project may own many mockups
+     */
+    public function mockups()
+    {
+        return $this->hasMany('App\Mockup');
+    }
+
+    /**
+     * A project may own many mockup categories
+     */
+    public function mockupCategories()
+    {
+        return $this->hasMany('App\MockupCategory');
+    }
+
+    /**
      * A project may have one documentation
      */
     public function documentation()
