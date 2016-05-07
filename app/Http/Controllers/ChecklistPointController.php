@@ -19,7 +19,7 @@ class ChecklistPointController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $categories = ChecklistCategory::orderBy('order')->get();
         $categoriesSelect = ChecklistCategory::lists('name', 'id');
         return View::make('admin.checklist-points.index', compact('categories', 'categoriesSelect'));
@@ -75,26 +75,24 @@ class ChecklistPointController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  ChecklistPoint  $point
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ChecklistPoint $point)
     {
-        $point = ChecklistPoint::find($id);
         $categoriesSelect = ChecklistCategory::lists('name', 'id');
-        return View::make('admin.checklist-points.edit', compact('point', 'categoriesSelect'));    
+        return View::make('admin.checklist-points.edit', compact('point', 'categoriesSelect'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  ChecklistPoint $point
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ChecklistPoint $point)
     {
-        $point = ChecklistPoint::find($id);
         $point->update($request->all());
         return redirect(route('admin.checklist-point.index'));
     }
@@ -102,16 +100,15 @@ class ChecklistPointController extends Controller
     /**
      * Remove the specified point from storage.
      *
-     * @param  int  $id
+     * @param  ChecklistPoint $point
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, ChecklistPoint $point)
     {
-        $point = ChecklistPoint::find($id);
         $point->delete();
 
         if($request->ajax()){
-            return Response::json($id);
+            return Response::json($point->id);
         }else{
             Session::flash('message', trans('checklist.deleted_point'));
             return back();

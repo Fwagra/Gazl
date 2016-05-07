@@ -99,6 +99,13 @@ class Project extends Model
     {
     	$this->slug;
     }
+    /**
+     * Replace id by slug in urls
+     */
+    public function getRouteKeyName()
+    {
+      return 'slug';
+    }
 
     /**
      * Query project by public Id

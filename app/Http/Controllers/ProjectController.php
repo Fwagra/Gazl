@@ -74,12 +74,11 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $slug
+     * @param  Project  $project
      * @return Response
      */
-    public function show($slug)
+    public function show(Project $project)
     {
-        $project = Project::slug($slug);
         $answers = $this->getChecklistStatus($project);
         $accesses = $project->accesses;
         $bugs = $this->getBugsCounts($project);
@@ -98,12 +97,11 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $slug
+     * @param  Project  $project
      * @return Response
      */
-    public function edit($slug)
+    public function edit(Project $project)
     {
-        $project = Project::slug($slug);
 
         $cms = Cms::lists('name', 'id');
         $selected_cms = $project->cms_id;
@@ -136,13 +134,11 @@ class ProjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  string  $slug
+     * @param  Project  $project
      * @return Response
      */
-    public function update(StoreProjectRequest $request, $slug)
+    public function update(StoreProjectRequest $request,Project $project)
     {
-        $project = Project::slug($slug);
-
         $project->name = $request->name;
         $project->cms_id = $request->cms;
 
@@ -154,13 +150,11 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $slug
+     * @param  Project  $project
      * @return Response
      */
-    public function destroy($slug)
+    public function destroy(Project $project)
     {
-        $project = Project::slug($slug);
-
         $project->delete();
 
         Session::flash('message', trans('project.delete_success'));
@@ -192,8 +186,8 @@ class ProjectController extends Controller
 
     /**
      * Check the checklist status for the current project
-     * @param object $project
-     * @return Array
+     * @param Project $project
+     * @return array $answers
      */
     public function getChecklistStatus($project)
     {
@@ -217,8 +211,8 @@ class ProjectController extends Controller
 
     /**
      * Get the number of new bugs and the total number of bugs for the provided project
-     * @param object $project
-     * @return Array
+     * @param Project $project
+     * @return array $bugs
      */
     public function getBugsCounts($project)
     {
@@ -238,6 +232,8 @@ class ProjectController extends Controller
 
     /**
      * Return the number of memos and their status
+     * @param Project $project
+     * @return array $memos
      */
     public function getMemos($project)
     {

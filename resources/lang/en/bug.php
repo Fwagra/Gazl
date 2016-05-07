@@ -44,6 +44,7 @@ return [
     'private' => "Private bug?",
     'private_bug' => "Private",
     'private_tooltip' => "If checked, this bug report will only be seen by logged users",
+    'reini_btn' => "Reset",
     'reported_on' => "Reported on : ",
     'save' => "Send my bug report",
     'search_button' => "Search",

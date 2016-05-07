@@ -24,12 +24,11 @@ class MemoController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param string $projectSlug
+     * @param Project $project
      * @return \Illuminate\Http\Response
      */
-    public function index($projectSlug)
+    public function index(Project $project)
     {
-        $project = Project::slug($projectSlug);
         $memos = $project->memos()->orderBy('order')->get();
         return View::make('memos.index', compact('project','memos'));
     }
@@ -37,12 +36,11 @@ class MemoController extends Controller
     /**
      * Return a rendered list of resources for ajax requests.
      *
-     * @param string $projectSlug
+     * @param Project $project
      * @return Response
      */
-    public function returnList($projectSlug)
+    public function returnList(Project $project)
     {
-        $project = Project::slug($projectSlug);
         $memos = $project->memos()->orderBy('order')->get();
         $data = [
             'view' => View::make('memos.list', compact('memos', 'project'))
@@ -56,14 +54,14 @@ class MemoController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  Project $project
      * @return \Illuminate\Http\Response
      */
-     public function store(Request $request, $projectSlug)
+     public function store(Request $request, Project $project)
      {
          $this->validate($request, [
              'name' => 'required|max:255',
          ]);
-         $project = Project::slug($projectSlug);
          // Getting last category to increment order of the new one
          $highest = Memo::orderBy('order', 'desc')->first();
          $highest = (is_object($highest))? $highest->order : 0;
@@ -73,7 +71,7 @@ class MemoController extends Controller
          $memo->order = intval($highest) +1;
          $memo->save();
          if($request->ajax()){
-             return $this->returnList($project->slug);
+             return $this->returnList($project);
          }else{
              Session::flash('message', trans('memo.added_memo'));
              return back();
@@ -85,16 +83,16 @@ class MemoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  int  $id
+     * @param  Project $project
+     * @param  Memo $memo
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Project $project, Memo $memo)
     {
         $this->validate($request, [
             'edit-input' => 'required|max:255',
         ]);
 
-        $memo = Memo::find($id);
         $memo->name = $request->input('edit-input');
         $memo->save();
 
@@ -110,16 +108,16 @@ class MemoController extends Controller
      * Remove the category and the attached items
      *
      * @param  string  $projectSlug
-     * @param  int  $id
+     * @param  Project $project
+     * @param  Memo $memo
      * @return Response
      */
-    public function destroy(Request $request, $projectSlug, $id)
+    public function destroy(Request $request, Project $project, Memo $memo)
     {
-        $memo= Memo::find($id);
         $memo->delete();
 
         if($request->ajax()){
-            return Response::json($id);
+            return Response::json($memo->id);
         }else{
             Session::flash('message', trans('memo.deleted_memo'));
             return back();
@@ -148,12 +146,11 @@ class MemoController extends Controller
     /**
      * Change the memo session_status
      * @param Request $request
-     * @param int $id
+     * @param Memo $memo
      */
-    public function check(Request $request, $id)
+    public function check(Request $request, Memo $memo)
     {
       if($request->ajax()){
-         $memo = Memo::find($id);
          $memo->active = ($memo->active == 0)? 1 : 0;
          $memo->save();
       }

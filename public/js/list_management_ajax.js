@@ -86,7 +86,7 @@ $(document).on('submit', '.edit-submit', function(event){
 
 /* Submit auto-submit forms */
 /* ifChanged is an iCheck callback */
-$('input[type="text"]').on('ifChanged', function(event) {
+$(document).on('ifChanged', 'input[type="text"], input[type="checkbox"]', function(event) {
 	event.preventDefault();
 	form = $(this).parents('.auto-submit');
 	$.post(

@@ -16,9 +16,11 @@ Route::get('/', array('as' => 'home', 'uses' => 'ProjectController@home'));
 // Projects routes
 Route::get('search/project', ['as' => 'project.search', 'uses' => 'ProjectController@searchProject']);
 Route::resource('project', 'ProjectController');
+Route::model('project', 'App\Project');
 
 // Checklist routes
-Route::resource('project.checklist','ChecklistAnswerController', ['except' => ['show','store', 'edit', 'delete', 'create']]);
+Route::resource('project.checklist','ChecklistAnswerController', ['only' => ['index','update']]);
+Route::model('checklist', 'App\ChecklistAnswer');
 
 // Bug reporting routes
 Route::post('project/{project}/bug/search', ['as' => 'bug.search', 'uses' => 'BugController@search']);
@@ -26,8 +28,11 @@ Route::post('project/{project}/bug/{bug}/add/image', ['as' => 'bug.image.add', '
 Route::post('project/{project}/bug/{bug}/delete/image', ['as' => 'bug.image.delete', 'uses' => 'BugController@deleteImage']);
 Route::post('project/{project}/bug/{bug}/state/change', ['as' => 'bug.state.change', 'uses' => 'BugController@stateChange']);
 Route::resource('project.bug', 'BugController');
+Route::model('bug', 'App\Bug');
+
 // Bug comments
-Route::resource('project.bug.comment', 'BugCommentController', ['only' => ['store','update', 'destroy']]);
+// TODO : Plan the edit and destroy features for comments
+Route::post('project/{project}/bug/{bug}/comment',  ['as' => 'project.bug.comment.store', 'uses' => 'BugCommentController@store']);
 
 // Notifications
 Route::post('project/{project}/subscribe', ['as' => 'project.subscribe', 'uses' => 'NotificationController@switchNotification']);
@@ -37,6 +42,7 @@ Route::post('memo/sort',['as' => 'sort.memos','uses' => 'MemoController@order'])
 Route::put('memo/{memo}', ['as' => 'memo.update', 'uses' => 'MemoController@update']);
 Route::post('memo/check/{memo}', ['as' => 'memo.check', 'uses' => 'MemoController@check']);
 Route::resource('project.memo', 'MemoController', ['except' => ['show', 'create']]);
+Route::model('memo', 'App\Memo');
 
 // Documentation
 Route::get('project/{project}/doc/', ['as' => 'project.doc.index', 'uses' => 'DocumentationController@index']);
@@ -53,14 +59,20 @@ Route::resource('project.mockup', 'MockupController');
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
 Route::post('key/set', ['as' => 'key.save', 'uses' => 'AccessesController@saveKey']);
+Route::Model('access', 'App\Access');
 
 // Admin routes
 Route::get('admin', ['as' => 'admin', 'uses' => 'AdminController@index']);
 Route::group(array('prefix'=>'admin', 'middleware' => 'auth'), function(){
+
 	Route::resource('checklist-category', 'ChecklistCategoryController', ['except' => ['show', 'create']]);
-	Route::resource('checklist-point', 'ChecklistPointController', ['except' => ['show', 'create']]);
 	Route::post('checklist-category/sort',['as' => 'sort.categories','uses' => 'ChecklistCategoryController@order']);
+	Route::model('checklist_category', 'App\ChecklistCategory');
+
+	Route::resource('checklist-point', 'ChecklistPointController', ['except' => ['show', 'create']]);
 	Route::post('checklist-point/sort',['as' => 'sort.checklist','uses' => 'ChecklistPointController@order']);
+	Route::model('checklist_point', 'App\ChecklistPoint');
+
 	Route::get('key', ['as' => 'admin.key', 'uses' => 'AccessesController@setGlobalKey']);
 	Route::post('key', ['as' => 'admin.key.save', 'uses' => 'AccessesController@saveGlobalKey']);
 });

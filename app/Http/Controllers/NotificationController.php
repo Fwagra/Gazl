@@ -22,11 +22,10 @@ class NotificationController extends Controller
 
     /**
      * Create or delete a notification subscription for the provided project to the current user.
-     * @param string $project_slug
+     * @param Project $project
      */
-    public function switchNotification($project_slug)
+    public function switchNotification(Project $project)
     {
-    	$project = Project::slug($project_slug);
     	$user = Auth::user();
     	$subscription = Notification::projectUser($project->id, $user->id)->first();
     	if(count($subscription)){

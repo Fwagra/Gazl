@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Bug;
 use App\BugComment;
 use App\Events\NewBugComment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Project;
 use Auth;
 use Event;
 use \Redirect;
@@ -14,15 +16,17 @@ use Session;
 
 class BugCommentController extends Controller
 {
-    
+
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  Project  $project
+     * @param  Bug  $bug
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $projectSlug, $bugId)
+    public function store(Request $request, Project $project, Bug $bug)
     {
         if(Auth::check()){
 
@@ -42,24 +46,24 @@ class BugCommentController extends Controller
             $this->validate($request, [
                 'name' => 'required|max:255',
                 'comment' => 'required|max:1500',
-            ]); 
+            ]);
 
             $request->merge([
                 'guest' => 1
             ]);
         }
-        
+
         $request->merge([
-            'bug_id' => $bugId
+            'bug_id' => $bug->id
         ]);
 
         $fields = $request->all();
-        
+
         $bugComment = BugComment::create($fields);
         Event::fire(new NewBugComment($bugComment));
 
         Session::flash('message', trans('bug.added_comment'));
-        return Redirect::action('BugController@show', [$projectSlug, $bugId]);
+        return Redirect::action('BugController@show', [$project->slug, $bug->id]);
 
     }
 

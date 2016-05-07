@@ -29,18 +29,17 @@ class DocumentationController extends Controller
     /**
      * Display the documentation if it exists.
      *
-     * @param string $projectSlug
+     * @param Project $project
      * @return \Illuminate\Http\Response
      */
-    public function index($projectSlug)
+    public function index(Project $project)
     {
-        $project = Project::slug($projectSlug);
         $doc = $project->documentation;
 
         if(!Auth::check() && ($doc == null || $doc->active == 0))
         {
           Session::flash('error', trans('doc.no_access'));
-          return redirect()->action('ProjectController@show', ['projectSlug' => $projectSlug]);
+          return redirect()->action('ProjectController@show', ['projectSlug' => $project->slug]);
         }
 
         if($doc != null)
@@ -49,7 +48,7 @@ class DocumentationController extends Controller
         }
         else
         {
-          return redirect()->action('DocumentationController@edit', ['projectSlug' => $projectSlug]);
+          return redirect()->action('DocumentationController@edit', ['projectSlug' => $project->slug]);
         }
     }
 
@@ -57,12 +56,11 @@ class DocumentationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $projectSlug
+     * @param  Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit($projectSlug)
+    public function edit(Project $project)
     {
-        $project = Project::slug($projectSlug);
         $doc = $project->documentation;
         $active = (isset($doc->active))? $doc->active : 0;
         return View::make('documentation.form', compact('project', 'doc', 'active'));
@@ -73,12 +71,11 @@ class DocumentationController extends Controller
      * Convert the markdown into html and store it for usage
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  string  $projectSlug
+     * @param  Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $projectSlug)
+    public function update(Request $request, Project $project)
     {
-        $project = Project::slug($projectSlug);
         $doc = $project->documentation;
 
         $mdText = $request->get('md_value');
@@ -99,18 +96,17 @@ class DocumentationController extends Controller
         }
 
         Session::flash('message', trans('doc.success_edit'));
-        return redirect()->action('DocumentationController@edit', ['projectSlug' => $projectSlug]);
+        return redirect()->action('DocumentationController@edit', ['projectSlug' => $project->slug]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $projectSlug
+     * @param  Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy($projectSlug)
+    public function destroy(Project $project)
     {
-      $project = Project::slug($projectSlug);
       $doc = $project->documentation;
 
       if($doc != null)
@@ -123,16 +119,15 @@ class DocumentationController extends Controller
         Session::flash('error', trans('doc.no_doc_matching'));
       }
 
-      return Redirect::action('ProjectController@show', $projectSlug);
+      return Redirect::action('ProjectController@show', $project->slug);
     }
 
     /**
      * Publish the documentation
-     * @param string $projectSlug
+     * @param Project $project
      */
-    public function publish($projectSlug)
+    public function publish(Project $project)
     {
-      $project = Project::slug($projectSlug);
       $doc = $project->documentation;
 
       if($doc != null)
@@ -151,16 +146,15 @@ class DocumentationController extends Controller
 
     /**
      * Generate a PDF version of the index page.
-     *  @param string $projectSlug
+     *  @param Project $project
      */
-    public function generatePdf($projectSlug)
+    public function generatePdf(Project $project)
     {
-      $project = Project::slug($projectSlug);
       $doc = $project->documentation;
 
       $pdf = PDF::loadView('documentation.index', compact('project', 'doc'));
       $pdf->setOption('user-style-sheet', base_path('public/css/pdf.css'));
-      
+
       return $pdf->download('documentation.pdf');
     }
 }

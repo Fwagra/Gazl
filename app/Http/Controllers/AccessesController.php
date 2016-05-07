@@ -36,7 +36,7 @@ class AccessesController extends Controller
      *
      * @return Response
      */
-    public function create($project)
+    public function create(Project $project)
     {
         $access = new Access;
         if(Cookie::get('key') == null):
@@ -56,13 +56,12 @@ class AccessesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  string  $projectSlug
      * @param  StoreAccessRequest  $request
+     * @param  Project $project
      * @return Response
      */
-    public function store($projectSlug, StoreAccessRequest $request)
+    public function store(StoreAccessRequest $request, Project $project)
     {
-        $project = Project::slug($projectSlug);
         $request['project_id'] = $project->id;
         Access::create($request->only('name', 'host', 'login', 'password', 'project_id', 'access_category_id'));
         Session::flash('message', trans('access.success'));
@@ -73,14 +72,12 @@ class AccessesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Project $project
+     * @param  Access  $access
      * @return Response
      */
-    public function edit($projectSlug, $accessId)
+    public function edit(Project $project, $access)
     {
-        $project = Project::slug($projectSlug);
-        $access = Access::find($accessId);
-
         if($project->id != $access->project_id){
             return Redirect::action('AccessesController@index', $projectSlug)->withErrors(['message' => trans('access.access_not_found')]);
         }
@@ -95,7 +92,7 @@ class AccessesController extends Controller
             $categories = AccessCategory::lists('name', 'id');
             $selected_category = $access->access_category_id;
 
-            return View::make('accesses.edit', compact('project', 'access', 'categories', 'selected_category'));            
+            return View::make('accesses.edit', compact('project', 'access', 'categories', 'selected_category'));
         endif;
     }
 
@@ -103,14 +100,12 @@ class AccessesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  StoreAccessRequest  $request
-     * @param  string  $projectSlug
-     * @param  int  $accessId
+     * @param  Project  $project
+     * @param  Access  $access
      * @return Response
      */
-    public function update(StoreAccessRequest $request, $projectSlug, $accessId)
+    public function update(StoreAccessRequest $request, Project $project, Access $access)
     {
-        $project = Project::slug($projectSlug);
-        $access = Access::find($accessId);
         $access->update($request->all());
         return redirect(route('project.show', $project->slug));
     }
@@ -118,14 +113,12 @@ class AccessesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  string  $projectSlug
-     * @param  int  $accessId
+     * @param  Project  $project
+     * @param  Access $access
      * @return Response
      */
-    public function destroy($projectSlug, $accessId)
+    public function destroy(Project $project, Access $access)
     {
-        $project = Project::slug($projectSlug);
-        $access = Access::find($accessId);
         $access->delete();
         return redirect(route('project.show', $project->slug));
     }
@@ -150,13 +143,13 @@ class AccessesController extends Controller
             $this->validate($request, [
                 'old_key' => 'required|min:32|max:32',
                 'key' => 'required|min:32|max:32',
-            ]); 
+            ]);
         }else{
             $this->validate($request, [
                 'key' => 'required|min:32|max:32',
             ]);
         }
-        
+
         if(File::exists($path)){
             $currentKey = File::get($path);
             if(Hash::check(Input::get('old_key'), $currentKey)){

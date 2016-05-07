@@ -26,12 +26,12 @@ class ChecklistAnswerController extends Controller
     /**
      * Display the checklist form for a project.
      *
+     * @param Project $project
      * @return \Illuminate\Http\Response
      */
-    public function index($projectSlug)
+    public function index(Project $project)
     {
         $categories = ChecklistCategory::orderBy('order')->get();
-        $project = Project::slug($projectSlug);
         $answers = $project->checklistAnswers->keyBy('checklist_point_id');
         return View::make('checklist.index', compact('categories', 'project', 'answers'));
     }
@@ -40,13 +40,12 @@ class ChecklistAnswerController extends Controller
      * Create or update an existing answer in the database.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  string  $projectSlug
+     * @param  Project  $project
      * @param  int  $pointId
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $projectSlug, $pointId)
+    public function update(Request $request, Project $project, $pointId)
     {
-        $project = Project::slug($projectSlug);
         $answer = ChecklistAnswer::firstOrCreate(['project_id' => $project->id, 'checklist_point_id' => $pointId]);
         $answer->update($request->all());
         if($request->check != 1)

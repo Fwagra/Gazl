@@ -14,7 +14,7 @@ use View;
 
 class ChecklistCategoryController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -71,21 +71,20 @@ class ChecklistCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  int  $id
+     * @param  ChecklistCategory  $category
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ChecklistCategory $category)
     {
         $this->validate($request, [
             'edit-input' => 'required|max:255',
         ]);
 
-        $category = ChecklistCategory::find($id);
         $category->name = $request->input('edit-input');
         $category->save();
 
         if($request->ajax()){
-            return Response::json($request->input('edit-input'));        
+            return Response::json($request->input('edit-input'));
         }else{
             Session::flash('message', trans('checklist.updated_category'));
             return back();
@@ -95,16 +94,15 @@ class ChecklistCategoryController extends Controller
     /**
      * Remove the category and the attached items
      *
-     * @param  int  $id
+     * @param  ChecklistCategory  $category
      * @return Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, ChecklistCategory $category)
     {
-        $category = ChecklistCategory::find($id);
         $category->delete();
 
         if($request->ajax()){
-            return Response::json($id);
+            return Response::json($category->id);
         }else{
             Session::flash('message', trans('checklist.deleted_category'));
             return back();

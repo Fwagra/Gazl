@@ -42,12 +42,11 @@ class BugController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param string $projectSlug
+     * @param Project $project
      * @return \Illuminate\Http\Response
      */
-    public function index($projectSlug)
+    public function index(Project $project)
     {
-        $project = Project::slug($projectSlug);
         $bugs  = $this->getAllBugs($project);
         $notification = null;
 
@@ -59,7 +58,7 @@ class BugController extends Controller
 
     /**
      * Return a bug list filtered and sorted
-     * @param object $project
+     * @param Project $project
      * @return \Illuminate\Http\Response
      */
     protected function getAllBugs($project)
@@ -75,7 +74,7 @@ class BugController extends Controller
         if(Input::get('order') && Input::get('order') == 'state'){
             $bugs->orderBy('state', 'asc');
         }
-        // Sort them by date anyway 
+        // Sort them by date anyway
         $bugs->orderBy('created_at', 'desc');
 
         return $bugs->paginate(50);
@@ -84,12 +83,11 @@ class BugController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param string $projectSlug
+     * @param Project $project
      * @return \Illuminate\Http\Response
      */
-    public function create($projectSlug)
+    public function create(Project $project)
     {
-        $project = Project::slug($projectSlug);
         return View::make('bugs.new', compact('project'));
     }
 
@@ -97,16 +95,15 @@ class BugController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param string $projectSlug
+     * @param Project $project
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $projectSlug)
+    public function store(Request $request, Project $project)
     {
         $this->validate($request, [
             'name' => 'required|max:255',
             'description' => 'required|max:1500',
         ]);
-        $project = Project::slug($projectSlug);
         if($request->hasFile('images')){
             $images = $request->file('images');
             $imagesStored = [];
@@ -114,7 +111,7 @@ class BugController extends Controller
                 $rules = array('file' => 'image|max:500');
                 $validator = Validator::make(array('file'=> $image), $rules);
                 if($validator->passes()) {
-                    $filename = $this->saveImage($projectSlug, $image);
+                    $filename = $this->saveImage($project, $image);
                     $imagesStored[] = $filename;
                 } else {
                     // redirect back with errors.
@@ -142,20 +139,18 @@ class BugController extends Controller
         Event::fire(new NewBug($bug));
 
         Session::flash('message', trans('bug.success'));
-        return redirect()->action('BugController@index', ['projectSlug' => $projectSlug]);
+        return redirect()->action('BugController@index', ['projectSlug' => $project->slug]);
     }
 
     /**
      * Add image(s) to a bug
      * @param  \Illuminate\Http\Request  $request
-     * @param string $projectSlug
-     * @param int $id
+     * @param Project $project
+     * @param Bug $bug
      * @return \Illuminate\Http\Response
      */
-    public function addImage(Request $request, $projectSlug, $id)
+    public function addImage(Request $request, Project $project, Bug $bug)
     {
-        $bug = Bug::find($id);
-        $project = Project::slug($projectSlug);
         $savedImages = (empty($bug->images))? array() : $bug->images;
         if($request->hasFile('images')){
             $images = $request->file('images');
@@ -164,9 +159,9 @@ class BugController extends Controller
                 $rules = array('file' => 'image|max:500');
                 $validator = Validator::make(array('file'=> $image), $rules);
                 if($validator->passes()) {
-                    $filename = $this->saveImage($projectSlug, $image);
+                    $filename = $this->saveImage($project, $image);
                     $imagesStored[] = $filename;
-                    
+
                 } else {
                     // redirect back with errors.
                     return Response::json($validator->getMessageBag()->toArray(), 422);
@@ -187,11 +182,11 @@ class BugController extends Controller
 
     /**
      * Resize, save and create a thumbnail for a bug image
-     * @param string $projectSlug
+     * @param Project $project
      * @param object $image
      * @return string $filename
      */
-    public function saveImage($projectSlug, $image)
+    public function saveImage(Project $project, $image)
     {
         // Directories creation
         $destinationPath = $this->destinationImages;
@@ -201,12 +196,12 @@ class BugController extends Controller
             File::makeDirectory($destinationPath,  0775, true);
         if(!File::isDirectory($destinationPathThumbs))
             File::makeDirectory($destinationPathThumbs,  0775, true);
-        
+
         // Saving image
-        $filename = $projectSlug . '-screenshot-' . uniqid() . '.' . $image->getClientOriginalExtension();
+        $filename = $project->slug . '-screenshot-' . uniqid() . '.' . $image->getClientOriginalExtension();
         $upload_success = $image->move($destinationPath, $filename);
 
-        // Resize image 
+        // Resize image
         $imageresize = $imageThumb = Image::make($destinationPath.$filename);
         $imageresize->resize(1920, null, function ($constraint) {
             $constraint->aspectRatio();
@@ -224,13 +219,12 @@ class BugController extends Controller
     /**
      * Remove an image from a bug
      * @param  \Illuminate\Http\Request  $request
-     * @param string $projectSlug
-     * @param int $id
+     * @param Project $project
+     * @param Bug $bug
      * @return \Illuminate\Http\Response
      */
-    public function deleteImage(Request $request, $projectSlug, $id)
+    public function deleteImage(Request $request, Project $project, Bug $bug)
     {
-        $bug = Bug::find($id);
         $savedImages = (empty($bug->images))? array() : $bug->images;
         $return = null;
         if($toDeleteImage = $request->input('image_name')){
@@ -242,7 +236,7 @@ class BugController extends Controller
                 $bug->images = $savedImages;
                 $bug->save();
                 $return = (string) $key;
-            }           
+            }
         }
 
         return Response::json($return);
@@ -263,14 +257,12 @@ class BugController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $projectSlug
-     * @param  int  $id
+     * @param  Project $project
+     * @param  Bug $bug
      * @return View
      */
-    public function show($projectSlug, $id)
+    public function show(Project $project, Bug $bug)
     {
-        $project = Project::slug($projectSlug);
-        $bug = Bug::find($id); 
         $states = $this->availableStates;
         $comments = $bug->comments;
         return View::make('bugs.show', compact('project', 'bug', 'states', 'comments'));
@@ -279,32 +271,28 @@ class BugController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $projectSlug
-     * @param  int  $id
+     * @param  Project $project
+     * @param  Bug  $bug
      * @return View
      */
-    public function edit($projectSlug, $id)
+    public function edit(Project $project, Bug $bug)
     {
-        $project = Project::slug($projectSlug);
-        $bug = Bug::find($id);
         return View::make('bugs.edit', compact('project', 'bug'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  string  $projectSlug
-     * @param  int  $id
-     * @return View    
+     * @param  Project $project
+     * @param  Bug  $bug
+     * @return View
      */
-    public function update(Request $request, $projectSlug, $id)
+    public function update(Request $request, Project $project, Bug $bug)
     {
         $this->validate($request, [
             'name' => 'required|max:255',
             'description' => 'required|max:1500',
         ]);
-        $project = Project::slug($projectSlug);
-        $bug = Bug::find($id);
 
         if($request->private  == null){
            $request->merge([
@@ -315,20 +303,19 @@ class BugController extends Controller
         $bug->update($fields);
 
         Session::flash('message', trans('bug.success_edit'));
-        return redirect()->action('BugController@index', ['projectSlug' => $projectSlug]);
+        return redirect()->action('BugController@index', ['project' => $project->slug]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  string  $projectSlug
-     * @param  int  $id
+     * @param  Project $project
+     * @param  Bug $bug
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $projectSlug, $id)
+    public function destroy(Request $request, Project $project, Bug $bug)
     {
-        $bug = Bug::find($id);
         $images = $bug->images;
         $bug->delete();
 
@@ -340,21 +327,20 @@ class BugController extends Controller
         }
 
         if($request->ajax()){
-            return Response::json($id);
+            return Response::json($bug->id);
         }else{
             Session::flash('message', trans('bug.deleted_bug'));
-            Redirect::action('BugController@index', [$projectSlug]);
+            Redirect::action('BugController@index', ['project' => $project->slug]);
         }
     }
 
     /**
      * Search through bug names.
-     * @param string $projectSlug
+     * @param Project $project
      */
-    public function search($projectSlug)
+    public function search(Project $project)
     {
         $term = Input::get('bug');
-        $project = Project::slug($projectSlug);
 
         if(is_null($term))
             return Response::json(trans('bug.no_result'));
@@ -370,7 +356,7 @@ class BugController extends Controller
                 ->where('private', 0)
                 ->get();
         }
-        
+
         $data = array();
         if(count($bugs)){
             // Parsing the date that curiously, is no more a Carbon object here.
@@ -390,18 +376,17 @@ class BugController extends Controller
      * Change the state of a bug
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  string  $projectSlug
-     * @param  int  $id
+     * @param  Project $project
+     * @param  Bug $bug
      * @return \Illuminate\Http\Response
      */
-    public function stateChange(Request $request, $projectSlug, $id)
+    public function stateChange(Request $request, Project $project, Bug $bug)
     {
         if($request->ajax()){
             if(in_array($request->state, $this->availableStates)){
-                $bug = Bug::find($id);
                 $bug->state = $request->state;
                 $bug->save();
-                return Response::json(['state' => $request->state]);   
+                return Response::json(['state' => $request->state]);
             }
         }
     }

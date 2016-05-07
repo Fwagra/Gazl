@@ -44,6 +44,7 @@ return [
     'private' => "Bug privé?",
     'private_bug' => "Privé",
     'private_tooltip' => "Si coché, le bug n'apparaîtra qu'aux utilisateurs connectés.",
+    'reini_btn' => "Réinitialiser",
     'reported_on' => "Signalé le : ",
     'save' => "Envoyer le rapport de bug",
     'search_button' => "Rechercher",
