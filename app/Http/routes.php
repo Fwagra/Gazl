@@ -46,6 +46,9 @@ Route::get('project/{project}/doc/pdf', ['as' => 'project.doc.pdf', 'uses' => 'D
 Route::put('project/{project}/doc', ['as' => 'project.doc.update', 'uses' => 'DocumentationController@update']);
 Route::delete('project/{project}/destroy', ['as' => 'project.doc.destroy', 'uses' => 'DocumentationController@destroy']);
 
+// Mockups & mockup categories
+Route::resource('project.mockup', 'MockupController');
+
 // Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
