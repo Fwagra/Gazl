@@ -54,6 +54,7 @@ Route::delete('project/{project}/destroy', ['as' => 'project.doc.destroy', 'uses
 
 // Mockups & mockup categories
 Route::resource('project.mockup', 'MockupController');
+Route::model('mockup', 'App\Mockup');
 
 // Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);

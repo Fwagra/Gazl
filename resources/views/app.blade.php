@@ -7,7 +7,9 @@
         <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
         <script src="{{ URL::asset('js/icheck.min.js') }}"></script>
+        <script src="{{ URL::asset('js/select2.min.js') }}"></script>
         <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/select2.min.css')}}">
         <link rel="stylesheet" href="{{URL::asset('css/bootflat.css')}}">
         <link rel="stylesheet" href="{{URL::asset('css/flat/red.css')}}">
         <link rel="stylesheet" href="{{URL::asset('css/jquery-ui.min.css')}}">
@@ -46,7 +48,7 @@
     @yield('footer_js')
     <script>
     $(document).ready(function(){
-      $('input').iCheck({
+      $('input').not('.no-icheck').iCheck({
         checkboxClass: 'icheckbox_flat-red',
         radioClass: 'iradio_flat-red'
       });
