@@ -1,12 +1,12 @@
 {!! csrf_field() !!}
 <div class="form-group">
-    {!! Form::label('name', trans('mockup.name')) !!}
+    {!! Form::label('name', trans('mockup.name_label')) !!}
     {!! Form::text('name', null, ['class' => 'form-control', 'required' => 'required']) !!}
     <small class="text-danger">{{ $errors->first('name') }}</small>
 </div>
 
 <div class="form-group">
-    {!! Form::label('mockup_category_id', trans('mockup.category')) !!}
+    {!! Form::label('mockup_category_id', trans('mockup.category_label')) !!}
     {!! Form::select('mockup_category_id', $categories, null, ['class' => 'form-control categories select2', 'required' => 'required']) !!}
     <small class="text-danger">{{ $errors->first('mockup_category_id') }}</small>
 </div>
