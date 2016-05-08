@@ -27,10 +27,10 @@
 
 <div class="form-group">
   {!! Form::label('color', trans('mockup.color_label')) !!}
-  @for ($i = 1; $i < 6; $i++)
+  @for ($i = 0; $i < 6; $i++)
     <div class="checkbox">
         <label for="color_{{$i}}" class="checkbox">
-            {!! Form::radio('color', 'color_'.$i,  null, [
+            {!! Form::radio('color', 'color_'.$i,  ($i == 0), [
                 'class' => 'form-control no-icheck',
                 'id'    => 'color_'.$i,
             ]) !!} {!! trans('mockup.color_'.$i) !!}
@@ -44,6 +44,13 @@
     {!! Form::file('images', ['class' => 'required']) !!}
     <p class="help-block">{!! trans('mockup.help_image_text') !!}</p>
     <small class="text-danger">{{ $errors->first('images') }}</small>
+</div>
+
+<div class="form-group">
+    {!! Form::label('psd', trans('mockup.psd_label')) !!}
+    {!! Form::file('psd', ['class' => 'psd-files']) !!}
+    <p class="help-block">{!! trans('mockup.help_psd_text') !!}</p>
+    <small class="text-danger">{{ $errors->first('psd') }}</small>
 </div>
 
 {!! Form::submit(trans('mockup.submit'), ['class' => 'btn btn-info pull-right']) !!}
