@@ -18,7 +18,7 @@
     <label for="{{$key}}" class="checkbox">
         {!! Form::radio('format', $key,  null, [
             'class' => 'form-control no-icheck',
-            'id'    => 'format',
+            'id'    => $key,
         ]) !!} {!! trans($format) !!}
     </label>
   </div>
