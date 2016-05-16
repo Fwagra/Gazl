@@ -16,6 +16,7 @@ return [
     'color_label' => "Colour",
     'create_h1' => "New mockup",
     'create_title' => "New mockup",
+    'description' => "Description",
     'desktop_format' => "Desktop",
     'format_label' => "Format",
     'image_label' => "Image file",

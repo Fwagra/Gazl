@@ -16,6 +16,7 @@ class Mockup extends Model
         'project_id',
         'mockup_category_id',
         'order',
+        'description',
     ];
 
   /**

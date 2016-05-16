@@ -16,6 +16,7 @@ return [
     'color_label' => "Couleur",
     'create_h1' => "Ajouter une maquette",
     'create_title' => "Nouvelle maquette",
+    'description' => "Notes",
     'desktop_format' => "Bureau",
     'format_label' => "Format",
     'image_label' => "Fichier image",

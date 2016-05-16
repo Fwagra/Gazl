@@ -52,5 +52,10 @@
     <p class="help-block">{!! trans('mockup.help_psd_text') !!}</p>
     <small class="text-danger">{{ $errors->first('psd') }}</small>
 </div>
+<div class="form-group">
+    {!! Form::label('description', trans('mockup.desc_label')) !!}
+    {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
+    <small class="text-danger">{{ $errors->first('description') }}</small>
+</div>
 
 {!! Form::submit(trans('mockup.submit'), ['class' => 'btn btn-info pull-right']) !!}
