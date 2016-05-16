@@ -23,5 +23,6 @@ return [
     'name_label' => "Nom de la maquette",
     'psd_label' => "Fichier psd",
     'submit' => "Enregister",
+    'success_create' => "La maquette a été ajoutée.",
     'tablet_format' => "Tablette",
 ];

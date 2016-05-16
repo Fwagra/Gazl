@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\Mockup;
 use App\MockupCategory;
+use File;
+use Session;
 use View;
 
 class MockupController extends Controller
@@ -22,6 +24,10 @@ class MockupController extends Controller
       'tablet' => 'mockup.tablet_format',
       'mobile' => 'mockup.mobile_format',
     ];
+
+    /* Define pathes for image saving */
+    protected $destinationImages = 'uploads/mockups/';
+    protected $destinationPsd = 'uploads/psd/';
 
     /**
      * Construct method
@@ -73,7 +79,31 @@ class MockupController extends Controller
             'mockup_category_id' => $category->id,
           ]);
         }
-        dd($request);
+
+        if($request->hasFile('images')){
+            $image = $request->file('images');
+            $filename = $this->saveImage($project, $image, $this->destinationImages);
+            $request->merge([
+                'images' => $filename
+            ]);
+        }
+
+        if($request->hasFile('psd')){
+            $image = $request->file('psd');
+            $filename = $this->saveImage($project, $image, $this->destinationPsd);
+            $request->merge([
+                'psd' => $filename
+            ]);
+        }
+
+        $request->merge([
+            'project_id' => $project->id
+        ]);
+
+        $mockup = Mockup::create($request->all());
+
+        Session::flash('message', trans('mockup.success_create'));
+        return redirect()->action('MockupController@index', ['projectSlug' => $project->slug]);
     }
 
     /**
@@ -138,5 +168,23 @@ class MockupController extends Controller
       }
 
       return $category;
+    }
+
+    /**
+     * Save an image
+     * @param Project $project
+     * @param object $image
+     * @param string $path
+     * @return string $filename
+     */
+    public function saveImage(Project $project, $image, $path)
+    {
+        if(!File::isDirectory($path))
+            File::makeDirectory($path,  0775, true);
+
+        $filename = $project->slug . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+        $image->move($path, $filename);
+
+        return $filename;
     }
 }

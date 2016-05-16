@@ -6,6 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mockup extends Model
 {
+
+    protected $fillable = [
+        'name',
+        'color',
+        'format',
+        'images',
+        'psd',
+        'project_id',
+        'mockup_category_id',
+        'order',
+    ];
+
   /**
    * A mockup  belongs to a project
    */

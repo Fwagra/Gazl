@@ -23,5 +23,6 @@ return [
     'name_label' => "Name of the mockup",
     'psd_label' => "Psd file",
     'submit' => "Save",
+    'success_create' => "The mockup has been created",
     'tablet_format' => "Tablet",
 ];
