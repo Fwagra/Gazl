@@ -71,36 +71,30 @@ class MockupController extends Controller
      */
     public function store(StoreMockupRequest $request, Project $project, Mockup $mockup)
     {
+        $request->merge([
+            'project_id' => $project->id
+        ]);
+
+        $fields = $request->all();
         // Eventually generate a new category
         if(!MockupCategory::find($request->mockup_category_id))
         {
           $category = $this->findOrCreateCategory($request->mockup_category_id, $project);
-          $request->merge([
-            'mockup_category_id' => $category->id,
-          ]);
+          $fields['mockup_category_id'] = $category->id;
         }
 
         if($request->hasFile('images')){
             $image = $request->file('images');
             $filename = $this->saveImage($project, $image, $this->destinationImages);
-            $request->merge([
-                'images' => $filename
-            ]);
+            $fields['images'] = $filename;
         }
 
         if($request->hasFile('psd')){
             $image = $request->file('psd');
             $filename = $this->saveImage($project, $image, $this->destinationPsd);
-            $request->merge([
-                'psd' => $filename
-            ]);
+            $fields['psd'] = $filename;
         }
-
-        $request->merge([
-            'project_id' => $project->id
-        ]);
-
-        $mockup = Mockup::create($request->all());
+        $mockup = Mockup::create($fields);
 
         Session::flash('message', trans('mockup.success_create'));
         return redirect()->action('MockupController@index', ['projectSlug' => $project->slug]);
@@ -120,24 +114,59 @@ class MockupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Project $project
+     * @param  Mockup $mockup
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project, Mockup $mockup)
     {
-        //
+        $categories = $project->mockupCategories->lists('name','id');
+        $formats = $this->formats;
+        return View::make('mockups.edit', compact('project', 'mockup', 'categories', 'formats'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  StoreMockupRequest  $request
+     * @param  Project $project
+     * @param  Mockup $mockup
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreMockupRequest $request, Project $project, Mockup $mockup)
     {
-        //
+        // Require image if the current mockup image is not set
+        if(empty($mockup->images)){
+            $this->validate($request, [
+                'images' => 'required',
+            ]);
+        }
+
+        $fields = $request->all();
+
+        // Eventually generate a new category
+        if(!MockupCategory::find($request->mockup_category_id))
+        {
+          $category = $this->findOrCreateCategory($request->mockup_category_id, $project);
+          $fields['mockup_category_id'] = $category->id;
+        }
+
+        if($request->hasFile('images')){
+            $image = $request->file('images');
+            $filename = $this->saveImage($project, $image, $this->destinationImages);
+            $fields['images'] = $filename;
+        }
+
+        if($request->hasFile('psd')){
+            $image = $request->file('psd');
+            $filename = $this->saveImage($project, $image, $this->destinationPsd);
+            $fields['psd'] = $filename;
+        }
+
+        $mockup->update($fields);
+
+        Session::flash('message', trans('mockup.success_edit'));
+        return redirect()->action('MockupController@index', ['projectSlug' => $project->slug]);
     }
 
     /**

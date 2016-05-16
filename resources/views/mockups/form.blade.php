@@ -41,6 +41,11 @@
 
 <div class="form-group">
     {!! Form::label('images', trans('mockup.image_label')) !!}
+    @if (isset($mockup->images))
+        <span>
+            {{ $mockup->images }} <a class="btn btn-danger" href="#">{!! trans('mockup.delete_image') !!}</a>
+        </span>
+    @endif
     {!! Form::file('images', ['class' => 'required']) !!}
     <p class="help-block">{!! trans('mockup.help_image_text') !!}</p>
     <small class="text-danger">{{ $errors->first('images') }}</small>
@@ -48,6 +53,11 @@
 
 <div class="form-group">
     {!! Form::label('psd', trans('mockup.psd_label')) !!}
+    @if (isset($mockup->psd))
+        <span>
+            {{ $mockup->psd }} <a class="btn btn-danger" href="#">{!! trans('mockup.delete_image') !!}</a>
+        </span>
+    @endif
     {!! Form::file('psd', ['class' => 'psd-files']) !!}
     <p class="help-block">{!! trans('mockup.help_psd_text') !!}</p>
     <small class="text-danger">{{ $errors->first('psd') }}</small>

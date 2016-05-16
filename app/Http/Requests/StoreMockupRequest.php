@@ -23,11 +23,26 @@ class StoreMockupRequest extends Request
      */
     public function rules()
     {
-        return [
-            'name' => 'required|max:255',
-            'mockup_category_id' => 'required',
-            'images' => 'required|mimes:jpeg,jpg,png',
-            'psd' => 'mimes:psd',
-        ];
+        switch($this->method())
+        {
+            case 'POST':
+            {
+                return [
+                    'name' => 'required|max:255',
+                    'mockup_category_id' => 'required',
+                    'images' => 'required|mimes:jpeg,jpg,png',
+                    'psd' => 'mimes:psd',
+                ];
+            }
+            case 'PUT':
+            {
+                return [
+                    'name' => 'required|max:255',
+                    'mockup_category_id' => 'required',
+                    'images' => 'mimes:jpeg,jpg,png',
+                    'psd' => 'mimes:psd',
+                ];
+            }
+        }
     }
 }
