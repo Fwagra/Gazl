@@ -11,5 +11,35 @@
       tags: true
     });
   </script>
-
+@endsection
+@section('footer_js')
+	<script type="text/javascript">
+	var config = {
+		routes: [{
+			delete: "{{ action('MockupController@deleteImage', [$project->slug, $mockup->id ])}}"
+		}],
+		others: [{
+			csrf: "{{ csrf_token() }}",
+			deletemsg: "{{ trans('global.deletemsg') }}"
+		}]
+	}
+	$(document).on('click', '.delete-element', function(event){
+		event.preventDefault();
+	    if(confirm(config.others[0].deletemsg)) {
+			var route = config.routes[0].delete + '/' + $(this).attr('data-type');
+	        $.ajax({
+	    		url: route,
+				type:'POST',
+				data: {
+	               "_token": config.others[0].csrf
+			   }
+			})
+	    	.done(function(id) {
+				if (id != false) {
+					$('span[data-type="'+id+'"]').remove();
+				}
+	    	});
+	    }
+	});
+	</script>
 @endsection

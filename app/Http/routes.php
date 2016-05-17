@@ -53,6 +53,7 @@ Route::put('project/{project}/doc', ['as' => 'project.doc.update', 'uses' => 'Do
 Route::delete('project/{project}/destroy', ['as' => 'project.doc.destroy', 'uses' => 'DocumentationController@destroy']);
 
 // Mockups & mockup categories
+Route::post('project/{project}/mockup/{mockup}/delete/{type}', ['as' => 'mockup.image.delete', 'uses' => 'MockupController@deleteImage']);
 Route::resource('project.mockup', 'MockupController');
 Route::model('mockup', 'App\Mockup');
 

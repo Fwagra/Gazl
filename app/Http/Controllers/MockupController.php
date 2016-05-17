@@ -11,6 +11,7 @@ use App\Project;
 use App\Mockup;
 use App\MockupCategory;
 use File;
+use Response;
 use Session;
 use View;
 
@@ -178,6 +179,41 @@ class MockupController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    /**
+     * Remove an image
+     * @param  \Illuminate\Http\Request  $request
+     * @param Project $project
+     * @param Mockup $mockup
+     * @param string $type
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteImage(Request $request, Project $project, Mockup $mockup, $type)
+    {
+        $return  = false;
+
+        if(isset($mockup->$type)){
+            $path = 'destination'.ucfirst($type);
+            $path = $this->$path;
+            $this->deleteFileImage($path.$mockup->$type);
+            $mockup->$type = '';
+            $mockup->save();
+            $return  = $type;
+        }
+
+        return Response::json($return);
+    }
+
+    /**
+     * Delete the provided image file
+     * @param string $filename
+     */
+    public function deleteFileImage($filepath)
+    {
+        if(File::isFile($filepath))
+            File::delete($filepath);
     }
 
     /**
