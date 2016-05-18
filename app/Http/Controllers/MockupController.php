@@ -173,12 +173,26 @@ class MockupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Project  $project
+     * @param  Mockup  $mockup
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project, Mockup $mockup)
     {
-        //
+         if(!empty($mockup->images)){
+             $this->deleteFileImage($this->destinationImages.$mockup->images);
+         }
+         if(!empty($mockup->psd)){
+             $this->deleteFileImage($this->destinationPsd.$mockup->psd);
+         }
+         $mockup->delete();
+
+         if($request->ajax()){
+             return Response::json($mockup->id);
+         }else{
+             Session::flash('message', trans('mockup.deleted_mockup'));
+             return back();
+         }
     }
 
 
