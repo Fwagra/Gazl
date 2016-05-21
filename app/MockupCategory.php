@@ -19,7 +19,7 @@ class MockupCategory extends Model
    */
     public function mockups()
     {
-        return $this->belongsTo('App\Mockup');
+        return $this->hasMany('App\Mockup');
     }
 
 }

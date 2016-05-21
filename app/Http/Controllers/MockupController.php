@@ -41,11 +41,18 @@ class MockupController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(Project $project)
     {
-        //
+        $categories = $project->mockupCategories()->orderBy('order')->get();
+        // Remove categories without children
+        foreach ($categories as $k => $v) {
+            if(count($v->mockups) == 0){
+                $categories->forget($k);
+            }
+        }
+        return View::make('mockups.index', compact('project','categories'));
     }
 
     /**
@@ -53,7 +60,7 @@ class MockupController extends Controller
      *
      * @param Project $project
      * @param Mockup $mockup
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create(Project $project, Mockup $mockup)
     {
@@ -105,7 +112,7 @@ class MockupController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show($id)
     {

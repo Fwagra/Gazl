@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Input;
+use App\MockupCategory;
 
 class MockupCategoryController extends Controller
 {
@@ -83,5 +85,23 @@ class MockupCategoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    /**
+     *  Sort the categories
+     * @param  Request  $request
+     */
+    public function order(Request $request)
+    {
+        if($request->ajax()){
+            $input = Input::get('order');
+            $i = 1;
+             foreach($input as $value) {
+                 $category = MockupCategory::find($value);
+                 $category->order = $i;
+                 $category->save();
+                 $i++;
+             }
+        }
     }
 }
