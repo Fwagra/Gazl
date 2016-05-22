@@ -17,6 +17,7 @@ return [
     'create_h1' => "Ajouter une maquette",
     'create_mockup' => "Ajouter une maquette",
     'create_title' => "Nouvelle maquette",
+    'delete_category_msg' => "Vous êtes sur le point de supprimer la catégorie et toutes les maquettes qu'elle contient. Êtes-vous sûr de vouloir continuer?",
     'delete_image' => "Supprimer",
     'desc_label' => "Notes",
     'desktop_format' => "Bureau",

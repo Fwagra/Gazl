@@ -22,4 +22,16 @@ class MockupCategory extends Model
         return $this->hasMany('App\Mockup');
     }
 
+    /**
+     * Handle children deletion on resource removal
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::deleted(function($category)
+        {
+            $category->mockups()->delete();
+        });
+    }
+
 }

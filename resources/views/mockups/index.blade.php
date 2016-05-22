@@ -6,8 +6,8 @@
 		@forelse ($categories as $category)
 			<div class="list-group-item" data-id="{{ $category->id }}">
 				<i class=" glyphicon glyphicon-th"></i>
-				<a class="name" href="{{ action('MockupCategoryController@destroy', [$project->slug, $category->id]) }}">{{ $category->name }}</a>
-				{!! Form::open(['route' => ['project.mockup-category.destroy', $category->id], 'method' => 'DELETE', 'class' => 'delete-element pull-right']) !!}
+				<a class="name" href="{{ action('MockupCategoryController@show', [$project->slug, $category->id]) }}">{{ $category->name }}</a>
+				{!! Form::open(['url' => action('MockupCategoryController@destroy', [$project->slug, $category->id]), 'method' => 'DELETE', 'class' => 'delete-element pull-right']) !!}
 					<div class="form-group">
 					    {!! Form::submit('×', ['class' => 'close'])!!}
 					</div>
@@ -27,7 +27,7 @@
 			}],
 			others: [{
 				csrf: "{{ csrf_token() }}",
-				deletemsg: "{{ trans('global.deletemsg') }}"
+				deletemsg: "{{ trans('mockup.delete_category_msg') }}"
 			}]
 		}
 	</script>

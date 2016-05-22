@@ -8,6 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Input;
 use App\MockupCategory;
+use App\Project;
+use Session;
+use Response;
 
 class MockupCategoryController extends Controller
 {
@@ -77,16 +80,25 @@ class MockupCategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the category and the attached items
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  Project  $project
+     * @param  MockupCategory  $category
+     * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,Project $project,  MockupCategory $category)
     {
-        //
+        $category->delete();
+
+        if($request->ajax()){
+            return Response::json($category->id);
+        }else{
+            Session::flash('message', trans('mockup.deleted_category'));
+            return back();
+        }
     }
-    
+
     /**
      *  Sort the categories
      * @param  Request  $request

@@ -180,11 +180,12 @@ class MockupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  Request  $request
      * @param  Project  $project
      * @param  Mockup  $mockup
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project, Mockup $mockup)
+    public function destroy(Request $request, Project $project, Mockup $mockup)
     {
          if(!empty($mockup->images)){
              $this->deleteFileImage($this->destinationImages.$mockup->images);
