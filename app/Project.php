@@ -201,11 +201,20 @@ class Project extends Model
     public static function boot()
     {
         parent::boot();
-        static::deleted(function($product)
+        static::deleted(function($project)
         {
-            $product->accesses()->delete();
-            $product->checklistAnswers()->delete();
-            $product->bugs()->delete();
+            $project->accesses()->delete();
+            $project->checklistAnswers()->delete();
+            $project->bugs()->delete();
+            $project->memos()->delete();
+            $project->documentation()->delete();
+            $project->notifications()->delete();
+            $project->mockupCategories()->delete();
+
+            // In order to trigger static::delete in Mockup Model
+            foreach ($project->mockups() as $mockup) {
+                $mockup->delete();
+            }
         });
     }
 }
