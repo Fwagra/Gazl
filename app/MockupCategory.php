@@ -28,9 +28,12 @@ class MockupCategory extends Model
     public static function boot()
     {
         parent::boot();
-        static::deleted(function($category)
+        static::deleting(function($category)
         {
-            $category->mockups()->delete();
+            // When using $category->mockups->delete(), the static::deleting is not triggered in Mockup.php
+            foreach ($category->mockups as $mockup) {
+                $mockup->delete();
+            }
         });
     }
 

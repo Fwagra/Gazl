@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use File;
 
 class Mockup extends Model
 {
@@ -34,5 +35,33 @@ class Mockup extends Model
     {
         return $this->belongsTo('App\MockupCategory');
     }
+
+    /**
+    * Handle files deletion on cascading delete
+    */
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function($mockup)
+        {
+            if (isset($mockup->images) && !empty($mockup->images)) {
+               $filename = $mockup->images;
+               $path = 'uploads/mockups/';
+               if (File::exists($path.$filename)) {
+                   File::delete($path.$filename);
+               }
+            }
+            if (isset($mockup->psd) && !empty($mockup->psd)) {
+               $filename = $mockup->psd;
+               $path = 'uploads/psd/';
+               if (File::exists($path.$filename)) {
+                   File::delete($path.$filename);
+               }
+            }
+        });
+    }
+
+
+
 
 }
