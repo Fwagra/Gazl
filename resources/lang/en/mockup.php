@@ -35,4 +35,5 @@ return [
     'success_create' => "The mockup has been created",
     'success_edit' => "The mockup has been updated",
     'tablet_format' => "Tablet",
+    'tooltip_category' => "Select a category or type a new one.",
 ];

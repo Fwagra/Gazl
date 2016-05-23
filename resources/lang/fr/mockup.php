@@ -35,4 +35,5 @@ return [
     'success_create' => "La maquette a été ajoutée.",
     'success_edit' => "La maquette a bien été modifiée.",
     'tablet_format' => "Tablette",
+    'tooltip_category' => "Sélectionnez une catégorie ou tapez le nom d'une catégorie à ajouter.",
 ];

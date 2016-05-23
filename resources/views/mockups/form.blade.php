@@ -6,7 +6,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('mockup_category_id', trans('mockup.category_label')) !!}
+    {!! Form::label('mockup_category_id', trans('mockup.category_label'), ['data-toggle' => "tooltip", 'data-original-title' => trans('mockup.tooltip_category'), 'data-placement' => 'right']) !!}
     {!! Form::select('mockup_category_id', $categories, null, ['class' => 'form-control categories select2', 'required' => 'required']) !!}
     <small class="text-danger">{{ $errors->first('mockup_category_id') }}</small>
 </div>
