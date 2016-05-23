@@ -20,7 +20,6 @@ Route::model('project', 'App\Project');
 
 // Checklist routes
 Route::resource('project.checklist','ChecklistAnswerController', ['only' => ['index','update']]);
-Route::model('checklist', 'App\ChecklistAnswer');
 
 // Bug reporting routes
 Route::post('project/{project}/bug/search', ['as' => 'bug.search', 'uses' => 'BugController@search']);
