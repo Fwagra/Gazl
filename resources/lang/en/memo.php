@@ -17,6 +17,7 @@ return [
     'memos_left' => "There are :left memos left before the project could be launched.",
     'new_memo' => "New memo",
     'no_memo_dash' => "No memos have been created yet. Follow this link to add one :",
+    'no_memo_list' => "No memos have been created yet.",
     'title_memo_dash' => "Memos",
     'updated_memo' => "The memo has been updated",
 ];

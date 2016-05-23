@@ -17,6 +17,7 @@ return [
     'memos_left' => "Il reste :left mémos à vérifier avant de pouvoir passer en production.",
     'new_memo' => "Nouveau mémo",
     'no_memo_dash' => "Il n'y a pas encore de mémo pour ce projet.",
+    'no_memo_list' => "Il n'y a pas encore de mémo pour ce projet.",
     'title_memo_dash' => "Mémos",
     'updated_memo' => "Le mémo a été mis à jour",
 ];
