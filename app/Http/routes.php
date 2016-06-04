@@ -54,6 +54,7 @@ Route::delete('project/{project}/destroy', ['as' => 'project.doc.destroy', 'uses
 // Mockups & mockup categories
 Route::post('project/{project}/mockup/{mockup}/delete/{type}', ['as' => 'mockup.image.delete', 'uses' => 'MockupController@deleteImage']);
 Route::resource('project.mockup', 'MockupController');
+Route::post('mockup/sort',['as' => 'sort.mockup','uses' => 'MockupController@order']);
 Route::model('mockup', 'App\Mockup');
 Route::post('mockup-category/sort',['as' => 'sort.mockup-category','uses' => 'MockupCategoryController@order']);
 Route::resource('project.mockup-category', 'MockupCategoryController');

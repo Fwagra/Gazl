@@ -11,6 +11,7 @@ use App\Project;
 use App\Mockup;
 use App\MockupCategory;
 use File;
+use Input;
 use Response;
 use Session;
 use View;
@@ -273,5 +274,23 @@ class MockupController extends Controller
         $image->move($path, $filename);
 
         return $filename;
+    }
+
+    /**
+     *  Sort the mockups
+     * @param  Request  $request
+     */
+    public function order(Request $request)
+    {
+        if($request->ajax()){
+            $input = Input::get('order');
+            $i = 1;
+             foreach($input as $value) {
+                 $mockup = Mockup::find($value);
+                 $mockup->order = $i;
+                 $mockup->save();
+                 $i++;
+             }
+        }
     }
 }

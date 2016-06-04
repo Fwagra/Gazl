@@ -11,6 +11,7 @@ use App\MockupCategory;
 use App\Project;
 use Session;
 use Response;
+use View;
 
 class MockupCategoryController extends Controller
 {
@@ -48,12 +49,14 @@ class MockupCategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Project  $project
+     * @param  MockupCategory  $mockupCategory
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project, MockupCategory $category)
     {
-        //
+        $mockups = $category->mockups()->orderBy('order')->get();
+        return View::make('mockups.list', compact('mockups', 'category', 'project'));
     }
 
     /**
