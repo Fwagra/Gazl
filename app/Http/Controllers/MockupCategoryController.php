@@ -62,24 +62,28 @@ class MockupCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Project  $project
+     * @param  MockupCategory  $mockupCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project, MockupCategory $category)
     {
-        //
+        return View::make('mockups..category.edit', compact('project', 'category'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Project  $project
+     * @param  MockupCategory  $mockupCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project, MockupCategory $category)
     {
-        //
+        $category->update($request->all());
+        Session::flash('message', trans('mockup.success_edit_cat'));
+        return redirect()->action('MockupController@index', ['projectSlug' => $project->slug]);
     }
 
     /**

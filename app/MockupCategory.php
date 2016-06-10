@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class MockupCategory extends Model
 {
+    protected $fillable = ['name'];
+
   /**
    * A mockup category  belongs to a project
    */

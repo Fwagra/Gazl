@@ -21,7 +21,9 @@ return [
     'delete_image' => "Supprimer",
     'desc_label' => "Notes",
     'desktop_format' => "Bureau",
+    'edit_cat_title' => "Éditer la catégorie",
     'edit_title' => "Éditer la maquette",
+    'edit_cat_h1' => "Éditer la catégorie",
     'edit_h1' => "Éditer la maquette",
     'format_label' => "Format",
     'image_label' => "Fichier image",
@@ -34,6 +36,7 @@ return [
     'submit' => "Enregister",
     'success_create' => "La maquette a été ajoutée.",
     'success_edit' => "La maquette a bien été modifiée.",
+    'success_edit_cat' => "La catégorie a bien été modifiée.",
     'tablet_format' => "Tablette",
     'tooltip_category' => "Sélectionnez une catégorie ou tapez le nom d'une catégorie à ajouter.",
 ];
