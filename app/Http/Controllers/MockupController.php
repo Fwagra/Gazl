@@ -98,6 +98,9 @@ class MockupController extends Controller
             $fields['images'] = $filename;
         }
 
+        $order = $project->mockups()->max('order') + 1;
+        $fields['order'] = $order;
+
         if($request->hasFile('psd')){
             $image = $request->file('psd');
             $filename = $this->saveImage($project, $image, $this->destinationPsd);
