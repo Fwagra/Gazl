@@ -57,7 +57,7 @@ Route::resource('project.mockup', 'MockupController');
 Route::post('mockup/sort',['as' => 'sort.mockup','uses' => 'MockupController@order']);
 Route::model('mockup', 'App\Mockup');
 Route::post('mockup-category/sort',['as' => 'sort.mockup-category','uses' => 'MockupCategoryController@order']);
-Route::resource('project.mockup-category', 'MockupCategoryController');
+Route::resource('project.mockup-category', 'MockupCategoryController', ['except' => ['store', 'create', 'index']]);
 Route::model('mockup-category', 'App\MockupCategory');
 
 // Accesses Routes
