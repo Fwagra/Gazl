@@ -115,12 +115,17 @@ class MockupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Project $project
+     * @param  Mockup $mockup
      * @return View
      */
-    public function show($id)
+    public function show(Project $project, Mockup $mockup)
     {
-        //
+        // Retrieve the previous and next mockup
+        $previous = ($mockup->order != 0)? $project->mockups()->where('order', '=', $mockup->order - 1)->first() : null ;
+        $next = $project->mockups()->where('order', '=', $mockup->order + 1)->first();
+
+        Return View::make('mockups.show', compact('project', 'mockup', 'next', 'previous'));
     }
 
     /**

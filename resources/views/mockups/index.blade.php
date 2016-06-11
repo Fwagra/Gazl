@@ -10,6 +10,7 @@
 				@endif
 				<a class="name" href="{{ action('MockupCategoryController@show', [$project->slug, $category->id]) }}">{{ $category->name }}</a>
 				@if (Auth::check())
+					<a class="edit" href="{{ action('MockupCategoryController@edit', [$project->slug, $category->id])}}">{!! trans('mockup.edit') !!}</a>
 					{!! Form::open(['url' => action('MockupCategoryController@destroy', [$project->slug, $category->id]), 'method' => 'DELETE', 'class' => 'delete-element pull-right']) !!}
 						<div class="form-group">
 						    {!! Form::submit('×', ['class' => 'close'])!!}

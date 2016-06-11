@@ -11,6 +11,8 @@
 				<span class="format-{{ $mockup->format }}"></span>
 				<a class="name" href="{{ action('MockupController@show', [$project->slug, $mockup->id]) }}">{{ $mockup->name }}</a>
 				@if (Auth::check())
+					<a class="edit" href="{{ action('MockupController@edit', [$project->slug, $mockup->id])}}">{!! trans('mockup.edit') !!}</a>
+
 					{!! Form::open(['url' => action('MockupController@destroy', [$project->slug, $mockup->id]), 'method' => 'DELETE', 'class' => 'delete-element pull-right']) !!}
 						<div class="form-group">
 						    {!! Form::submit('×', ['class' => 'close'])!!}

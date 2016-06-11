@@ -22,6 +22,7 @@ return [
     'desc_label' => "Description",
     'desktop_format' => "Desktop",
     'format_label' => "Format",
+    'edit' => "Edit",
     'edit_cat_title' => "Edit category",
     'edit_title' => "Edit the mockup",
     'edit_cat_h1' => "Edit category",

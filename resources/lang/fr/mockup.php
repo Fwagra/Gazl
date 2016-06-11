@@ -21,6 +21,7 @@ return [
     'delete_image' => "Supprimer",
     'desc_label' => "Notes",
     'desktop_format' => "Bureau",
+    'edit' => "Éditer",
     'edit_cat_title' => "Éditer la catégorie",
     'edit_title' => "Éditer la maquette",
     'edit_cat_h1' => "Éditer la catégorie",
