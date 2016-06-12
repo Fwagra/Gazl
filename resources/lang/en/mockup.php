@@ -6,6 +6,7 @@ return [
     |--------------------------------------------------------------------------
     |
     */
+    'back_link' => "Back",
     'category_label' => "Category",
     'color_0' => "No colour",
     'color_1' => "Grey",
@@ -32,7 +33,9 @@ return [
     'mockup_index_h1' => "Maquettes",
     'mockup_index_title' => "Maquettes",
     'name_label' => "Name of the mockup",
-    'no_categories' => "Aucune maquette n'a été ajoutée.",
+    'next_link' => "Next",
+    'no_categories' => "No mockups added",
+    'previous_link' => "Previous",
     'psd_label' => "Psd file",
     'submit' => "Save",
     'success_create' => "The mockup has been created",

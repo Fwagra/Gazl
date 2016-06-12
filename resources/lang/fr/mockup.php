@@ -6,6 +6,7 @@ return [
     |--------------------------------------------------------------------------
     |
     */
+    'back_link' => "Retour",
     'category_label' => "Catégorie",
     'color_0' => "Pas de couleur",
     'color_1' => "Gris",
@@ -32,7 +33,9 @@ return [
     'mockup_index_h1' => "Maquettes",
     'mockup_index_title' => "Maquettes",
     'name_label' => "Nom de la maquette",
+    'next_link' => "Suivant",
     'no_categories' => "Aucune maquette n'a été ajoutée.",
+    'previous_link' => "Précédent",
     'psd_label' => "Fichier psd",
     'submit' => "Enregister",
     'success_create' => "La maquette a été ajoutée.",
