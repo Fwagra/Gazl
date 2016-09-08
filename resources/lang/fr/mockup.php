@@ -43,5 +43,8 @@ return [
     'success_edit' => "La maquette a bien été modifiée.",
     'success_edit_cat' => "La catégorie a bien été modifiée.",
     'tablet_format' => "Tablette",
+    'title_mockup_dash' => "Maquettes",
     'tooltip_category' => "Sélectionnez une catégorie ou tapez le nom d'une catégorie à ajouter.",
+    'total_cats_dash' => "dans :cats catégorie. | dans :cats catégories.",
+    'total_dash' => "Il y a :total maquette disponible | Il y a :total maquettes disponibles",
 ];

@@ -83,6 +83,7 @@ class ProjectController extends Controller
         $accesses = $project->accesses;
         $bugs = $this->getBugsCounts($project);
         $memos = $this->getMemos($project);
+        $mockups = $this->getMockups($project);
         $doc = $project->documentation;
         return View::make('projects.show', compact(
           'project',
@@ -90,7 +91,8 @@ class ProjectController extends Controller
           'answers',
           'bugs',
           'memos',
-          'doc'
+          'doc',
+          'mockups'
         ));
     }
 
@@ -242,5 +244,18 @@ class ProjectController extends Controller
       $memos['left'] = $memos['total'] - $memos['active'];
 
       return $memos;
+    }
+
+    /**
+     * Return the number of memos and their categories
+     * @param Project $project
+     * @return array $mockups
+     */
+    public function getMockups($project)
+    {
+        $mockups['total'] = count($project->mockups);
+        $mockups['categories'] = count($project->mockupCategories);
+
+        return $mockups;
     }
 }

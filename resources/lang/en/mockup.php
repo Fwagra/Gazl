@@ -43,5 +43,8 @@ return [
     'success_cat_edit' => "The category has been updated",
     'success_edit' => "The mockup has been updated",
     'tablet_format' => "Tablet",
+    'title_mockup_dash' => "Mockups",
     'tooltip_category' => "Select a category or type a new one.",
+    'total_cats_dash' => "in :cats category. | in :cats categories.",
+    'total_dash' => "There is :total mockup for this project | There are :total mockups for this project",
 ];
