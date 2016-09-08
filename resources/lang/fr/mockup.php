@@ -20,6 +20,7 @@ return [
     'create_title' => "Nouvelle maquette",
     'delete_category_msg' => "Vous êtes sur le point de supprimer la catégorie et toutes les maquettes qu'elle contient. Êtes-vous sûr de vouloir continuer?",
     'delete_image' => "Supprimer",
+    'delete_mockup_msg' => "Êtes-vous sûr de vouloir supprimer cette maquette?",
     'desc_label' => "Notes",
     'desktop_format' => "Bureau",
     'edit' => "Éditer",

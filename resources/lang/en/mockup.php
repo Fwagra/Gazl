@@ -20,6 +20,7 @@ return [
     'create_title' => "New mockup",
     'delete_category_msg' => "You are about to delete this category and all the related mockups. Are you sure ?",
     'delete_image' => "Delete",
+    'delete_mockup_msg' => "You are about to delete this mockup. Are you sure ??",
     'desc_label' => "Description",
     'desktop_format' => "Desktop",
     'format_label' => "Format",
