@@ -15,7 +15,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
         // Using class based composers...
         view()->composer(
-            'projects.info', 'App\ViewComposers\ProjectComposer'
+            'app', 'App\ViewComposers\ProjectComposer'
         );
     }
 
