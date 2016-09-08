@@ -1,7 +1,7 @@
 @extends('app')
 @section('title', $category->name)
 @section('content')
-	<h1>{{ $category->name }}</h1>
+	<h1><a href="{{ action('MockupController@index', [$project->slug])}}">&#8701;</a> / {{ $category->name }}</h1>
 	<div class="sortable panel panel-default list-group">
 		@forelse ($mockups as $mockup)
 			<div class="list-group-item {{ $mockup->color }}" data-id="{{ $mockup->id }}">
