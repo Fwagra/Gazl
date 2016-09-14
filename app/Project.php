@@ -180,11 +180,19 @@ class Project extends Model
     }
 
     /**
-     * A project may have one documentation
+     * A project may have one documentation (client-oriented)
      */
     public function documentation()
     {
         return $this->hasOne('App\Documentation');
+    }
+
+    /**
+     * A project may have one wiki (internal documentation)
+     */
+    public function internalDocumentation()
+    {
+        return $this->hasOne('App\InternalDocumentation');
     }
 
     /**

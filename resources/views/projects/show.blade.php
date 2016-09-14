@@ -7,5 +7,6 @@
 	@include('dashboard.bugs')
 	@include('dashboard.memos')
 	@include('dashboard.doc')
+	@include('dashboard.internaldoc')
 	@include('dashboard.mockups')
 @endsection

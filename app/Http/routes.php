@@ -51,6 +51,12 @@ Route::get('project/{project}/doc/pdf', ['as' => 'project.doc.pdf', 'uses' => 'D
 Route::put('project/{project}/doc', ['as' => 'project.doc.update', 'uses' => 'DocumentationController@update']);
 Route::delete('project/{project}/destroy', ['as' => 'project.doc.destroy', 'uses' => 'DocumentationController@destroy']);
 
+// Internal Documentation
+Route::get('project/{project}/internaldoc/', ['as' => 'project.internaldoc.index', 'uses' => 'InternalDocumentationController@index']);
+Route::get('project/{project}/internaldoc/edit', ['as' => 'project.internaldoc.edit', 'uses' => 'InternalDocumentationController@edit']);
+Route::put('project/{project}/internaldoc', ['as' => 'project.internaldoc.update', 'uses' => 'InternalDocumentationController@update']);
+Route::delete('project/{project}/internaldoc/destroy', ['as' => 'project.internaldoc.destroy', 'uses' => 'InternalDocumentationController@destroy']);
+
 // Mockups & mockup categories
 Route::post('project/{project}/mockup/{mockup}/delete/{type}', ['as' => 'mockup.image.delete', 'uses' => 'MockupController@deleteImage']);
 Route::resource('project.mockup', 'MockupController');
