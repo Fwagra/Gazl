@@ -1,4 +1,4 @@
-@if (Auth::check() OR (!Auth::check() AND $doc != null))
+@if (Auth::check())
 <div class="col-md-4 col-xs-12">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -7,7 +7,6 @@
             </a>
         </div>
 
-        @if(Auth::check())
         <a href="{{ action('InternalDocumentationController@edit', [$project->slug]) }}">
             @if (!$doc)
                 {!! trans('doc.write_doc') !!}
@@ -15,7 +14,6 @@
                 {{ trans('doc.edit_doc') }}
             @endif
         </a>
-        @endif
 
         @if($doc)
         <a href="{{ action('InternalDocumentationController@index', [$project->slug]) }}">
