@@ -19,6 +19,7 @@
 		    <small class="text-danger">{{ $errors->first('checkbox_id') }}</small>
 		</div>
     <div class="btn-group pull-right">
+		<a target="_blank" href="https://guides.github.com/features/mastering-markdown/#syntax">{!! trans('doc.link_markdown_guide') !!}</a>
         {!! Form::submit(trans('doc.save'), ['class' => 'btn btn-success']) !!}
     </div>
   {!! Form::close() !!}

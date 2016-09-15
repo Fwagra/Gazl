@@ -15,6 +15,7 @@ return [
     'download_pdf' => "Télécharger en PDF",
     'edit_doc' => "Modifier la documentation",
     'form_h1' => "Modifier la documentation",
+    'link_markdown_guide' => "Guide Markdown",
     'link_to_edit' => "Éditer",
     'no_access' => "Cette page n'est pas accessible pour le moment.",
     'no_doc_matching' => "La documentation n'existe pas",

@@ -15,6 +15,7 @@ return [
     'download_pdf' => "Download PDF version",
     'edit_doc' => "Edit the documentation",
     'form_h1' => "Edit the documentation",
+    'link_markdown_guide' => "Markdown Guide",
     'link_to_edit' => "Edit",
     'no_access' => "This page is not available currently.",
     'no_doc_matching' => "Requested documentation not found.",
