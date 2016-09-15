@@ -74,7 +74,7 @@ class AuthController extends Controller
         ]);
     }
 
-      /**
+    /**
      * Handle a registration request for the application.
      * - Overridden from Illuminate\Foundation\Auth trait
      * @param  \Illuminate\Http\Request  $request
@@ -90,8 +90,18 @@ class AuthController extends Controller
             );
         }
 
-       $this->create($request->all());
-       Session::flash('message', trans('auth.registration_effective')); 
+        $user = $this->create($request->all());
+
+        // Activate the first user automatically, all other users will need to 
+        // be validated first (we set the status manually because we don't want 
+        // it to be mass assignable).
+        if ($user->id === 1) {
+            $user->status = 1;
+            $user->save();
+        }
+
+        Session::flash('message', trans('auth.registration_effective')); 
+
         return redirect($this->redirectPath());
     }
 
@@ -150,12 +160,23 @@ class AuthController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
+        // Redirect to login form if the user is disabled.
+        $user = User::where($this->loginUsername(), $request->input($this->loginUsername()))->first();
+        if ($user AND !$user->status) {
+            return redirect()->back()
+                ->withInput($request->only($this->loginUsername(), 'remember'))
+                ->withErrors([
+                    $this->loginUsername() => trans('auth.failed'),
+                ]);
+        }
+
         $credentials = $this->getCredentials($request);
 
-        if (Auth::attempt($credentials, $request->has('remember')) && isset($cookie)) {
-            return $this->handleUserWasAuthenticated($request, $throttles)->withCookie($cookie);
-        }else{
-            return $this->handleUserWasAuthenticated($request, $throttles); 
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            if (isset($cookie))
+                return $this->handleUserWasAuthenticated($request, $throttles)->withCookie($cookie);
+            else 
+                return $this->handleUserWasAuthenticated($request, $throttles);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -164,8 +185,6 @@ class AuthController extends Controller
         if ($throttles) {
             $this->incrementLoginAttempts($request);
         }
-
-
 
         return redirect($this->loginPath())
             ->withInput($request->only($this->loginUsername(), 'remember'))
