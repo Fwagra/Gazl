@@ -148,6 +148,14 @@ class Project extends Model
     }
 
     /**
+     * A project may be linked to many contacts
+     */
+    public function contacts()
+    {
+        return $this->belongsToMany('App\Contact');
+    }
+
+    /**
      * A project may own many notifcation subscriptions
      */
     public function notifications()
@@ -216,6 +224,7 @@ class Project extends Model
             $project->bugs()->delete();
             $project->memos()->delete();
             $project->documentation()->delete();
+            $project->internaldocumentation()->delete();
             $project->notifications()->delete();
             $project->mockupCategories()->delete();
 

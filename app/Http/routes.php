@@ -66,6 +66,9 @@ Route::post('mockup-category/sort',['as' => 'sort.mockup-category','uses' => 'Mo
 Route::resource('project.mockup-category', 'MockupCategoryController', ['except' => ['store', 'create', 'index']]);
 Route::model('mockup-category', 'App\MockupCategory');
 
+// Contacts
+Route::get('project/{project}/contacts/', ['as' => 'project.contacts.index', 'uses' => 'ContactController@index']);
+
 // Accesses Routes
 Route::resource('project.access', 'AccessesController', ['except' => ['show','index']]);
 Route::get('key/set', ['as' => 'key.set', 'uses' => 'AccessesController@setKey']);
