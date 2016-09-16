@@ -78,7 +78,6 @@ Route::Model('access', 'App\Access');
 // Admin routes
 Route::get('admin', ['as' => 'admin', 'uses' => 'AdminController@index']);
 Route::group(array('prefix'=>'admin', 'middleware' => 'auth'), function(){
-
 	Route::resource('checklist-category', 'ChecklistCategoryController', ['except' => ['show', 'create']]);
 	Route::post('checklist-category/sort',['as' => 'sort.categories','uses' => 'ChecklistCategoryController@order']);
 	Route::model('checklist_category', 'App\ChecklistCategory');
@@ -89,6 +88,8 @@ Route::group(array('prefix'=>'admin', 'middleware' => 'auth'), function(){
 
 	Route::get('key', ['as' => 'admin.key', 'uses' => 'AccessesController@setGlobalKey']);
 	Route::post('key', ['as' => 'admin.key.save', 'uses' => 'AccessesController@saveGlobalKey']);
+
+  Route::resource('user', 'UserController', ['except' => ['create', 'store', 'show']]);
 });
 
 //**** Authentication routes...****//
