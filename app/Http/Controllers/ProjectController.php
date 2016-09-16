@@ -84,15 +84,19 @@ class ProjectController extends Controller
         $bugs = $this->getBugsCounts($project);
         $memos = $this->getMemos($project);
         $mockups = $this->getMockups($project);
-        $doc = $project->documentation;
+		$doc = $project->documentation;
+        $internaldoc = $project->internaldocumentation;
+		$contacts = $project->contacts;
         return View::make('projects.show', compact(
           'project',
           'accesses',
           'answers',
           'bugs',
           'memos',
-          'doc',
-          'mockups'
+		  'doc',
+          'internaldoc',
+		  'mockups',
+          'contacts'
         ));
     }
 

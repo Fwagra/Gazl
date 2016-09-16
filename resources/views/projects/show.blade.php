@@ -9,4 +9,5 @@
 	@include('dashboard.doc')
 	@include('dashboard.internaldoc')
 	@include('dashboard.mockups')
+	@include('dashboard.contacts')
 @endsection
