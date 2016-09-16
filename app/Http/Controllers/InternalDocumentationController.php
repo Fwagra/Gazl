@@ -21,8 +21,7 @@ class InternalDocumentationController extends Controller
      * Construct method
      */
     public function __construct() {
-      $this->middleware('guest.auth', ['only' => ['index']]);
-      $this->middleware('auth', ['except' => ['index']]);
+      $this->middleware('auth');
     }
 
     /**
@@ -34,12 +33,6 @@ class InternalDocumentationController extends Controller
     public function index(Project $project)
     {
         $doc = $project->internalDocumentation;
-
-        if(!Auth::check() && $doc == null)
-        {
-          Session::flash('error', trans('doc.no_access'));
-          return redirect()->action('ProjectController@show', ['projectSlug' => $project->slug]);
-        }
 
         if($doc != null)
         {
