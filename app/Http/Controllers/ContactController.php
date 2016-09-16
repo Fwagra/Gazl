@@ -25,31 +25,36 @@ class ContactController extends Controller
     }
 
     /**
-     * Display the projects contacts if there is at least one
+     * Display all the contacts
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $contacts = Contact::All();
+        return View::make('contacts.index', compact('contacts'));
+    }
+    /**
+     * Display the project's contacts only
      *
      * @param Project $project
      * @return \Illuminate\Http\Response
      */
-    public function index(Project $project)
+    public function contactForProject(Project $project)
     {
         $contacts = $project->contacts;
-
-        if($contacts != null)
-        {
-          return View::make('contacts.index', compact('project', 'contacts'));
-        }
+        return View::make('contacts.index', compact('project', 'contacts'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Project $project
-     * @param  Bug $bug
+     * @param  Contact $contact
      * @return View
      */
-    public function show(Project $project, Contact $contact)
+    public function show(Contact $contact)
     {
-        return View::make('contacts.show', compact('project', 'contact'));
+        return View::make('contacts.show', compact('contact'));
     }
 
     /**
@@ -58,31 +63,33 @@ class ContactController extends Controller
     * @param Project $project
     * @return \Illuminate\Http\Response
     */
-    public function create(Project $project)
+    public function create()
     {
-        return View::make('contacts.new', compact('project'));
+        // We will need the projects list
+        $projects = Project::All();
+        return View::make('contacts.new', compact('projects'));
     }
 
     /**
     * Show the form for editing the specified resource.
     *
-    * @param  Project $project
-    * @param  Bug  $bug
+    * @param  Contact  $contact
     * @return View
     */
-    public function edit(Project $project, Contact $contact)
+    public function edit(Contact $contact)
     {
-        return View::make('contacts.edit', compact('project', 'contact'));
+        // We will need the projects list
+        $projects = Project::All();
+        return View::make('contacts.edit', compact('projects','contact'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Project $project
      * @return \Illuminate\Http\Response
      */
-     public function store(Request $request, Project $project)
+     public function store(Request $request)
      {
          $this->validate($request, [
              'name' => 'required|max:255',
@@ -95,18 +102,17 @@ class ContactController extends Controller
          Event::fire(new NewContact($contact));
 
          Session::flash('message', trans('contacts.added_contact'));
-         return redirect()->action('ContactController@index', ['projectSlug' => $project->slug]);
+         return redirect()->action('ContactController@index');
      }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  Project $project
      * @param  Contact $contact
      * @return Response
      */
-    public function update(Request $request, Project $project, Contact $contact)
+    public function update(Request $request, Contact $contact)
     {
         $this->validate($request, [
             'name' => 'required|max:255',
@@ -117,18 +123,17 @@ class ContactController extends Controller
         $contact->update($fields);
 
         Session::flash('message', trans('contacts.edited_contact'));
-        return redirect()->action('ContactController@index', ['projectSlug' => $project->slug]);
+        return redirect()->action('ContactController@index');
     }
 
     /**
      * Remove the category and the attached items
      *
      * @param  string  $projectSlug
-     * @param  Project $project
      * @param  Contact $contact
      * @return Response
      */
-    public function destroy(Request $request, Project $project, Contact $contact)
+    public function destroy(Request $request, Contact $contact)
     {
         $contact->delete();
 

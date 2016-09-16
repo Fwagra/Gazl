@@ -16,5 +16,12 @@
     {!! Form::textarea('notes', null, ['class' => 'form-control', 'placeholder' => trans('contacts.notes_placeholder')]) !!}
 </div>
 <div class="form-group">
+    <div class="label">{!! trans('contacts.projects') !!}</div>
+	@foreach ($projects as $project)
+    	{!! Form::checkbox('projects', $project->id, ['class' => 'form-control']) !!}
+		{!! $project->name !!}
+	@endforeach
+</div>
+<div class="form-group">
     {!! Form::submit(trans('contacts.save'), ['class' => 'btn btn-primary'])!!}
 </div>

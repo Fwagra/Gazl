@@ -2,7 +2,7 @@
 	<div class="col-md-4 col-xs-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<a href="{{ action('ContactController@index', [$project->slug]) }}">
+				<a href="{{ action('ContactController@contactForProject', $project->slug) }}">
 					{{ trans('contacts.dash_block_title') }}
 				</a>
 			</div>
@@ -11,7 +11,7 @@
 					@if (count($contacts))
 						@foreach ($contacts as $contact)
 							<li>
-								<a href="{{ action('ContactController@show',[$project->slug, $contact->id]) }}">
+								<a href="{{ action('ContactController@show',$contact->id) }}">
 									{!! $contact->name !!}
 								</a>
 							</li>
@@ -20,7 +20,7 @@
 				</ul>
 			</div>
 			<div class="panel-footer">
-				<a href="{{ action('ContactController@create',[$project->slug]) }}">{!! trans('contacts.new_contact_action') !!}</a>
+				<a href="{{ action('ContactController@create') }}">{!! trans('contacts.new_contact_action') !!}</a>
 			</div>
 		</div>
 	</div>

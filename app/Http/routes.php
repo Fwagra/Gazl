@@ -67,7 +67,8 @@ Route::resource('project.mockup-category', 'MockupCategoryController', ['except'
 Route::model('mockup-category', 'App\MockupCategory');
 
 // Contacts
-Route::resource('project.contacts', 'ContactController');
+Route::resource('contacts', 'ContactController');
+Route::get('project/{project}/contacts', 'ContactController@contactForProject');
 Route::model('contacts', 'App\Contact');
 
 // Accesses Routes
