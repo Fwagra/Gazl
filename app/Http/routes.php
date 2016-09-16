@@ -89,7 +89,8 @@ Route::group(array('prefix'=>'admin', 'middleware' => 'auth'), function(){
 	Route::get('key', ['as' => 'admin.key', 'uses' => 'AccessesController@setGlobalKey']);
 	Route::post('key', ['as' => 'admin.key.save', 'uses' => 'AccessesController@saveGlobalKey']);
 
-  Route::resource('user', 'UserController', ['except' => ['create', 'store', 'show']]);
+    Route::resource('user', 'UserController', ['except' => ['create', 'store', 'show']]);
+	Route::model('user', 'App\User');
 });
 
 //**** Authentication routes...****//
