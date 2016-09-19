@@ -13,7 +13,6 @@
 			</ul>
 			<div class="actions">
 				<a href="{{ action('ContactController@edit', $contact->id) }}">{!! trans('contacts.edit_contact_action') !!}</a>
-				<a href="{{ action('ContactController@destroy', $contact->id) }}">{!! trans('contacts.delete_contact_action') !!}</a>
 			</div>
 		</div>
 	@endforeach

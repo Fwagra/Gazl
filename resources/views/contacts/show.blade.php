@@ -5,6 +5,7 @@
     <div class="col-md-12">
         <div class="row">
             <a href="{{ action('ContactController@edit', $contact->id) }}">{{ trans('contacts.edit_contact_action') }}</a>
+			<a href="{{ action('ContactController@destroy', $contact->id) }}">{!! trans('contacts.delete_contact_action') !!}</a>
             <div class="group email">
                 <span class="label">{{ trans('contacts.email') }}</span>
                 <span class="value">{{ $contact->email }}</span>

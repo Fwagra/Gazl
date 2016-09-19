@@ -121,6 +121,8 @@ class ContactController extends Controller
 
         $fields = $request->all();
         $contact->update($fields);
+		// Sync updates the relationships in the contact-project table
+		$contact->projects()->sync($fields['projects']);
 
         Session::flash('message', trans('contacts.edited_contact'));
         return redirect()->action('ContactController@index');

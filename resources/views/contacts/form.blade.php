@@ -18,7 +18,7 @@
 <div class="form-group">
     <div class="label">{!! trans('contacts.projects') !!}</div>
 	@foreach ($projects as $project)
-    	{!! Form::checkbox('projects', $project->id, ['class' => 'form-control']) !!}
+    	{!! Form::checkbox('projects[]', $project->id, ['class' => 'form-control']) !!}
 		{!! $project->name !!}
 	@endforeach
 </div>
