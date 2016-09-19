@@ -5,7 +5,9 @@
     <div class="col-md-12">
         <div class="row">
             <a href="{{ action('ContactController@edit', $contact->id) }}">{{ trans('contacts.edit_contact_action') }}</a>
-			<a href="{{ action('ContactController@destroy', $contact->id) }}">{!! trans('contacts.delete_contact_action') !!}</a>
+			{!! Form::model($contact, ['url' => action('ContactController@destroy', $contact->id), 'method' => 'DELETE']) !!}
+				{!! Form::submit(trans('contacts.delete_contact_action'), ['class' => 'btn btn-delete'])!!}
+		    {!!  Form::close() !!}
             <div class="group email">
                 <span class="label">{{ trans('contacts.email') }}</span>
                 <span class="value">{{ $contact->email }}</span>

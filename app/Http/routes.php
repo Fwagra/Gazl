@@ -69,6 +69,7 @@ Route::model('mockup-category', 'App\MockupCategory');
 // Contacts
 Route::resource('contacts', 'ContactController');
 Route::get('project/{project}/contacts', 'ContactController@contactForProject');
+Route::get('project/{project}/contacts/{contact}/starrify', 'ContactController@starrify');
 Route::model('contacts', 'App\Contact');
 
 // Accesses Routes

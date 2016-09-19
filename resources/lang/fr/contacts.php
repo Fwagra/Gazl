@@ -13,7 +13,8 @@ return [
 	'edit_contact_action' => "Éditer",
 	'email' => "Email",
 	'email_placeholder' => "",
-	'list_h1' => "Contacts du projet",
+	'list_for_project_h1' => "Contacts du projet",
+	'list_h1' => "Tous les contacts",
 	'new_contact_action' => "Ajouter un contact",
 	'name' => "Nom",
 	'name_placeholder' => "Prénom Nom",
@@ -23,4 +24,5 @@ return [
 	'phone_placeholder' => "",
 	'projects' => "Projets liés",
 	'save' => "Enregistrer",
+	'starrify_contact' => "Ajouter aux favoris",
 ];

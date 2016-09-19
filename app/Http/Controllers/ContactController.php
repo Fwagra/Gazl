@@ -80,7 +80,8 @@ class ContactController extends Controller
     {
         // We will need the projects list
         $projects = Project::All();
-        return View::make('contacts.edit', compact('projects','contact'));
+		$linked_projects = $contact->projects;
+        return View::make('contacts.edit', compact('projects','contact','linked_projects'));
     }
 
     /**
@@ -99,7 +100,8 @@ class ContactController extends Controller
          $fields = $request->all();
 
          $contact = Contact::create($fields);
-         Event::fire(new NewContact($contact));
+ 		// Sync updates the relationships in the contact-project table
+ 		$contact->projects()->sync($fields['projects']);
 
          Session::flash('message', trans('contacts.added_contact'));
          return redirect()->action('ContactController@index');
@@ -143,7 +145,21 @@ class ContactController extends Controller
             return Response::json($contact->id);
         }else{
             Session::flash('message', trans('contacts.deleted_contact'));
-            return back();
+	        return redirect()->action('ContactController@index');
         }
+    }
+
+    /**
+     * Set to "starred" status for current project
+     *
+     * @param  string  $projectSlug
+     * @param  Contact $contact
+     * @return Response
+     */
+    public function starrify(Project $project, Contact $contact)
+    {
+		dd($project,$contact);
+        Session::flash('message', trans('contacts.starrify_contact'));
+        return back();
     }
 }

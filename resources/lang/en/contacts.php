@@ -13,7 +13,8 @@ return [
 	'edit_contact_action' => "Edit",
 	'email' => "Email",
 	'email_placeholder' => "",
-	'list_h1' => "Project's contacts",
+	'list_for_project_h1' => "Project's contacts",
+	'list_h1' => "All contacts",
 	'new_contact_action' => "Add new contact",
 	'name' => "Name",
 	'name_placeholder' => "Firstname Lastname",
@@ -23,4 +24,5 @@ return [
 	'phone_placeholder' => "",
 	'projects' => "User's projects",
 	'save' => "Save",
+	'starrify_contact' => "Add to favorites",
 ];
