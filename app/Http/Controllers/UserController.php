@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return View::make('admin.users.edit', compact('user'));
     }
 
     /**

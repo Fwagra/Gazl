@@ -4,13 +4,11 @@
     <h1>{{ trans('user.user_admin_h1') }}</h1>
     <div class="list-users">
         <ul class="list-group">
-            @forelse ($users as $user)
+            @foreach ($users as $user)
                 <li class="list-group-item">
-                    {{ $user->first_name . ' ' . $user->name }}
+                    <a href="{{ action('UserController@edit', $user->id) }}">{{ $user->first_name . ' ' . $user->name }}</a> 
                 </li>
-            @empty
-                <li class="list-group-item">{{ trans('user.no_user_list') }}</li>
-            @endforelse
+            @endforeach
         </ul>
     </div>
 @endsection
