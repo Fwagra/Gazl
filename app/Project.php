@@ -152,7 +152,14 @@ class Project extends Model
      */
     public function contacts()
     {
-        return $this->belongsToMany('App\Contact');
+        return $this->belongsToMany('App\Contact')->withPivot('is_starred');
+    }
+    /**
+     * Some contacts may be "starrified" (to be displayed on project's homepage)
+     */
+    public function starrified_contacts()
+    {
+		return $this->belongsToMany('App\Contact')->wherePivot('is_starred', 1);
     }
 
     /**

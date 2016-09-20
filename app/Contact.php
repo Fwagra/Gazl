@@ -14,6 +14,14 @@ class Contact extends Model
      */
     public function projects()
     {
-        return $this->belongsToMany('App\Project');
+        return $this->belongsToMany('App\Project')->withPivot('is_starred');
+    }
+
+    /**
+     * A contact can be "starred" for a project
+     */
+    public function is_starred($project_id)
+    {
+        return $this->projects()->findOrFail($project_id, ['project_id'])->pivot->is_starred;
     }
 }

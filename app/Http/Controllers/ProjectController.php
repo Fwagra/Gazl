@@ -86,7 +86,7 @@ class ProjectController extends Controller
         $mockups = $this->getMockups($project);
 		$doc = $project->documentation;
         $internaldoc = $project->internaldocumentation;
-		$contacts = $project->contacts;
+		$contacts = $project->starrified_contacts;
         return View::make('projects.show', compact(
           'project',
           'accesses',

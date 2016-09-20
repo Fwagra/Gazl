@@ -80,7 +80,7 @@ class ContactController extends Controller
     {
         // We will need the projects list
         $projects = Project::All();
-		$linked_projects = $contact->projects;
+        $linked_projects = $contact->projects;
         return View::make('contacts.edit', compact('projects','contact','linked_projects'));
     }
 
@@ -100,8 +100,8 @@ class ContactController extends Controller
          $fields = $request->all();
 
          $contact = Contact::create($fields);
- 		// Sync updates the relationships in the contact-project table
- 		$contact->projects()->sync($fields['projects']);
+         // Sync updates the relationships in the contact-project table
+         $contact->projects()->sync($fields['projects']);
 
          Session::flash('message', trans('contacts.added_contact'));
          return redirect()->action('ContactController@index');
@@ -123,8 +123,8 @@ class ContactController extends Controller
 
         $fields = $request->all();
         $contact->update($fields);
-		// Sync updates the relationships in the contact-project table
-		$contact->projects()->sync($fields['projects']);
+        // Sync updates the relationships in the contact-project table
+        $contact->projects()->sync($fields['projects']);
 
         Session::flash('message', trans('contacts.edited_contact'));
         return redirect()->action('ContactController@index');
@@ -145,12 +145,12 @@ class ContactController extends Controller
             return Response::json($contact->id);
         }else{
             Session::flash('message', trans('contacts.deleted_contact'));
-	        return redirect()->action('ContactController@index');
+            return redirect()->action('ContactController@index');
         }
     }
 
     /**
-     * Set to "starred" status for current project
+     * Set client to "starred" status for current project
      *
      * @param  string  $projectSlug
      * @param  Contact $contact
@@ -158,8 +158,25 @@ class ContactController extends Controller
      */
     public function starrify(Project $project, Contact $contact)
     {
-		dd($project,$contact);
-        Session::flash('message', trans('contacts.starrify_contact'));
+        // From all client's projects, starrify only the current one (from url)
+        $contact->projects()->sync([$project->id => ['is_starred' => 1]], false);
+
+        Session::flash('message', trans('contacts.starrified_contact'));
+        return back();
+    }
+    /**
+     * Set client to "unstarred" status for current project
+     *
+     * @param  string  $projectSlug
+     * @param  Contact $contact
+     * @return Response
+     */
+    public function unstarrify(Project $project, Contact $contact)
+    {
+        // From all client's projects, starrify only the current one (from url)
+        $contact->projects()->sync([$project->id => ['is_starred' => 0]], false);
+
+        Session::flash('message', trans('contacts.unstarrified_contact'));
         return back();
     }
 }

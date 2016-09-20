@@ -6,11 +6,14 @@ return [
     |--------------------------------------------------------------------------
     |
     */
+	'added_contact' => "Your new contact has been saved.",
 	'contact_title' => "Contact:",
 	'create_h1' => "New contact",
 	'dash_block_title' => "Main contacts",
 	'delete_contact_action' => "Delete",
+	'deleted_contact' => "The contact has been deleted.",
 	'edit_contact_action' => "Edit",
+	'edited_contact' => "The contact's informations have been updated.",
 	'email' => "Email",
 	'email_placeholder' => "",
 	'list_for_project_h1' => "Project's contacts",
@@ -24,5 +27,8 @@ return [
 	'phone_placeholder' => "",
 	'projects' => "User's projects",
 	'save' => "Save",
-	'starrify_contact' => "Add to favorites",
+	'starrified_contact' => "The contact is now in favorites list.",
+	'starrify_action' => "Add to favorites",
+	'unstarrified_contact' => "The contact has been removed from favorites.",
+	'unstarrify_action' => "Remove from favorites",
 ];
