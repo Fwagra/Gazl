@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use View;
+use Input;
+use Validator;
+use Session;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -41,7 +44,24 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $rules = [
+            'name' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
+            'password' => 'confirmed|min:6',
+        ];
+
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        $user->update($request->all());
+        
+        Session::flash('message', trans('user.success_edit'));
+        return back();
     }
 
     /**

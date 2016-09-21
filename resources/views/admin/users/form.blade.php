@@ -1,3 +1,4 @@
+@include('errors.form-error')
 {!! Form::model($user, ['route' => ['admin.user.update', $user->id], 'method' => 'PUT']) !!}
     {!! csrf_field() !!}
     <div class="form-group">
