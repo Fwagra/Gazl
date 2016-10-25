@@ -10,6 +10,7 @@ use Validator;
 use Session;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class UserController extends Controller
 {
@@ -59,7 +60,7 @@ class UserController extends Controller
         }
 
         $user->update($request->all());
-        
+
         Session::flash('message', trans('user.success_edit'));
         return back();
     }
@@ -72,6 +73,20 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $current_user = Auth::user();
+        $users = User::all()->count();
+
+        if($users <= 1){
+            Session::flash('error', trans('user.no_enough_users'));
+            return back();
+        }
+        elseif($current_user == $user){
+            Session::flash('error', trans('user.cant_delete_self'));
+            return back();
+        }else{
+            $user->delete();
+            Session::flash('message', trans('user.delete_confirmation'));
+            return redirect(route('admin.user.index'));
+        }
     }
 }
