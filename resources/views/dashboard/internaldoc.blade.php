@@ -8,14 +8,14 @@
         </div>
 
         <a href="{{ action('InternalDocumentationController@edit', [$project->slug]) }}">
-            @if (!$doc)
+            @if (!$internaldoc)
                 {!! trans('doc.write_doc') !!}
             @else
                 {{ trans('doc.edit_doc') }}
             @endif
         </a>
 
-        @if($doc)
+        @if($internaldoc)
         <a href="{{ action('InternalDocumentationController@index', [$project->slug]) }}">
             {{ trans('doc.view_doc') }}
         </a>
