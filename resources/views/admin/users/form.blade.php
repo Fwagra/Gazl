@@ -22,6 +22,13 @@
         {!! Form::password('password_confirmation',['class' => 'form-control'])!!}
     </div>
     <div class="form-group">
+        {!! Form::label('status', trans('auth.status_check'))!!}
+         <?php $active = ($user->status == 1)? true : false; ?>
+        {!! Form::checkbox('status', true, $active, ['id' => 'active']) !!}
+
+    </div>
+
+    <div class="form-group">
         {!! Form::submit(trans('auth.submit'), ['class' => 'btn btn-primary'])!!}
     </div>
 {!!  Form::close() !!}

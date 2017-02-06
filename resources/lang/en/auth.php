@@ -25,6 +25,7 @@ return [
     'register' => 'Register',
     'registration_effective' => 'You has been correctly created, we\'ll activate your acount soon',
     'remember' => 'Remember me',
+    'status_check' => "Activate the user",
     'submit' => 'Submit',
     'throttle' => 'Too many connection attemps. You could retry in :seconds seconds.',
 ];

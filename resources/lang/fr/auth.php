@@ -25,6 +25,7 @@ return [
     'register' => 'Créer un compte',
     'registration_effective' => 'Votre compte a été créé. Il sera validé dans les plus brefs délais',
     'remember' => 'Se souvenir de moi',
+    'status_check' => "Activer l'utilisateur",
     'submit' => 'Envoyer',
     'throttle' => 'Trop de tentatives de connexion. Veuillez essayer de nouveau dans :seconds secondes.',
 ];

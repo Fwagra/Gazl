@@ -58,7 +58,11 @@ class UserController extends Controller
                 $request, $validator
             );
         }
-
+        if($request->status == null || !isset($request->status)){
+           $request->merge([
+               'status' => 0,
+           ]);
+        }
         $user->update($request->all());
 
         Session::flash('message', trans('user.success_edit'));
