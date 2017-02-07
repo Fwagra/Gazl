@@ -2,7 +2,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">{{ trans('admin.users') }}</div>
 		<div class="list-group">
-			<a href="#" class="list-group-item">
+			<a href="{{ route('admin.user.index') }}" class="list-group-item">
 				{{ trans('admin.users_list') }}
 			</a>
 			<a href="#" class="list-group-item">
