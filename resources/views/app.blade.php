@@ -3,18 +3,7 @@
     <head>
         <title>Dashboard - @yield('title')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="{{ URL::asset('js/jquery-1.11.3.min.js') }}"></script>
-        <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-        <script src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
-        <script src="{{ URL::asset('js/icheck.min.js') }}"></script>
-        <script src="{{ URL::asset('js/select2.min.js') }}"></script>
-        <script src="{{ URL::asset('js/delete-confirm.js') }}"></script>
-        <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('css/select2.min.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('css/bootflat.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('css/flat/red.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('css/jquery-ui.min.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('css/styles.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/app.css')}}">
     </head>
     <body>
         <div class="navbar main-nav">
@@ -51,23 +40,28 @@
     </body>
     @yield('footer_js')
     <script>
-    $(document).ready(function(){
-      $('input').not('.no-icheck').iCheck({
-        checkboxClass: 'icheckbox_flat-red',
-        radioClass: 'iradio_flat-red'
-      });
-      $('[data-toggle="tooltip"]').tooltip();
-    });
-    $(document).ajaxComplete(function(){
-      $('input').iCheck({
-        checkboxClass: 'icheckbox_flat-red',
-        radioClass: 'iradio_flat-red'
-      });
-    });
+
     var config = {
         messages: {
             deletemsg: "{{ trans('global.deletemsg') }}"
         }
     }
+
+    </script>
+    <script src="{{ URL::asset('js/app.js') }}"></script> --}}
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('input').not('.no-icheck').iCheck({
+            checkboxClass: 'icheckbox_flat-red',
+            radioClass: 'iradio_flat-red'
+          });
+          $('[data-toggle="tooltip"]').tooltip();
+        });
+        $(document).ajaxComplete(function(){
+          $('input').iCheck({
+            checkboxClass: 'icheckbox_flat-red',
+            radioClass: 'iradio_flat-red'
+          });
+        });
     </script>
 </html>
