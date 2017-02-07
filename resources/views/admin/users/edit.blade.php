@@ -5,7 +5,7 @@
     @include('admin.users.form')
     {!! Form::model($user, ['route' => ['admin.user.destroy', $user], 'method' => 'DELETE']) !!}
 		<div class="form-group">
-		    {!! Form::submit(trans('user.delete'), ['class' => 'btn btn-primary'])!!}
+		    {!! Form::submit(trans('user.delete'), ['class' => 'btn btn-primary delete-confirm']) !!}
 		</div>
     {!!  Form::close() !!}
 @endsection

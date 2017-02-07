@@ -8,6 +8,7 @@
         <script src="{{ URL::asset('js/jquery-ui.min.js') }}"></script>
         <script src="{{ URL::asset('js/icheck.min.js') }}"></script>
         <script src="{{ URL::asset('js/select2.min.js') }}"></script>
+        <script src="{{ URL::asset('js/delete-confirm.js') }}"></script>
         <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{URL::asset('css/select2.min.css')}}">
         <link rel="stylesheet" href="{{URL::asset('css/bootflat.css')}}">
@@ -63,5 +64,10 @@
         radioClass: 'iradio_flat-red'
       });
     });
+    var config = {
+        messages: {
+            deletemsg: "{{ trans('global.deletemsg') }}"
+        }
+    }
     </script>
 </html>
