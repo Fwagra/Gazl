@@ -48,7 +48,7 @@
     }
 
     </script>
-    <script src="{{ URL::asset('js/app.js') }}"></script> --}}
+    <script src="{{ URL::asset('js/app.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function(){
           $('input').not('.no-icheck').iCheck({

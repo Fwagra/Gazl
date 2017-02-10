@@ -17,7 +17,6 @@
             $('.add-element input[type=file]').val("");
         },
         error:function(data) {
-         console.log(data);
             errorsHtml = '<div class="alert alert-danger"><ul>';
             $.each( data.responseJSON, function( key, value ) {
                 errorsHtml += '<li>' + value[0] + '</li>';
@@ -48,7 +47,7 @@
    $(document).on('click', '.state .btn', function(event){
       event.preventDefault();
       $.ajax({
-         headers: { 'X-XSRF-TOKEN' : config.others[0].csrf }, 
+         headers: { 'X-XSRF-TOKEN' : config.others[0].csrf },
          url: config.routes[0].state,
          type: 'POST',
          data: {

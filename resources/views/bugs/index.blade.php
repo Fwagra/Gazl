@@ -13,12 +13,12 @@
 		@endif
 	</div>
 	{!! $bugs->appends(Input::except('page'))->render(); !!}
-	
+
 @endsection
 @section('footer_js')
 	<script>
 		var config = {
-			selectors: [{ 
+			selectors: [{
 				form: '.form-search',
 				input: '#bug-input',
 				replace:'.bug-content',
@@ -29,6 +29,4 @@
 			}],
 		}
 	</script>
-	{!! Html::script('js/search_ajax.js'); !!}
-	{!! Html::script('js/list_management_ajax.js'); !!}
 @endsection

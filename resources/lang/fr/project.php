@@ -12,6 +12,7 @@ return [
     'list_title' => 'Cherchez un projet',
     'name' => 'Nom du projet',
     'no_desc' => "Aucune information entrée",
+    'no_project_found' => "Aucun project correspondant n'a été trouvé",
     'no_results_found' => 'Aucun résultat',
     'save' => 'Sauvegarder le projet',
     'search_button' => 'Chercher',

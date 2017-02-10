@@ -12,6 +12,7 @@ return [
     'list_title' => 'Search a project',
     'name' => 'Project name',
     'no_desc' => "No informations yet",
+    'no_project_found ' => 'There is no matching project',
     'no_results_found' => 'No results found',
     'save' => 'Save the project',
     'search_button' => 'Search',
