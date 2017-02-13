@@ -91,7 +91,7 @@ class MockupCategoryController extends Controller
     {
         if($request->ajax()){
             $input = Input::get('order');
-            $i = 1;
+            $i = 0;
              foreach($input as $value) {
                  $category = MockupCategory::find($value);
                  $category->order = $i;

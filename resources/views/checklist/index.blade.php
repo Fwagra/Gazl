@@ -8,8 +8,8 @@
 				{!! $category->name !!}
 			</div>
 			@foreach ($category->points()->orderBy('order')->get() as $point)
-				<?php 
-					$answer = isset($answers[$point->id])? $answers[$point->id] : false; 
+				<?php
+					$answer = isset($answers[$point->id])? $answers[$point->id] : false;
 					$check = ($answer)? $answer->check : 0;
 					$active = ($answer)? $answer->active : 1;
 					$comment = ($answer)? $answer->comment : '';
@@ -28,16 +28,9 @@
 @endsection
 @section('footer_js')
 	<script>
-		var config = {
-			routes: [{ 
-				sort: '{{ route("sort.categories") }}',
-				edit: '{{ route ("admin.checklist-category.update", "url_id") }}'
-			}],
-			others: [{
-				csrf: "{{ csrf_token() }}",
-				deletemsg: "{{ trans('global.deletemsg') }}"
-			}]
+		config.routes = {
+			sort: '{{ route("sort.categories") }}',
+			edit: '{{ route ("admin.checklist-category.update", "url_id") }}'
 		}
 	</script>
-	{!! Html::script('js/checklist_ajax.js'); !!}
 @endsection

@@ -17,16 +17,12 @@
 @endsection
 @section('footer_js')
 	<script>
-		var config = {
-			selectors: [{
-				form: '.form-search',
-				input: '#bug-input',
-				replace:'.bug-content',
-				reini:'.reini-btn',
-			}],
-			others: [{
-				deletemsg: "{{ trans('global.deletemsg') }}",
-			}],
-		}
+	config.selectors =
+		{
+			form: '.form-search',
+			input: '#bug-input',
+			replace:'.bug-content',
+			reini:'.reini-btn',
+		};
 	</script>
 @endsection

@@ -21,17 +21,9 @@
 
 @section('footer_js')
 	<script>
-		var config = {
-			routes: [{
-				sort: '{{ route("sort.memos") }}',
-				edit: '{{ route ("memo.update", "url_id") }}'
-			}],
-			others: [{
-				csrf: "{{ csrf_token() }}",
-				deletemsg: "{{ trans('global.deletemsg') }}"
-			}]
-		}
+        config.routes = {
+            sort: '{{ route("sort.memos") }}',
+            edit: '{{ route ("memo.update", "url_id") }}'
+        };
 	</script>
-	{!! Html::script('js/list_management_ajax.js'); !!}
-  {!! Html::script('js/checklist_ajax.js'); !!}
 @endsection

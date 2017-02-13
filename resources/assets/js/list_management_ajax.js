@@ -9,7 +9,7 @@ function sort_list(){
         update: function (event, ui) {
             var order = jQuery(this).sortable('toArray',	{attribute: 'data-id'});
             var category = jQuery(this).data('category-id');
-            jQuery.post(config.routes[0].sort, { order: order, category: category, "_token": config.others[0].csrf });
+            jQuery.post(config.routes.sort, { order: order, category: category, "_token": config.others.csrf });
         }
     });
 }
@@ -40,7 +40,7 @@ $(document).on('submit', '.add_element', function(event){
 /* Delete element */
 $(document).on('submit', '.delete-element', function(event){
 	event.preventDefault();
-    if(confirm(config.others[0].deletemsg)) {
+    if(confirm(config.others.deletemsg)) {
         $.post(
     		$(this).prop( 'action' ),
     	    $(this).serialize(),
@@ -54,7 +54,7 @@ $(document).on('submit', '.delete-element', function(event){
 /* Trigger edit form */
 $(document).on('click', '.edit-element', function(event){
 	event.preventDefault();
-	var form = '<form method="POST" class="edit-submit"><input value="put" type="hidden" name="_method" /><input type="hidden" name="_token" value="'+ config.others[0].csrf +'" /><input type="text" class="edit-input" name="edit-input" value="'+ $(this).text() +'" /></form>';
+	var form = '<form method="POST" class="edit-submit"><input value="put" type="hidden" name="_method" /><input type="hidden" name="_token" value="'+ config.others.csrf +'" /><input type="text" class="edit-input" name="edit-input" value="'+ $(this).text() +'" /></form>';
 	$(this).replaceWith(form);
 	$('input.edit-input').focus();
 });
@@ -67,12 +67,14 @@ $(document).on('blur', 'input.edit-input', function(event) {
 	form = $(this).parent('form');
 	form.trigger('submit');
 });
+
+
 /* Edit element */
 $(document).on('submit', '.edit-submit', function(event){
 	event.preventDefault();
 	form = $(this);
 	// Generating edit url
-	var editUrl = config.routes[0].edit.replace('url_id', form.parent().attr('data-id'));
+	var editUrl = config.routes.edit.replace('url_id', form.parent().attr('data-id'));
 	if($('.edit-input', this).val()){
 	    $.post(
 			editUrl,
@@ -86,7 +88,7 @@ $(document).on('submit', '.edit-submit', function(event){
 
 /* Submit auto-submit forms */
 /* ifChanged is an iCheck callback */
-$(document).on('ifChanged', 'input[type="text"], input[type="checkbox"]', function(event) {
+$(document).on('ifChanged', '.auto-submit input[type="text"], .auto-submit input[type="checkbox"]', function(event) {
 	event.preventDefault();
 	form = $(this).parents('.auto-submit');
 	$.post(

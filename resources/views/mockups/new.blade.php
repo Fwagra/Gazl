@@ -6,10 +6,5 @@
 	{!! Form::open(['url' => action('MockupController@store', $project->slug), 'files' => true, 'enctype' => 'multipart/form-data']) !!}
 		@include('mockups.form')
   {!!  Form::close() !!}
-  <script type="text/javascript">
-    jQuery('.select2').select2({
-      tags: true
-    });
-  </script>
 
 @endsection

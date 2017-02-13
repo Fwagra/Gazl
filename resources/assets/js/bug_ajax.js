@@ -1,6 +1,6 @@
 (function($) {
    // Add images function
-   $(document).on('submit', '.add-element', function(event){
+   $(document).on('submit', '.add-element-image', function(event){
       event.preventDefault();
       var formSelect = new FormData($(this).get(0));
 
@@ -28,9 +28,9 @@
    });
 
    // Delete images function
-   $(document).on('submit', '.delete-element', function(event){
+   $(document).on('submit', '.delete-element-image', function(event){
       event.preventDefault();
-       if(confirm(config.others[0].deletemsg)) {
+       if(confirm(config.others.deletemsg)) {
            $.post(
             $(this).prop( 'action' ),
              $(this).serialize(),
@@ -47,12 +47,12 @@
    $(document).on('click', '.state .btn', function(event){
       event.preventDefault();
       $.ajax({
-         headers: { 'X-XSRF-TOKEN' : config.others[0].csrf },
-         url: config.routes[0].state,
+         headers: { 'X-XSRF-TOKEN' : config.others.csrf },
+         url: config.routes.state,
          type: 'POST',
          data: {
             state: $(this).attr('data-state'),
-            "_token": config.others[0].csrf
+            "_token": config.others.csrf
          },
       })
       .done(function(data) {

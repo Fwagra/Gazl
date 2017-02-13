@@ -292,7 +292,7 @@ class MockupController extends Controller
     {
         if($request->ajax()){
             $input = Input::get('order');
-            $i = 1;
+            $i = 0;
              foreach($input as $value) {
                  $mockup = Mockup::find($value);
                  $mockup->order = $i;

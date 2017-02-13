@@ -43,7 +43,7 @@
     {!! Form::label('images', trans('mockup.image_label')) !!}
     @if (!empty($mockup->images))
         <span data-type="images">
-            {{ $mockup->images }} <a class="btn btn-danger delete-element" data-type="images" href="#">{!! trans('mockup.delete_image') !!}</a>
+            {{ $mockup->images }} <a class="btn btn-danger delete-mockup-image" data-type="images" href="#">{!! trans('mockup.delete_image') !!}</a>
         </span>
     @endif
     {!! Form::file('images', ['class' => 'required']) !!}
@@ -55,7 +55,7 @@
     {!! Form::label('psd', trans('mockup.psd_label')) !!}
     @if (!empty($mockup->psd))
         <span data-type="psd">
-            {{ $mockup->psd }} <a class="btn btn-danger delete-element" data-type="psd" href="#">{!! trans('mockup.delete_image') !!}</a>
+            {{ $mockup->psd }} <a class="btn btn-danger delete-mockup-image" data-type="psd" href="#">{!! trans('mockup.delete_image') !!}</a>
         </span>
     @endif
     {!! Form::file('psd', ['class' => 'psd-files']) !!}
