@@ -34,7 +34,7 @@
 				@include('bugs.images')
 			</div>
 			<div class="add_image">
-			   	{!! Form::open(['route' => ['bug.image.add', $project->slug, $bug->id], 'files' => true, 'class' => 'add-element']) !!}
+			   	{!! Form::open(['route' => ['bug.image.add', $project->slug, $bug->id], 'files' => true, 'class' => 'add-element-image']) !!}
 			    	<div class="errors"></div>
 				   	<div class="input-group">
 				   		<div class="form-group">
@@ -61,15 +61,8 @@
 @endsection
 @section('footer_js')
 	<script>
-		var config = {
-			routes: [{ 
-				state: '{{ route("bug.state.change", [$project->slug, $bug->id]) }}'
-			}],
-			others: [{
-				csrf: "{{ csrf_token() }}",
-				deletemsg: "{{ trans('global.deletemsg') }}"
-			}]
-		}
+		config.routes = {
+			state: '{{ route("bug.state.change", [$project->slug, $bug->id]) }}'
+		};
 	</script>
-	{!! Html::script('js/bug_ajax.js'); !!}
 @endsection

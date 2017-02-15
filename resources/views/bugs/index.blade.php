@@ -13,22 +13,16 @@
 		@endif
 	</div>
 	{!! $bugs->appends(Input::except('page'))->render(); !!}
-	
+
 @endsection
 @section('footer_js')
 	<script>
-		var config = {
-			selectors: [{ 
-				form: '.form-search',
-				input: '#bug-input',
-				replace:'.bug-content',
-				reini:'.reini-btn',
-			}],
-			others: [{
-				deletemsg: "{{ trans('global.deletemsg') }}",
-			}],
-		}
+	config.selectors =
+		{
+			form: '.form-search',
+			input: '#bug-input',
+			replace:'.bug-content',
+			reini:'.reini-btn',
+		};
 	</script>
-	{!! Html::script('js/search_ajax.js'); !!}
-	{!! Html::script('js/list_management_ajax.js'); !!}
 @endsection

@@ -18,17 +18,17 @@
 		});
    }
    $(document).ready(function() {
-   	$('form textarea').on('change', function(event) {
+   	$('.checklist-form textarea').on('change', function(event) {
    		event.preventDefault();
    		updateChecklistPoint($(this).parents('form'));
    	});
    	// Since the checkboxes use iCheck, we use the iCheck Callback 'ifToggled'
    	// https://github.com/fronteed/iCheck
-   	$(document).on('ifToggled', 'input[type="checkbox"],input[type="radio"]', function(event) {
+   	$(document).on('ifToggled', '.checklist-form input[type="checkbox"], .checklist-form input[type="radio"]', function(event) {
    		event.preventDefault();
    		 updateChecklistPoint($(this).parents('form'));
    	});
-    $(document).on('change', 'input[type="checkbox"],input[type="radio"]', function(event) {
+    $(document).on('change', '.checklist-form input[type="checkbox"], .checklist-form input[type="radio"]', function(event) {
    		event.preventDefault();
    		updateChecklistPoint($(this).parents('form'));
    	});

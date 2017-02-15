@@ -17,7 +17,7 @@
 @section('footer_js')
 	<script>
 		var config = {
-			routes: [{ 
+			routes: [{
 				sort: '{{ route("sort.checklist") }}',
 			}],
 			others: [{
@@ -26,5 +26,4 @@
 			}]
 		}
 	</script>
-	{!! Html::script('js/list_management_ajax.js'); !!}
 @endsection

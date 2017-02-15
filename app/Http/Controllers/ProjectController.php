@@ -169,25 +169,44 @@ class ProjectController extends Controller
     }
 
     /**
-     * Search through project names for ajax autocomplete
+     * Search through project names for ajax autocomplete or redirect to project page
+     * @param Request $request
      */
-    public function searchProject()
+    public function searchProject(Request $request)
     {
-        $term = Input::get('term');
+        if ($request->ajax()) {
 
-        if(is_null($term))
-            return Response::json('no result');
+            $term = Input::get('term');
+            if(is_null($term))
+                return Response::json('no result');
 
-        $queries = DB::table('projects')
-            ->where('name', 'LIKE', '%'.$term.'%')
-            ->take(10)->get();
+            $queries = DB::table('projects')
+                ->where('name', 'LIKE', '%'.$term.'%')
+                ->take(10)->get();
 
-        $results = array();
-        foreach ($queries as $query) {
-            $results[] = [ 'id' => $query->id, 'value' => $query->name, 'slug' => $query->slug];
+            $results = array();
+            foreach ($queries as $query) {
+                $results[] = [ 'id' => $query->id, 'value' => $query->name, 'slug' => $query->slug];
+            }
+
+            return Response::json($results);
+        } else {
+            $term = Input::get('project');
+
+            if (is_null($term)) {
+                Session::flash('error', trans('project.no_project_found'));
+                return back();
+            }
+
+            $project = Project::slug(mb_strtolower($term));
+
+            if (isset($project->id)) {
+                return Redirect::route('project.show', [$project->slug]);
+            } else {
+                Session::flash('error', trans('project.no_project_found'));
+                return back();
+            }
         }
-
-        return Response::json($results);
     }
 
     /**

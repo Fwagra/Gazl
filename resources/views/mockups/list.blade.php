@@ -30,15 +30,7 @@
 @endsection
 @section('footer_js')
 	<script>
-		var config = {
-			routes: [{
-				sort: '{{ route("sort.mockup") }}',
-			}],
-			others: [{
-				csrf: "{{ csrf_token() }}",
-				deletemsg: "{{ trans('mockup.delete_mockup_msg') }}"
-			}]
-		}
+		config.routes.sort = '{{ route("sort.mockup") }}';
+		config.others.deletemsg = "{{ trans('mockup.delete_mockup_msg') }}";
 	</script>
-	{!! Html::script('js/list_management_ajax.js'); !!}
 @endsection

@@ -12,3 +12,5 @@ storage/.encryption_key
 *.sass-cache*
 dashboard.sublime-workspace
 composer.lock
+public/css/*
+public/js/*

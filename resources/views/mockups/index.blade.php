@@ -28,15 +28,6 @@
 @endsection
 @section('footer_js')
 	<script>
-		var config = {
-			routes: [{
-				sort: '{{ route("sort.mockup-category") }}',
-			}],
-			others: [{
-				csrf: "{{ csrf_token() }}",
-				deletemsg: "{{ trans('mockup.delete_category_msg') }}"
-			}]
-		}
+		config.routes.sort = '{{ route("sort.mockup-category") }}';
 	</script>
-	{!! Html::script('js/list_management_ajax.js'); !!}
 @endsection

@@ -1,5 +1,5 @@
 <div class="list-group-item">
-	{!! Form::open(['route' => ['project.checklist.update',$project->slug, $point->id], 'method' => 'PUT', 'class' => '']) !!}
+	{!! Form::open(['route' => ['project.checklist.update',$project->slug, $point->id], 'method' => 'PUT', 'class' => 'checklist-form']) !!}
 		<div class="checkbox">
 			{!! Form::checkbox('check', 1, $check) !!}
 		</div>

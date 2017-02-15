@@ -21,16 +21,10 @@
 
 @section('footer_js')
 	<script>
-		var config = {
-			routes: [{ 
-				sort: '{{ route("sort.categories") }}',
-				edit: '{{ route ("admin.checklist-category.update", "url_id") }}'
-			}],
-			others: [{
-				csrf: "{{ csrf_token() }}",
-				deletemsg: "{{ trans('global.deletemsg') }}"
-			}]
-		}
+	config.routes = {
+		sort: '{{ route("sort.categories") }}',
+		edit: '{{ route ("admin.checklist-category.update", "url_id") }}'
+	}
+		config.others.deletemsg = "{{ trans('global.deletemsg') }}";
 	</script>
-	{!! Html::script('js/list_management_ajax.js'); !!}
 @endsection
