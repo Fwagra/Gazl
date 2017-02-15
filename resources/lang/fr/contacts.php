@@ -30,5 +30,5 @@ return [
 	'starrified_contact' => "Le contact a bien été ajouté aux favoris.",
 	'starrify_action' => "Ajouter aux favoris",
 	'unstarrified_contact' => "Le contact a bien été enlevé des favoris.",
-	'unstarrify_action' =>"'Enlever des favoris",
+	'unstarrify_action' =>"Enlever des favoris",
 ];
