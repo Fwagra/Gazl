@@ -33,7 +33,7 @@ class Mockup extends Model
    */
     public function category()
     {
-        return $this->belongsTo('App\MockupCategory');
+        return $this->belongsTo('App\MockupCategory', 'mockup_category_id');
     }
 
     /**

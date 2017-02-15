@@ -121,10 +121,11 @@ class MockupController extends Controller
      */
     public function show(Project $project, Mockup $mockup)
     {
+        $category = $mockup->category;
         // Retrieve the previous and next mockup
-        $previous = ($mockup->order != 0)? $project->mockups()->where('order', '=', $mockup->order - 1)->first() : null ;
-        $next = $project->mockups()->where('order', '=', $mockup->order + 1)->first();
-
+        $previous = ($mockup->order != 0)? $category->mockups()->where('order', '<', $mockup->order)->get()->last() : null ;
+        $next = $category->mockups()->where('order', '>', $mockup->order)->first();
+        
         Return View::make('mockups.show', compact('project', 'mockup', 'next', 'previous'));
     }
 

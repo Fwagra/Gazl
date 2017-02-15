@@ -21,7 +21,7 @@ class MockupCategory extends Model
    */
     public function mockups()
     {
-        return $this->hasMany('App\Mockup');
+        return $this->hasMany('App\Mockup')->orderBy('order');
     }
 
     /**
