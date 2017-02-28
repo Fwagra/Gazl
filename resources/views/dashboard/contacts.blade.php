@@ -20,7 +20,7 @@
 				</ul>
 			</div>
 			<div class="panel-footer">
-				<a href="{{ action('ContactController@create') }}">{!! trans('contacts.new_contact_action') !!}</a>
+				<a href="{{ route('project.contact.create', [$project->slug]) }}">{!! trans('contacts.new_contact_action') !!}</a>
 			</div>
 		</div>
 	</div>

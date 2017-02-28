@@ -6,7 +6,7 @@
 @else
     <h1>{!! trans('contacts.list_h1') !!}</h1>
 @endif
-    <a href="{{ action('ContactController@create') }}">{!! trans('contacts.new_contact_action') !!}</a>
+    <a href="{{ route('project.contact.create', [$project->slug]) }}">{!! trans('contacts.new_contact_action') !!}</a>
     <div class="contacts-list">
     @foreach ($contacts as $contact)
         <div class="contact">

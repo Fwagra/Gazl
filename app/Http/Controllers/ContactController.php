@@ -8,6 +8,7 @@ use App\Contact;
 use App\Project;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use \Illuminate\Database\Eloquent\Collection;
 use Redirect;
 use Session;
 use View;
@@ -68,6 +69,22 @@ class ContactController extends Controller
         // We will need the projects list
         $projects = Project::All();
         return View::make('contacts.new', compact('projects'));
+    }
+
+    /**
+    * Show the form for creating a new resource.
+    *
+    * @param Project $project
+    * @return \Illuminate\Http\Response
+    */
+    public function createForProjet(Project $project)
+    {
+        // We will need the projects list
+        $projects = Project::All();
+        $linked_projects = new Collection;
+        $linked_projects->push($project);
+
+        return View::make('contacts.new', compact('projects','project','linked_projects'));
     }
 
     /**
