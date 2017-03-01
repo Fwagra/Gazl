@@ -17,9 +17,9 @@ elixir(function(mix) {
         'flat/red.css',
         'bootstrap.min.scss',
         'jquery-ui.min.scss',
-        'pdf.scss',
         'select2.min.scss',
         'styles.scss'
     ], 'public/css/app.css' );
+    mix.sass('pdf.scss', 'public/css/pdf.css');
     mix.scriptsIn(['resources/assets/js'], 'public/js/app.js');
 });

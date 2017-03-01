@@ -19,6 +19,3 @@
   </script>
 
 @endsection
-@section('footer_js')
-  {!! Html::script('js/toc.min.js'); !!}
-@endsection
