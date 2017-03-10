@@ -7,14 +7,14 @@
 		</div>
     @if ($bugs['new'] != 0)
       <div class="new_bug">
-    			{{ trans('bug.new_bugs_count', ['new' => $bugs['new']]) }}
+    			{{ trans_choice('bug.new_bugs_count', $bugs['new'], ['new' => $bugs['new']]) }}
       </div>
     @endif
     <div class="total_bugs">
       @if ($bugs['total'] == 0)
         {{ trans('bug.no_bugs') }}
       @else
-        {{ trans('bug.bugs_count', ['total' => $bugs['total']]) }}
+        {{ trans_choice('bug.bugs_count', $bugs['total'], ['total' => $bugs['total']]) }}
       @endif
     </div>
 		<a href="{{ action('BugController@create', [$project->slug]) }}">
