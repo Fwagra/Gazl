@@ -19,6 +19,7 @@ Route::resource('project', 'ProjectController');
 Route::model('project', 'App\Project');
 
 // Checklist routes
+Route::get('project/{project}/checklist/pdf', ['as' => 'project.checklist.pdf', 'uses' => 'ChecklistAnswerController@generatePdf']);
 Route::resource('project.checklist','ChecklistAnswerController', ['only' => ['index','update']]);
 
 // Bug reporting routes

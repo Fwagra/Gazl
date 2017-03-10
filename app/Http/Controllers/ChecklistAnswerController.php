@@ -12,6 +12,7 @@ use App\ChecklistAnswer;
 use App\Project;
 use Response;
 use View;
+use PDF;
 
 class ChecklistAnswerController extends Controller
 {
@@ -34,6 +35,21 @@ class ChecklistAnswerController extends Controller
         $categories = ChecklistCategory::orderBy('order')->get();
         $answers = $project->checklistAnswers->keyBy('checklist_point_id');
         return View::make('checklist.index', compact('categories', 'project', 'answers'));
+    }
+
+    /**
+     * Generate a PDF version of the index page.
+     *  @param Project $project
+     */
+    public function generatePdf(Project $project)
+    {
+      $categories = ChecklistCategory::orderBy('order')->get();
+      $answers = $project->checklistAnswers->keyBy('checklist_point_id');
+
+      $pdf = PDF::loadView('checklist.index', compact('categories', 'project', 'answers'));
+      $pdf->setOption('user-style-sheet', base_path('public/css/pdf.css'));
+
+      return $pdf->download('checklist.pdf');
     }
 
     /**

@@ -25,6 +25,9 @@
 			@endforeach
 		</div>
 	@endforeach
+	@if (Auth::check())
+		<a href="{{ action('ChecklistAnswerController@generatePdf',[$project->slug]) }}" class="btn btn-success">{!! trans('checklist.download_pdf') !!}</a>
+	@endif
 @endsection
 @section('footer_js')
 	<script>

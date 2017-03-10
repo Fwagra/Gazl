@@ -13,6 +13,7 @@ return [
     'deleted_category' => 'La catégorie a été supprimée',
     'deleted_point' => 'Le point a été supprimé',
     'description' => 'Description',
+    'download_pdf' => 'Télécharger en pdf',
     'goto_checklist' => 'Accéder à la checklist',
     'list_categories' => 'Catégories',
     'list_points' => 'Points de validation',
