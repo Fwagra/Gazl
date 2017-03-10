@@ -144,7 +144,7 @@ class ContactController extends Controller
         $contact->projects()->sync($fields['projects']);
 
         Session::flash('message', trans('contacts.edited_contact'));
-        return redirect()->action('ContactController@index');
+        return redirect()->back();
     }
 
     /**
