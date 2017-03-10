@@ -15,6 +15,7 @@ Route::get('/', array('as' => 'home', 'uses' => 'ProjectController@home'));
 
 // Projects routes
 Route::get('search/project', ['as' => 'project.search', 'uses' => 'ProjectController@searchProject']);
+Route::post('project/{project}/sendcode', ['as' => 'project.sendcode', 'uses' => 'ProjectController@sendCode']);
 Route::resource('project', 'ProjectController');
 Route::model('project', 'App\Project');
 

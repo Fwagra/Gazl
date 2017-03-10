@@ -281,4 +281,16 @@ class ProjectController extends Controller
 
         return $mockups;
     }
+
+    /**
+     * Send the project code by email
+     */
+    public function sendCode(Project $project, Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'email|max:255',
+        ]);
+
+        dd($request->get('email'));
+    }
 }
