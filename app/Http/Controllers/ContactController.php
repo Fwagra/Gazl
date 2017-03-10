@@ -121,7 +121,7 @@ class ContactController extends Controller
          $contact->projects()->sync($fields['projects']);
 
          Session::flash('message', trans('contacts.added_contact'));
-         return redirect()->action('ContactController@index');
+         return redirect()->back();
      }
 
     /**
